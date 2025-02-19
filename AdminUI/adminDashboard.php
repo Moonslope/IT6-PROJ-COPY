@@ -11,7 +11,6 @@ $row = $result->fetch_assoc();
 $title = "Admin Dashboard";
 require "../global/head.php";
 
-
 ?>
 
 <body>
@@ -26,7 +25,7 @@ require "../global/head.php";
       <div class="row pt-3">
          <div class="col col-3   ">
             <div class="card shadow-lg">
-               <div style="padding-bottom: 235px;" class="card_css card-body">
+               <div style="height: 500px;" class="card_css card-body">
 
                   <!-- ADD -->
                   <div class="mx-3 mb-3">
@@ -42,14 +41,14 @@ require "../global/head.php";
                   </div>
 
                   <div class="mx-3">
-                     <a href="../Login-Register/Login.php" class="btn btn-h w-100 border border-1 border-dark fw-semibold">LOG OUT</a>
+                     <a href="../Login-Register/Login.php" class="btn btn-h w-100 border border-1 border-dark fw-semibold">Log Out</a>
                   </div>
                </div>
             </div>
          </div>
 
-         <div class="col col-9">
-            <div class="card shadow-lg">
+         <div class="col col-9 ">
+            <div style="height: 500px;" class="card shadow-lg">
                <div class="card-body">
 
                   <div class="row mt-3 ms-3">
