@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- Try -->
+<!-- comment -->
 <?php
 include "../Database/db_connect.php";
 
