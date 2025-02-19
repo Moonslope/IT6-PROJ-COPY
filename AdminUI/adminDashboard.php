@@ -30,19 +30,19 @@ require "../global/head.php";
 
                   <!-- ADD -->
                   <div class="mx-3 mb-3">
-                     <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Cashier/view_cashier.php">Cashier</a>
+                     <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Cashier/view_cashier.php">Cashier</a>
                   </div>
 
                   <div class="mx-3 mb-3">
-                     <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Driver/add_driver.php">Driver</a>
+                     <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Driver/add_driver.php">Driver</a>
                   </div>
 
                   <div class="mx-3 mb-3">
-                     <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="#">Vehicle</a>
+                     <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="#">Vehicle</a>
                   </div>
 
                   <div class="mx-3">
-                     <a href="../Login-Register/Login.php" class="btn btn-info w-100 border border-1 border-dark fw-semibold">LOG OUT</a>
+                     <a href="../Login-Register/Login.php" class="btn btn-h w-100 border border-1 border-dark fw-semibold">LOG OUT</a>
                   </div>
                </div>
             </div>
