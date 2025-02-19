@@ -1,0 +1,58 @@
+.con-bg{
+    background-color: #5870aa;
+}
+
+.btn-c{
+    background-color: #2b344d;
+    border: solid 1.5px #2b344d;
+}
+            
+.btn-c:hover{
+    border: solid 1.5px #2b344d;
+    background-color: #44537b;
+}
+
+.btn-nav{
+    border:solid 1.5px black ;
+    background-color: #f0eff1;
+}
+
+.btn-nav:hover{
+    border:solid 1.5px black ;
+    background-color: #b8b8b8;
+}
+
+
+@media (max-width: 768px) {
+    /* Adjust logo size on small screens */
+    .logo-img {
+        width: 35px !important;
+        height: auto;
+    }
+
+    /* Scale down system administrator image */
+    .system-admin-img {
+        width: 80% !important;
+        height: auto;
+    }
+
+    /* Make the card responsive */
+    .responsive-card {
+        width: 95% !important;
+        margin: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .logo-img {
+        width: 30px !important;
+    }
+
+    .system-admin-img {
+        width: 60% !important;
+    }
+
+    .responsive-card {
+        width: 100% !important;
+    }
+}
