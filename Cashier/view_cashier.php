@@ -24,11 +24,11 @@ require "../global/head.php";
             <div class="card shadow-lg">
                <div style="height: 500px;" class="card_css card-body">
                   <div class="mx-3 mb-3">
-                     <a style="background-color: #62d0fb;" class="btn-h btn w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Cashier/view_cashier.php">Cashier</a>
+                     <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Cashier/view_cashier.php">Cashier</a>
                   </div>
 
                   <div class="mx-3 mb-3">
-                     <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Driver/add_driver.php">Driver</a>
+                     <a class="btn btn-info w-100 fw-semibold mb-2 border border-1 border-dark" href="../Driver/add_driver.php">Driver</a>
                   </div>
 
                   <div class="mx-3 mb-3">
@@ -43,7 +43,6 @@ require "../global/head.php";
             </div>
          </div>
 
-         <!-- mao ni para sa view -->
          <div class="col col-9">
             <div class="card shadow">
                <div style="height: 500px;" class="card-body pt-1">
@@ -54,12 +53,15 @@ require "../global/head.php";
                      </div>
 
                      <div class="col col-6 d-flex gap-2  ps-5">
-                        <input type="text" class="form-control">
-                        <button class="btn btn-success">Search</button>
+                        <input type="text" class="form-control" placeholder="Search here">
+                        <button class="btn btn-outline-dark"><i class="bi bi-search"></i></button>
                      </div>
 
                      <div class="col col-3 text-end">
-                        <a class="btn btn-info border border-1 border-dark fw-semibold w-50" href="add_cashier.php">ADD</a>
+                        <a class="btn btn-success border border-1 border-dark fw-semibold" href="add_cashier.php">ADD
+                           <i class="bi fs-5 bi-person-add"></i>
+                        </a>
+
                      </div>
                   </div>
 
@@ -74,7 +76,7 @@ require "../global/head.php";
                      ?>
                               <div class="">
                                  <ul class="list-group mb-1">
-                                    <li class="list-group-item d-flex align-items-center justify-content-between">
+                                    <li class="list-group-item d-flex align-items-center justify-content-between border border-2">
                                        <div class="d-flex align-items-center">
                                           <div>
                                              <img src="../images/cashier.png" alt="" class="img-fluid rounded-pill border border-2 border-dark me-3" width="50" height="50">
@@ -87,6 +89,7 @@ require "../global/head.php";
                                        </div>
                                        <div class="group-btn">
                                           <a href="../Cashier/edit_cashier.php?id=<?php echo $row['id'] ?>" class="btn"><i class="btn btn-outline-success bi bi-pencil-square"></i></a>
+
                                           <a href="../Operations/op_delete_cashier.php?id=<?php echo $row['id'] ?>" class="btn"><i class="btn btn-outline-danger bi bi-trash"></i></a>
                                        </div>
                                     </li>
