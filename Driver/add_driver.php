@@ -41,7 +41,7 @@ require "../global/head.php";
                         VIEW
                      </button>
                      <ul class="dropdown-menu w-100 text-center">
-                        <li><a class="dropdown-item" href="view_cashier.php">Cashier</a></li>
+                        <li><a class="dropdown-item" href="../Cashier/view_cashier.php">Cashier</a></li>
                         <li><a class="dropdown-item" href="#">Driver</a></li>
                         <li><a class="dropdown-item" href="#">Vehicle</a></li>
                      </ul>
