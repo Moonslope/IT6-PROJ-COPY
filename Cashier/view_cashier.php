@@ -53,8 +53,11 @@ require "../global/head.php";
                      </div>
 
                      <div class="col col-6 d-flex gap-2  ps-5">
-                        <input type="text" class="form-control" placeholder="Search here">
-                        <button class="btn btn-outline-dark"><i class="bi bi-search"></i></button>
+                        <form method="GET" action="view_cashier.php" class="d-flex gap-2 ps-5">
+                           <input type="text" name="query" class="form-control" placeholder="Search here" value="<?php echo isset($_GET['query']) ? $_GET['query'] : ''; ?>">
+                           <button type="submit" class="btn btn-outline-dark"><i class="bi bi-search"></i></button>
+                        </form>
+
                      </div>
 
                      <div class="col col-3 text-end">
@@ -66,35 +69,43 @@ require "../global/head.php";
                   </div>
 
                   <div style="max-height: 400px; overflow-y: auto;">
+
                      <?php
                      try {
                         $sql = "SELECT * FROM cashier";
+
+                        if (isset($_GET['query']) && !empty($_GET['query'])) {
+                           $search = $conn->real_escape_string($_GET['query']);
+                           $sql .= " WHERE 
+                                       cashier_fname LIKE '%$search%' OR 
+                                       cashier_lname LIKE '%$search%' OR 
+                                       cashier_address LIKE '%$search%' OR 
+                                       cashier_contactNum LIKE '%$search%'";
+                        }
+
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {
                            while ($row = $result->fetch_assoc()) {
                      ?>
-                              <div class="">
-                                 <ul class="list-group mb-1">
-                                    <li class="list-group-item d-flex align-items-center justify-content-between border border-2">
-                                       <div class="d-flex align-items-center">
-                                          <div>
-                                             <img src="../images/cashier.png" alt="" class="img-fluid rounded-pill border border-2 border-dark me-3" width="50" height="50">
-                                          </div>
-                                          <div>
-                                             <span><?php echo '<strong>Name   : </strong>' . $row['cashier_fname'] . ' ' . $row['cashier_lname'] ?></span> <br>
-                                             <span><?php echo '<strong>Address   : </strong> ' . $row['cashier_address'] ?></span><br>
-                                             <span><?php echo '<strong>Contact Number   : </strong>' . $row['cashier_contactNum'] ?></span>
-                                          </div>
+                              <ul class="list-group mb-1">
+                                 <li class="list-group-item d-flex align-items-center justify-content-between border border-2">
+                                    <div class="d-flex align-items-center">
+                                       <div>
+                                          <img src="../images/cashier.png" alt="" class="img-fluid rounded-pill border border-2 border-dark me-3" width="50" height="50">
                                        </div>
-                                       <div class="group-btn">
-                                          <a href="../Cashier/edit_cashier.php?id=<?php echo $row['id'] ?>" class="btn"><i class="btn btn-outline-success bi bi-pencil-square"></i></a>
-
-                                          <a href="../Operations/op_delete_cashier.php?id=<?php echo $row['id'] ?>" class="btn"><i class="btn btn-outline-danger bi bi-trash"></i></a>
+                                       <div>
+                                          <span><strong>Name : </strong><?php echo $row['cashier_fname'] . ' ' . $row['cashier_lname']; ?></span><br>
+                                          <span><strong>Address : </strong><?php echo $row['cashier_address']; ?></span><br>
+                                          <span><strong>Contact Number : </strong><?php echo $row['cashier_contactNum']; ?></span>
                                        </div>
-                                    </li>
-                                 </ul>
-                              </div>
+                                    </div>
+                                    <div class="group-btn">
+                                       <a href="../Cashier/edit_cashier.php?id=<?php echo $row['id']; ?>" class="btn"><i class="btn btn-outline-success bi bi-pencil-square"></i></a>
+                                       <a href="../Operations/op_delete_cashier.php?id=<?php echo $row['id']; ?>" class="btn"><i class="btn btn-outline-danger bi bi-trash"></i></a>
+                                    </div>
+                                 </li>
+                              </ul>
                      <?php
                            }
                         } else {
@@ -106,6 +117,7 @@ require "../global/head.php";
                         die($e);
                      }
                      ?>
+
 
                   </div>
                </div>
