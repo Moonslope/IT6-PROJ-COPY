@@ -26,8 +26,12 @@
     background-color: #b8b8b8;
 }
 
+.btn-h{
+    background-color: #62d0fb;
+}
+
 .btn-h:hover{
-    background-color: #2b344d !important;
+    background-color: #5dc2ea!important;
 }
 
 
