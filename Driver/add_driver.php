@@ -21,22 +21,21 @@ require "../global/head.php";
       <div class="row pt-3">
          <div class="col col-3">
             <div class="card shadow-lg">
-               <div style="padding-bottom: 235px;" class="card_css card-body">
+               <div style="height: 500px;" class="card_css card-body">
                   <div class="mx-3 mb-3">
-                     <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Cashier/view_cashier.php">Cashier</a>
+                     <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Cashier/view_cashier.php">Cashier</a>
                   </div>
 
                   <div class="mx-3 mb-3">
-                     <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Driver/view_driver.php">Driver</a>
+                     <a class="btn btn-h w-100 fw-semibold mb-2 border border-1 border-dark" href="../Driver/view_driver.php">Driver</a>
                   </div>
 
                   <div class="mx-3 mb-3">
-                     <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="#">Vehicle</a>
+                     <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="#">Vehicle</a>
                   </div>
-
 
                   <div class="mx-3">
-                     <a href="../Login-Register/Login.php" class="btn btn-info w-100 border border-1 border-dark fw-semibold">LOG OUT</a>
+                     <a href="../Login-Register/Login.php" class="btn btn-h w-100 border border-1 border-dark fw-semibold">Log Out</a>
                   </div>
                </div>
             </div>
@@ -44,8 +43,7 @@ require "../global/head.php";
 
          <div class="col col-9">
             <div class="card shadow-lg">
-               <div class="card-body">
-
+               <div style="height: 500px;" class="card-body">
                   <div class="row mt-3 ms-3">
                      <div class="col col-3">
                         <img class="img-fluid border border-2 border-black rounded-pill" src="../images/driver.png" alt="" width="150" height="150">

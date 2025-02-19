@@ -17,6 +17,6 @@ $conn->close();
 
 echo "<script>
             alert('Driver record updated successfully!');
-            window.location.href = '../../Driver/driver.php';  // Correct path
+            window.location.href = '../../Driver/view_driver.php';  // Correct path
          </script>";
 exit();

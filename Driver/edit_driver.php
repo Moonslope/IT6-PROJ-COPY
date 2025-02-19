@@ -26,35 +26,21 @@ require "../global/head.php";
         <div class="row pt-3">
             <div class="col col-3">
                 <div class="card shadow-lg">
-                    <div style="padding-bottom: 235px;" class="card_css card-body">
-                        <!-- ADD -->
-                        <div class="dropdown mx-3 mt-4  mb-4">
-                            <button class="btn btn-info border border-1 border-dark dropdown-toggle w-100 fw-semibold" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                ADD
-                            </button>
-                            <ul class="dropdown-menu w-100 text-center">
-                                <li><a class="dropdown-item" href="../Cashier/add_cashier.php">Cashier</a></li>
-                                <li><a class="dropdown-item" href="../Driver/add_driver.php">Driver</a></li>
-                                <li><a class="dropdown-item" href="#">Vehicle</a></li>
-                            </ul>
+                    <div style="height: 500px;" class="card_css card-body">
+                        <div class="mx-3 mb-3">
+                            <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Cashier/view_cashier.php">Cashier</a>
                         </div>
-                        <!-- ADD -->
 
-                        <!-- VIEW -->
-                        <div class="dropdown mx-3 mb-4">
-                            <button class="btn btn-info border border-1 border-dark fw-semibold  dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                VIEW
-                            </button>
-                            <ul class="dropdown-menu w-100 text-center">
-                                <li><a class="dropdown-item" href="../Cashier/view_cashier.php">Cashier</a></li>
-                                <li><a class="dropdown-item" href="../Driver/view_driver.php">Driver</a></li>
-                                <li><a class="dropdown-item" href="#">Vehicle</a></li>
-                            </ul>
+                        <div class="mx-3 mb-3">
+                            <a class="btn btn-h w-100 fw-semibold mb-2 border border-1 border-dark" href="../Driver/view_driver.php">Driver</a>
                         </div>
-                        <!-- VIEW -->
+
+                        <div class="mx-3 mb-3">
+                            <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="#">Vehicle</a>
+                        </div>
 
                         <div class="mx-3">
-                            <a href="../Login-Register/Login.php" class="btn btn-info w-100 border border-1 border-dark fw-semibold">LOG OUT</a>
+                            <a href="../Login-Register/Login.php" class="btn btn-h w-100 border border-1 border-dark fw-semibold">Log Out</a>
                         </div>
                     </div>
                 </div>
@@ -79,7 +65,7 @@ require "../global/head.php";
 
                                 <div class="card shadow-lg bg-light ">
                                     <div class="card-body">
-                                        <form action="../Operations/op_edit_driver.php" method="POST">
+                                        <form action="../Operations//op_edit_driver.php" method="POST">
                                             <input type="hidden" name="id" value="<?php echo $id; ?>">
                                             <div class="row">
                                                 <div class="col">

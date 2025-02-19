@@ -27,7 +27,7 @@ require "../global/head.php";
                   </div>
 
                   <div class="mx-3 mb-3">
-                     <a class="btn btn-h w-100 fw-semibold mb-2 border border-1 border-dark" href="../Driver/add_driver.php">Driver</a>
+                     <a class="btn btn-h w-100 fw-semibold mb-2 border border-1 border-dark" href="../Driver/view_driver.php">Driver</a>
                   </div>
 
                   <div class="mx-3 mb-3">
@@ -43,7 +43,7 @@ require "../global/head.php";
 
          <div class="col col-9">
             <div class="card shadow-lg">
-               <div class="card-body">
+               <div style="height: 500px;" class="card-body">
 
                   <div class="row mt-3 ms-3">
                      <div class="col col-3">
