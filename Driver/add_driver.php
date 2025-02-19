@@ -22,31 +22,18 @@ require "../global/head.php";
          <div class="col col-3">
             <div class="card shadow-lg">
                <div style="padding-bottom: 235px;" class="card_css card-body">
-                  <!-- ADD -->
-                  <div class="dropdown mx-3 mt-4  mb-4">
-                     <button class="btn btn-info border border-1 border-dark dropdown-toggle w-100 fw-semibold" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        ADD
-                     </button>
-                     <ul class="dropdown-menu w-100 text-center">
-                        <li><a class="dropdown-item" href="../Cashier/add_cashier.php">Cashier</a></li>
-                        <li><a class="dropdown-item" href="">Driver</a></li>
-                        <li><a class="dropdown-item" href="#">Vehicle</a></li>
-                     </ul>
+                  <div class="mx-3 mb-3">
+                     <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Cashier/view_cashier.php">Cashier</a>
                   </div>
-                  <!-- ADD -->
 
-                  <!-- VIEW -->
-                  <div class="dropdown mx-3 mb-4">
-                     <button class="btn btn-info border border-1 border-dark fw-semibold  dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        VIEW
-                     </button>
-                     <ul class="dropdown-menu w-100 text-center">
-                        <li><a class="dropdown-item" href="../Cashier/view_cashier.php">Cashier</a></li>
-                        <li><a class="dropdown-item" href="../Driver/view_driver.php">Driver</a></li>
-                        <li><a class="dropdown-item" href="#">Vehicle</a></li>
-                     </ul>
+                  <div class="mx-3 mb-3">
+                     <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Driver/view_driver.php">Driver</a>
                   </div>
-                  <!-- VIEW -->
+
+                  <div class="mx-3 mb-3">
+                     <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="#">Vehicle</a>
+                  </div>
+
 
                   <div class="mx-3">
                      <a href="../Login-Register/Login.php" class="btn btn-info w-100 border border-1 border-dark fw-semibold">LOG OUT</a>
@@ -74,28 +61,28 @@ require "../global/head.php";
 
                         <div class="card shadow-lg bg-light ">
                            <div class="card-body">
-                              <form action="../Operations/op_add_cashier.php" method="POST">
+                              <form action="../Operations/op_add_driver.php" method="POST">
                                  <div class="row">
                                     <div class="col">
-                                       <label for="cashier_fname" class="fw-semibold mb-3">First Name</label>
-                                       <input type="text" id="cashier_fname" name="cashier_fname" class="form-control border-dark">
+                                       <label for="driver_fname" class="fw-semibold mb-3">First Name</label>
+                                       <input type="text" id="driver_fname" name="driver_fname" class="form-control border-dark">
                                     </div>
 
                                     <div class="col">
-                                       <label for="cashier_lname" class="fw-semibold mb-3">Last Name</label>
-                                       <input type="text" id="cashier_lname" name="cashier_lname" class="form-control border-dark">
+                                       <label for="driver_lname" class="fw-semibold mb-3">Last Name</label>
+                                       <input type="text" id="driver_lname" name="driver_lname" class="form-control border-dark">
                                     </div>
                                  </div>
 
                                  <div class="row mt-2">
                                     <div class="col">
-                                       <label for="cashier_address" class="fw-semibold mb-3">Address</label>
-                                       <input type="text" id="cashier_address" name="cashier_address" class="form-control border-dark">
+                                       <label for="driver_address" class="fw-semibold mb-3">Address</label>
+                                       <input type="text" id="driver_address" name="driver_address" class="form-control border-dark">
                                     </div>
 
                                     <div class="col">
-                                       <label for="cashier_contactNum" class="fw-semibold mb-3">Contact Number</label>
-                                       <input type="text" id="cashier_contactNum" name="cashier_contactNum" class="form-control border-dark">
+                                       <label for="driver_contactNum" class="fw-semibold mb-3">Contact Number</label>
+                                       <input type="text" id="driver_contactNum" name="driver_contactNum" class="form-control border-dark">
                                     </div>
                                  </div>
 

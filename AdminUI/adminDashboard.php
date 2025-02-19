@@ -8,6 +8,11 @@ $sql = "SELECT COUNT(*) AS total_cashiers FROM cashier";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 
+
+$sqll = "SELECT COUNT(*) AS total_driver FROM driver";
+$resultt = $conn->query($sqll);
+$roww = $resultt->fetch_assoc();
+
 $title = "Admin Dashboard";
 require "../global/head.php";
 
@@ -33,7 +38,7 @@ require "../global/head.php";
                   </div>
 
                   <div class="mx-3 mb-3">
-                     <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Driver/add_driver.php">Driver</a>
+                     <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Driver/view_driver.php">Driver</a>
                   </div>
 
                   <div class="mx-3 mb-3">
@@ -94,7 +99,7 @@ require "../global/head.php";
                               <p class="text-white fs-5 mt-4">Number of Drivers</p>
 
                               <!-- php code para sa total drivers -->
-                              <p class="text-white fs-2">23</p>
+                              <p class="text-white fs-2"><?php echo $roww['total_driver']; ?></p>
                            </div>
                         </div>
                      </div>
