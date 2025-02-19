@@ -20,8 +20,8 @@ require "../global/head.php";
       </div>
 
       <div class="row pt-3">
-         <div class="col col-3">
-            <div class="card shadow-lg">
+         <div class="col col-3 ">
+            <div class="card shadow-lg ">
                <div style="height: 500px;" class="card_css card-body">
                   <div class="mx-3 mb-3">
                      <a style="background-color: #62d0fb;" class="btn-h btn w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Cashier/view_cashier.php">Cashier</a>
