@@ -2,6 +2,7 @@
 <html lang="en">
 <!-- Try -->
 <!-- comment -->
+<!-- php -->
 <?php
 include "../Database/db_connect.php";
 
