@@ -35,7 +35,6 @@ require "../global/head.php";
                      <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="#">Vehicle</a>
                   </div>
 
-
                   <div class="mx-3">
                      <a href="../Login-Register/Login.php" class="btn btn-h w-100 border border-1 border-dark fw-semibold">Log Out</a>
                   </div>
@@ -49,7 +48,6 @@ require "../global/head.php";
                   <div class="row rounded-3 border border-1 border-gray shadow  d-flex align-items-center mx-0 p-3 mb-3">
                      <div class="col col-3 d-flex align-items-center">
                         <h1 class="fs-4 pt-2">CASHIER | LISTS</h1>
-
                      </div>
 
                      <div class="col col-6 d-flex gap-2  ps-5">
@@ -64,7 +62,6 @@ require "../global/head.php";
                         <a class="btn btn-success border border-1 border-dark fw-semibold" href="add_cashier.php">ADD
                            <i class="bi fs-5 bi-person-add"></i>
                         </a>
-
                      </div>
                   </div>
 
@@ -117,13 +114,10 @@ require "../global/head.php";
                         die($e);
                      }
                      ?>
-
-
                   </div>
                </div>
             </div>
          </div>
-
       </div>
    </div>
    </div>
