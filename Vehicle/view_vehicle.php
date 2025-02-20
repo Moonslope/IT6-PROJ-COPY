@@ -86,7 +86,7 @@ require "../global/head.php";
                                             <li class="list-group-item d-flex align-items-center justify-content-between border border-2">
                                                 <div class="d-flex align-items-center">
                                                     <div>
-                                                        <img src="../images/cashier.png" alt="" class="img-fluid rounded-pill border border-2 border-dark me-3" width="50" height="50">
+                                                        <img src="../images/van.png" alt="" class="img-fluid rounded-pill border border-2 border-dark me-3" width="50" height="50">
                                                     </div>
                                                     <div>
                                                         <span><strong>Plate Number : </strong><?php echo $row['platenumber']; ?></span>
