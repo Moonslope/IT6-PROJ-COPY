@@ -12,6 +12,10 @@ $sqll = "SELECT COUNT(*) AS total_driver FROM driver";
 $resultt = $conn->query($sqll);
 $roww = $resultt->fetch_assoc();
 
+$sqlll = "SELECT COUNT(*) AS total_vehicle FROM vehicle";
+$resulttt = $conn->query($sqlll);
+$rowww = $resulttt->fetch_assoc();
+
 $title = "Admin Dashboard";
 require "../global/head.php";
 
@@ -40,7 +44,7 @@ require "../global/head.php";
                   </div>
 
                   <div class="mx-3 mb-3">
-                     <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="#">Vehicle</a>
+                     <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Vehicle/view_vehicle.php">Vehicle</a>
                   </div>
 
                   <div class="mx-3">
@@ -85,7 +89,7 @@ require "../global/head.php";
                               <p class="text-white fs-5 mt-4">Number of Vehicles</p>
 
                               <!-- php code para sa total vehicles -->
-                              <p class="text-white fs-2">23</p>
+                              <p class="text-white fs-2"><?php echo $rowww['total_vehicle']; ?></p>
                            </div>
                         </div>
                      </div>
