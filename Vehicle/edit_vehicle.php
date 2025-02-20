@@ -52,7 +52,7 @@ require "../global/head.php";
 
                         <div class="row mt-3 ms-3">
                             <div class="col col-3">
-                                <img class="img-fluid border border-2 border-black rounded-pill" src="" alt="" width="150" height="150">
+                                <img class="img-fluid border border-2 border-black rounded-pill" src="../images/van.png" alt="" width="150" height="150">
                             </div>
 
                             <div class="col">
