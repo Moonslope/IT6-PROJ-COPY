@@ -71,43 +71,40 @@ require "../global/head.php";
 
                                                 <div class="col">
                                                     <label for="platenumber" class="fw-semibold mb-3">Plate Number</label>
-                                                    <input type="text" id="platenumber" name="platenumber" value="<?php echo $row['platenumber'] ?>" class="form-control border-dark">
+                                                    <input type="text" id="platenumber" name="platenumber" value="<?php echo $row['platenumber'] ?>" class="form-control w-100 border-dark">
                                                 </div>
 
-                                                <div class="col d-flex align-items-end">
+                                                <div class="col">
+                                                    <label class="fw-semibold" for="driver">Assign Driver</label>
+                                                    <select class="form-select border border-dark mt-3" id="driver" name="driver">
+                                                        <option value="">None</option>
+                                                        <?php
+                                                        try {
+                                                            $sqll = "SELECT * FROM driver";
+                                                            $resultt = $conn->query($sqll);
 
-                                                    <div class=" w-100 ">
-                                                        <label class="text-top fw-semibold" for="driver">Assign Driver</label>
-                                                        <select class="form-select w-100 border border-dark mt-3" id="driver" name="driver">
-                                                            <option value="">None</option>
-                                                            <?php
-                                                            try {
-                                                                $sqll = "SELECT * FROM driver";
-                                                                $resultt = $conn->query($sqll);
-
-                                                                if ($resultt->num_rows > 0) {
-                                                                    while ($roww = $resultt->fetch_assoc()) {
-                                                                        echo '<option value="' . $roww['driver_id'] . '">' . $roww['driver_fname'] . ' ' . $roww['driver_lname'] . '</option>';
-                                                                    }
+                                                            if ($resultt->num_rows > 0) {
+                                                                while ($roww = $resultt->fetch_assoc()) {
+                                                                    echo '<option value="' . $roww['driver_id'] . '">' . $roww['driver_fname'] . ' ' . $roww['driver_lname'] . '</option>';
                                                                 }
-                                                                $conn->close();
-                                                            } catch (\Exception $e) {
-                                                                die($e);
                                                             }
-                                                            ?>
-                                                        </select>
-                                                    </div>
-
+                                                            $conn->close();
+                                                        } catch (\Exception $e) {
+                                                            die($e);
+                                                        }
+                                                        ?>
+                                                    </select>
                                                 </div>
+                                            </div>
 
-                                                <div class="row mt-4">
-                                                    <div class="col">
-                                                        <a href="../AdminUI/adminDashboard.php" class="btn btn-outline-info w-100 text-dark fw-semibold">CANCEL</a>
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="submit" class="btn btn-info w-100 border border-dark fw-semibold">UPDATE</button>
-                                                    </div>
+                                            <div class="row mt-4">
+                                                <div class="col">
+                                                    <a href="../AdminUI/adminDashboard.php" class="btn btn-outline-info w-100 text-dark fw-semibold">CANCEL</a>
                                                 </div>
+                                                <div class="col">
+                                                    <button type="submit" class="btn btn-info w-100 border border-dark fw-semibold"><i class="bi bi-floppy-fill me-2"></i> Save Changes </button>
+                                                </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
