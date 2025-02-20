@@ -74,25 +74,30 @@ require "../global/head.php";
                                                     <input type="text" id="platenumber" name="platenumber" value="<?php echo $row['platenumber'] ?>" class="form-control border-dark">
                                                 </div>
 
-                                                <div class="col">
-                                                    <select class="w-100" id="dirver" name="driver">
-                                                        <option value="">None</option>
-                                                        <?php
-                                                        try {
-                                                            $sqll = "SELECT * FROM driver";
-                                                            $resultt = $conn->query($sqll);
+                                                <div class="col d-flex align-items-end">
 
-                                                            if ($resultt->num_rows > 0) {
-                                                                while ($roww = $resultt->fetch_assoc()) {
-                                                                    echo '<option value="' . $roww['driver_id'] . '">' . $roww['driver_fname'] . ' ' . $roww['driver_lname'] . '</option>';
+                                                    <div class=" w-100 ">
+                                                        <label class="text-top fw-semibold" for="driver">Assign Driver</label>
+                                                        <select class="form-select w-100 border border-dark mt-3" id="driver" name="driver">
+                                                            <option value="">None</option>
+                                                            <?php
+                                                            try {
+                                                                $sqll = "SELECT * FROM driver";
+                                                                $resultt = $conn->query($sqll);
+
+                                                                if ($resultt->num_rows > 0) {
+                                                                    while ($roww = $resultt->fetch_assoc()) {
+                                                                        echo '<option value="' . $roww['driver_id'] . '">' . $roww['driver_fname'] . ' ' . $roww['driver_lname'] . '</option>';
+                                                                    }
                                                                 }
+                                                                $conn->close();
+                                                            } catch (\Exception $e) {
+                                                                die($e);
                                                             }
-                                                            $conn->close();
-                                                        } catch (\Exception $e) {
-                                                            die($e);
-                                                        }
-                                                        ?>
-                                                    </select>
+                                                            ?>
+                                                        </select>
+                                                    </div>
+
                                                 </div>
 
                                                 <div class="row mt-4">
