@@ -31,7 +31,7 @@ require "../global/head.php";
                         </div>
 
                         <div class="mx-3 mb-3">
-                            <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="#">Vehicle</a>
+                            <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Vehicle/view_vehicle.php">Vehicle</a>
                         </div>
 
                         <div class="mx-3">
@@ -47,7 +47,7 @@ require "../global/head.php";
 
                         <div class="row mt-3 ms-3">
                             <div class="col col-3">
-                                <img class="img-fluid border border-2 border-black rounded-pill" src="" alt="" width="150" height="150">
+                                <img class="img-fluid border border-2 border-black rounded-pill" src="../images/van.png" alt="" width="150" height="150">
                             </div>
 
                             <div class="col">
