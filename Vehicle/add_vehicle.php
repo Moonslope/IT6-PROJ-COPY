@@ -66,15 +66,6 @@ require "../global/head.php";
                                                     <label for="platenumber" class="fw-semibold mb-3">Plate Number</label>
                                                     <input type="text" id="platenumber" name="platenumber" class="form-control border-dark">
                                                 </div>
-
-                                                <div class="col">
-                                                    <label for="" class="fw-semibold mb-3">Assigned Driver</label>
-                                                    <select class=" border border-dark" id="dd-driver" name="dd-driver" onchange="this.form.submit()">
-                                                        <option>None</option>
-
-
-                                                    </select>
-                                                </div>
                                             </div>
 
                                             <div class="row mt-4">

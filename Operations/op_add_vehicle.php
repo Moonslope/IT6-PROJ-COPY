@@ -19,7 +19,7 @@ if ($method == 'POST') {
 
         echo "<script>
       alert('Vehicle added successfully!');
-      window.location.href = '../AdminUI/adminDashboard.php';
+      window.location.href = '../Vehicle/view_vehicle.php';
    </script>";
     } catch (\Exception $e) {
 

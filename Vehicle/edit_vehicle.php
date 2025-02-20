@@ -32,11 +32,11 @@ require "../global/head.php";
                         </div>
 
                         <div class="mx-3 mb-3">
-                            <a class="btn btn-h w-100 fw-semibold mb-2 border border-1 border-dark" href="../Driver/add_driver.php">Driver</a>
+                            <a class="btn btn-h w-100 fw-semibold mb-2 border border-1 border-dark" href="../Driver/view_driver.php">Driver</a>
                         </div>
 
                         <div class="mx-3 mb-3">
-                            <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="#">Vehicle</a>
+                            <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Vehicle/view_vehicle.php">Vehicle</a>
                         </div>
 
                         <div class="mx-3">
@@ -68,9 +68,43 @@ require "../global/head.php";
                                         <form action="../Operations//op_edit_vehicle.php" method="POST">
                                             <input type="hidden" name="id" value="<?php echo $id; ?>">
                                             <div class="row">
+
                                                 <div class="col">
                                                     <label for="platenumber" class="fw-semibold mb-3">Plate Number</label>
                                                     <input type="text" id="platenumber" name="platenumber" value="<?php echo $row['platenumber'] ?>" class="form-control border-dark">
+                                                </div>
+
+                                                <div class="col">
+                                                    <select class="w-100" id="dd-destination" name="dd-destination" onchange="this.form.submit()">
+                                                        <option value="">None</option>
+                                                        <option value="">
+
+                                                            <?php
+                                                            try {
+                                                                $sqll = "SELECT * FROM driver";
+
+
+                                                                $resultt = $conn->query($sqll);
+
+                                                                if ($resultt->num_rows > 0) {
+                                                                    while ($roww = $resultt->fetch_assoc()) {
+                                                            ?>
+
+                                                                        <div>
+                                                                            <span><strong> </strong><?php echo $roww['driver_fname'] . ' ' . $roww['driver_lname']; ?></span>
+                                                                        </div>
+                                                            <?php
+                                                                    }
+                                                                }
+                                                                $conn->close();
+                                                            } catch (\Exception $e) {
+                                                                die($e);
+                                                            }
+                                                            ?>
+
+                                                        </option>
+                                                    </select>
+
                                                 </div>
 
                                                 <div class="row mt-4">
