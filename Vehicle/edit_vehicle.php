@@ -5,10 +5,10 @@
 include "../Database/db_connect.php";
 
 $id = $_GET['id'];
-$sql = "SELECT * FROM driver WHERE id=" . $id;
+$sql = "SELECT * FROM vehicle WHERE vehicle_id=" . $id;
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
-$title = 'Driver Lists | ' . $row['driver_fname'] . ' ' . $row['driver_lname'];
+$title = 'Vehicle Lists | ' . $row['platenumber'];
 require "../global/head.php";
 ?>
 
@@ -32,11 +32,11 @@ require "../global/head.php";
                         </div>
 
                         <div class="mx-3 mb-3">
-                            <a class="btn btn-h w-100 fw-semibold mb-2 border border-1 border-dark" href="../Driver/view_driver.php">Driver</a>
+                            <a class="btn btn-h w-100 fw-semibold mb-2 border border-1 border-dark" href="../Driver/add_driver.php">Driver</a>
                         </div>
 
                         <div class="mx-3 mb-3">
-                            <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Vehicle/view_vehicle.php">Vehicle</a>
+                            <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="#">Vehicle</a>
                         </div>
 
                         <div class="mx-3">
@@ -52,11 +52,11 @@ require "../global/head.php";
 
                         <div class="row mt-3 ms-3">
                             <div class="col col-3">
-                                <img class="img-fluid border border-2 border-black rounded-pill" src="../images/driver.png" alt="" width="150" height="150">
+                                <img class="img-fluid border border-2 border-black rounded-pill" src="" alt="" width="150" height="150">
                             </div>
 
                             <div class="col">
-                                <h1 class="mt-3">DRIVER</h1>
+                                <h1 class="mt-3">VEHICLE</h1>
                             </div>
                         </div>
 
@@ -65,40 +65,22 @@ require "../global/head.php";
 
                                 <div class="card shadow-lg bg-light ">
                                     <div class="card-body">
-                                        <form action="../Operations//op_edit_driver.php" method="POST">
+                                        <form action="../Operations//op_edit_vehicle.php" method="POST">
                                             <input type="hidden" name="id" value="<?php echo $id; ?>">
                                             <div class="row">
                                                 <div class="col">
-                                                    <label for="driver_fname" class="fw-semibold mb-3">First Name</label>
-                                                    <input type="text" id="driver_fname" name="driver_fname" value="<?php echo $row['driver_fname'] ?>" class="form-control border-dark">
+                                                    <label for="platenumber" class="fw-semibold mb-3">Plate Number</label>
+                                                    <input type="text" id="platenumber" name="platenumber" value="<?php echo $row['platenumber'] ?>" class="form-control border-dark">
                                                 </div>
 
-                                                <div class="col">
-                                                    <label for="driver_lname" class="fw-semibold mb-3">Last Name</label>
-                                                    <input type="text" id="driver_lname" name="driver_lname" value="<?php echo $row['driver_lname'] ?>" class="form-control border-dark">
+                                                <div class="row mt-4">
+                                                    <div class="col">
+                                                        <a href="../AdminUI/adminDashboard.php" class="btn btn-outline-info w-100 text-dark fw-semibold">CANCEL</a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <button type="submit" class="btn btn-info w-100 border border-dark fw-semibold">UPDATE</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-
-                                            <div class="row mt-2">
-                                                <div class="col">
-                                                    <label for="driver_address" class="fw-semibold mb-3">Address</label>
-                                                    <input type="text" id="driver_address" name="driver_address" value="<?php echo $row['driver_address'] ?>" class="form-control border-dark">
-                                                </div>
-
-                                                <div class="col">
-                                                    <label for="driver_contactNum" class="fw-semibold mb-3">Contact Number</label>
-                                                    <input type="text" id="driver_contactNum" name="driver_contactNum" value="<?php echo $row['driver_contactNum'] ?>" class="form-control border-dark">
-                                                </div>
-                                            </div>
-
-                                            <div class="row mt-4">
-                                                <div class="col">
-                                                    <a href="../AdminUI/adminDashboard.php" class="btn btn-outline-info w-100 text-dark fw-semibold">CANCEL</a>
-                                                </div>
-                                                <div class="col">
-                                                    <button type="submit" class="btn btn-info w-100 border border-dark fw-semibold">UPDATE</button>
-                                                </div>
-                                            </div>
                                         </form>
                                     </div>
                                 </div>
