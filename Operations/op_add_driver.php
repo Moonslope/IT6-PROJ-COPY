@@ -21,7 +21,7 @@ if ($method == 'POST') {
 
       echo "<script>
       alert('Driver added successfully!');
-      window.location.href = '../AdminUI/adminDashboard.php';
+      window.location.href = '../Driver/view_driver.php';
    </script>";
    } catch (\Exception $e) {
 

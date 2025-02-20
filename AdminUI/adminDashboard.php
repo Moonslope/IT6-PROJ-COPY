@@ -8,7 +8,6 @@ $sql = "SELECT COUNT(*) AS total_cashiers FROM cashier";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 
-
 $sqll = "SELECT COUNT(*) AS total_driver FROM driver";
 $resultt = $conn->query($sqll);
 $roww = $resultt->fetch_assoc();
@@ -32,7 +31,6 @@ require "../global/head.php";
             <div class="card shadow-lg">
                <div style="height: 500px;" class="card_css card-body">
 
-                  <!-- ADD -->
                   <div class="mx-3 mb-3">
                      <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Cashier/view_cashier.php">Cashier</a>
                   </div>
