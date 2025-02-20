@@ -15,10 +15,4 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../CSS/style.css">
 
-    <!-- Apply Font to Whole Website -->
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-    </style>
 </head>

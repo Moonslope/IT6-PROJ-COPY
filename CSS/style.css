@@ -1,3 +1,7 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
 .con-bg{
     background-color: #5870aa;
 }
@@ -20,6 +24,15 @@
 .btn-nav:hover{
     border:solid 1.5px black ;
     background-color: #b8b8b8;
+}
+
+.btn-h{
+    background-color: #62d0fb;
+    
+}
+
+.btn-h:hover{
+    background-color: #51acd0!important;
 }
 
 

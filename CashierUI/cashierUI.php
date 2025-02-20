@@ -75,7 +75,7 @@ require  "../global/head.php";
                         </div>
 
                         <div class="d-flex justify-content-end">
-                           <button class="btn btn-primary w-25" type="submit">Okay</button>
+                           <button class="btn btn-h fw-semibold w-25" type="submit">Okay</button>
                         </div>
 
                      </form>
@@ -109,7 +109,7 @@ require  "../global/head.php";
                      </div>
 
                      <div class="d-flex justify-content-end mt-3">
-                        <button type="submit" class="btn btn-primary w-25">Insert</button>
+                        <button type="submit" class="btn btn-h fw-semibold w-25">Insert</button>
                      </div>
 
                   </div>
@@ -121,6 +121,83 @@ require  "../global/head.php";
             <div class="card shadow-lg">
                <div class="card-body">
                   <p class="card-title fw-semibold fs-5 text-center">Caltransco | Travel Pass(Davao)</p>
+                  <div class="container mt-3">
+                     <div class="row">
+                        <div class="col">
+                           <table class="table table-bordered table-hover text-center">
+                              <thead class="table-secondary">
+                                 <tr>
+                                    <th>DESTINATION</th>
+                                    <th>FARE</th>
+                                    <th>TOTAL PASSENGERS</th>
+                                    <th>TOTAL FARE</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr>
+                                    <td>Mintal</td>
+                                    <td>35</td>
+                                    <td></td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td>Tugbok</td>
+                                    <td>38</td>
+                                    <td></td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td>Los Amigos</td>
+                                    <td>40</td>
+                                    <td></td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td>Quarry</td>
+                                    <td>40</td>
+                                    <td></td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td>Puting Bato</td>
+                                    <td>45</td>
+                                    <td></td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td>Riverside</td>
+                                    <td>45</td>
+                                    <td></td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td>Calinan</td>
+                                    <td>50</td>
+                                    <td></td>
+                                    <td></td>
+                                 </tr>
+                              </tbody>
+                              <tfoot class="table-secondary fw-bold">
+                                 <tr>
+                                    <td colspan="2">TOTAL:</td>
+                                    <td></td>
+                                    <td></td>
+                                 </tr>
+                              </tfoot>
+                           </table>
+
+                           <div class="row">
+                              <div class="col">
+                                 <p>Cashier: </p>
+                              </div>
+                              <div class="col d-flex gap-3 justify-content-end">
+                                 <button class="btn btn-outline-info text-dark fw-semibold">On Hold</button>
+                                 <button class="btn btn-h fw-semibold">Depart</button>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
                </div>
             </div>
          </div>

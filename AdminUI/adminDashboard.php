@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 <!-- Try -->
 <!-- comment -->
 <!-- php -->
+=======
+
+>>>>>>> origin
 <?php
 include "../Database/db_connect.php";
 
@@ -10,9 +14,16 @@ $sql = "SELECT COUNT(*) AS total_cashiers FROM cashier";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 
+$sqll = "SELECT COUNT(*) AS total_driver FROM driver";
+$resultt = $conn->query($sqll);
+$roww = $resultt->fetch_assoc();
+
+$sqlll = "SELECT COUNT(*) AS total_vehicle FROM vehicle";
+$resulttt = $conn->query($sqlll);
+$rowww = $resulttt->fetch_assoc();
+
 $title = "Admin Dashboard";
 require "../global/head.php";
-
 
 ?>
 
@@ -28,30 +39,29 @@ require "../global/head.php";
       <div class="row pt-3">
          <div class="col col-3   ">
             <div class="card shadow-lg">
-               <div style="padding-bottom: 235px;" class="card_css card-body">
+               <div style="height: 500px;" class="card_css card-body">
 
-                  <!-- ADD -->
                   <div class="mx-3 mb-3">
-                     <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Cashier/view_cashier.php">Cashier</a>
+                     <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Cashier/view_cashier.php">Cashier</a>
                   </div>
 
                   <div class="mx-3 mb-3">
-                     <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Driver/add_driver.php">Driver</a>
+                     <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Driver/view_driver.php">Driver</a>
                   </div>
 
                   <div class="mx-3 mb-3">
-                     <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="#">Vehicle</a>
+                     <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Vehicle/view_vehicle.php">Vehicle</a>
                   </div>
 
                   <div class="mx-3">
-                     <a href="../Login-Register/Login.php" class="btn btn-info w-100 border border-1 border-dark fw-semibold">LOG OUT</a>
+                     <a href="../Login-Register/Login.php" class="btn btn-h w-100 border border-1 border-dark fw-semibold">Log Out</a>
                   </div>
                </div>
             </div>
          </div>
 
-         <div class="col col-9">
-            <div class="card shadow-lg">
+         <div class="col col-9 ">
+            <div style="height: 500px;" class="card shadow-lg">
                <div class="card-body">
 
                   <div class="row mt-3 ms-3">
@@ -85,7 +95,7 @@ require "../global/head.php";
                               <p class="text-white fs-5 mt-4">Number of Vehicles</p>
 
                               <!-- php code para sa total vehicles -->
-                              <p class="text-white fs-2">23</p>
+                              <p class="text-white fs-2"><?php echo $rowww['total_vehicle']; ?></p>
                            </div>
                         </div>
                      </div>
@@ -97,7 +107,7 @@ require "../global/head.php";
                               <p class="text-white fs-5 mt-4">Number of Drivers</p>
 
                               <!-- php code para sa total drivers -->
-                              <p class="text-white fs-2">23</p>
+                              <p class="text-white fs-2"><?php echo $roww['total_driver']; ?></p>
                            </div>
                         </div>
                      </div>
