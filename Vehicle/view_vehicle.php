@@ -89,7 +89,8 @@ require "../global/head.php";
                                                         <img src="../images/van.png" alt="" class="img-fluid rounded-pill border border-2 border-dark me-3" width="50" height="50">
                                                     </div>
                                                     <div>
-                                                        <span><strong>Plate Number : </strong><?php echo $row['platenumber']; ?></span>
+                                                        <span><strong>Plate Number : </strong><?php echo $row['platenumber']; ?></span><br>
+                                                        <span><strong>Driver: </strong></span>
                                                     </div>
                                                 </div>
                                                 <div class="group-btn">
