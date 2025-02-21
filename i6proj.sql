@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2025 at 08:12 AM
+-- Generation Time: Feb 21, 2025 at 07:33 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -76,6 +76,31 @@ INSERT INTO `driver` (`id`, `driver_fname`, `driver_lname`, `driver_address`, `d
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `route`
+--
+
+CREATE TABLE `route` (
+  `route_id` int(11) NOT NULL,
+  `route` varchar(100) NOT NULL,
+  `fare` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `route`
+--
+
+INSERT INTO `route` (`route_id`, `route`, `fare`) VALUES
+(1, 'Mintal', 35.00),
+(2, 'Tugbok', 38.00),
+(3, 'Los Amigos', 40.00),
+(4, 'Quarry', 40.00),
+(5, 'Puting Bato', 45.00),
+(6, 'Riverside', 45.00),
+(7, 'Calinan', 50.00);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `vehicle`
 --
 
@@ -89,7 +114,7 @@ CREATE TABLE `vehicle` (
 --
 
 INSERT INTO `vehicle` (`vehicle_id`, `platenumber`) VALUES
-(3, 'sad'),
+(3, 'XSDH10'),
 (4, '123'),
 (5, '123');
 
@@ -108,6 +133,12 @@ ALTER TABLE `cashier`
 --
 ALTER TABLE `driver`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `route`
+--
+ALTER TABLE `route`
+  ADD PRIMARY KEY (`route_id`);
 
 --
 -- Indexes for table `vehicle`
@@ -130,6 +161,12 @@ ALTER TABLE `cashier`
 --
 ALTER TABLE `driver`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `route`
+--
+ALTER TABLE `route`
+  MODIFY `route_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `vehicle`
