@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+
+include "../Database/db_connect.php";
 $title = 'Cashier';
 require  "../global/head.php";
 ?>
@@ -29,37 +31,50 @@ require  "../global/head.php";
                   <div>
                      <form method="POST">
                         <div class="mt-4">
-                           <label class="fw-semibold" for="dd-destination">DESTINATION</label>
-                           <select id="dd-destination" name="dd-destination" onchange="this.form.submit()">
+                           <label class="fw-semibold mb-2" for="dd-destination">DESTINATION</label>
+                           <select class="form-select mb-3" id="dd-destination" name="dd-destination">
                               <option value="">None</option>
+                              <?php
+                              try {
+                                 $sqll = "SELECT * FROM routes";
+                                 $resultt = $conn->query($sqll);
 
-                              <option value="Mintal" <?php echo (isset($_POST['dd-destination']) && $_POST['dd-destination'] == "Mintal") ? "selected" : ""; ?>>Mintal</option>
-                              <option value="Tugbok" <?php echo (isset($_POST['dd-destination']) && $_POST['dd-destination'] == "Tugbok") ? "selected" : ""; ?>>Tugbok</option>
-                              <option value="Los Amigos" <?php echo (isset($_POST['dd-destination']) && $_POST['dd-destination'] == "Los Amigos") ? "selected" : ""; ?>>Los Amigos</option>
-                              <option value="Quarry" <?php echo (isset($_POST['dd-destination']) && $_POST['dd-destination'] == "Quarry") ? "selected" : ""; ?>>Quarry</option>
-                              <option value="Puting Bato" <?php echo (isset($_POST['dd-destination']) && $_POST['dd-destination'] == "Puting Bato") ? "selected" : ""; ?>>Puting Bato</option>
-                              <option value="Riverside" <?php echo (isset($_POST['dd-destination']) && $_POST['dd-destination'] == "Riverside") ? "selected" : ""; ?>>Riverside</option>
-                              <option value="Calinan" <?php echo (isset($_POST['dd-destination']) && $_POST['dd-destination'] == "Calinan") ? "selected" : ""; ?>>Calinan</option>
+                                 if ($resultt->num_rows > 0) {
+                                    while ($roww = $resultt->fetch_assoc()) {
+                                       echo '<option value="' . $roww['route'] . '">' . $roww['route'] . '</option>';
+                                    }
+                                 }
+                              } catch (\Exception $e) {
+                                 die($e);
+                              }
+                              ?>
+
                            </select>
 
-                           <input class="form-control form-control-sm text-center my-3" type="text" id="inputField" name="inputField" value="<?php echo isset($_POST['dd-destination']) ? $_POST['dd-destination'] : ''; ?>" readonly>
                         </div>
 
                         <div>
-                           <label for="dd-cardColor" class="fw-semibold">CARD COLOR</label>
-                           <select id="dd-cardColor" name="dd-cardColor" onchange="this.form.submit()">
+                           <label for="dd-cardColor" class="fw-semibold mb-2">CARD COLOR</label>
+                           <select class="form-select mb-3" id="dd-cardColor" name="dd-cardColor">
                               <option value="">None</option>
 
-                              <option value="Blue" <?php echo (isset($_POST['dd-cardColor']) && $_POST['dd-cardColor'] == "Blue") ? "selected" : ""; ?>>Blue</option>
-                              <option value="Red" <?php echo (isset($_POST['dd-cardColor']) && $_POST['dd-cardColor'] == "Red") ? "selected" : ""; ?>>Red</option>
-                              <option value="Pink" <?php echo (isset($_POST['dd-cardColor']) && $_POST['dd-cardColor'] == "Pink") ? "selected" : ""; ?>>Pink</option>
-                              <option value="Orange" <?php echo (isset($_POST['dd-cardColor']) && $_POST['dd-cardColor'] == "Orange") ? "selected" : ""; ?>>Orange</option>
-                              <option value="Black" <?php echo (isset($_POST['dd-cardColor']) && $_POST['dd-cardColor'] == "Black") ? "selected" : ""; ?>>Black</option>
-                              <option value="Violet" <?php echo (isset($_POST['dd-cardColor']) && $_POST['dd-cardColor'] == "Violet") ? "selected" : ""; ?>>Violet</option>
-                              <option value="Yellow" <?php echo (isset($_POST['dd-cardColor']) && $_POST['dd-cardColor'] == "Yellow") ? "selected" : ""; ?>>Yellow</option>
+                              <?php
+                              try {
+                                 $sqll = "SELECT * FROM card";
+                                 $resultt = $conn->query($sqll);
+
+                                 if ($resultt->num_rows > 0) {
+                                    while ($roww = $resultt->fetch_assoc()) {
+                                       echo '<option value="' . $roww['card_color'] . '">' . $roww['card_color'] . '</option>';
+                                    }
+                                 }
+                                 $conn->close();
+                              } catch (\Exception $e) {
+                                 die($e);
+                              }
+                              ?>
                            </select>
 
-                           <input class="form-control form-control-sm text-center my-3" type="text" id="inputField" name="inputField" value="<?php echo isset($_POST['dd-cardColor']) ? $_POST['dd-cardColor'] : ''; ?>" readonly>
                         </div>
 
                         <div class="d-flex justify-content-end">

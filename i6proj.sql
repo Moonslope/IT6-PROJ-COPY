@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2025 at 08:55 AM
+-- Generation Time: Feb 21, 2025 at 02:25 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -57,6 +57,7 @@ CREATE TABLE `driver` (
   `driver_id` int(11) NOT NULL,
   `driver_fname` varchar(255) NOT NULL,
   `driver_lname` varchar(255) NOT NULL,
+  `driver_name` varchar(255) NOT NULL,
   `driver_address` varchar(255) NOT NULL,
   `driver_contactNum` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -65,13 +66,13 @@ CREATE TABLE `driver` (
 -- Dumping data for table `driver`
 --
 
-INSERT INTO `driver` (`driver_id`, `driver_fname`, `driver_lname`, `driver_address`, `driver_contactNum`) VALUES
-(6, 'josh', 'mojika', 'tugbok,maa,calinan', '5559974'),
-(7, 'dharyllll', 'dharyl', 'cabantian', '498456168'),
-(8, 'gar ', 'flores', 'buhangin', '4884894865'),
-(9, 'chris', '', '', ''),
-(10, 'MJ', '', '', ''),
-(11, 'jay', 'jjpo', 'dsd', '9283784');
+INSERT INTO `driver` (`driver_id`, `driver_fname`, `driver_lname`, `driver_name`, `driver_address`, `driver_contactNum`) VALUES
+(6, 'josh', 'mojika', 'josh mojika', 'tugbok,maa,calinan', '5559974'),
+(7, 'dharyllll', 'dharyl', 'dharyllll dharyl', 'cabantian', '498456168'),
+(8, 'gar ', 'flores', 'gar  flores', 'buhangin', '4884894865'),
+(9, 'chris', '', 'chris ', '', ''),
+(10, 'MJ', '', 'MJ ', '', ''),
+(11, 'jay', 'jjpo', 'jay jjpo', 'dsd', '9283784');
 
 -- --------------------------------------------------------
 
@@ -106,17 +107,23 @@ INSERT INTO `route` (`route_id`, `route`, `fare`) VALUES
 
 CREATE TABLE `vehicle` (
   `vehicle_id` int(11) NOT NULL,
-  `platenumber` varchar(100) NOT NULL
+  `platenumber` varchar(100) NOT NULL,
+  `vehicle_model` varchar(255) NOT NULL,
+  `vehicle_color` varchar(255) NOT NULL,
+  `transmission_type` varchar(255) NOT NULL,
+  `driver` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `vehicle`
 --
 
-INSERT INTO `vehicle` (`vehicle_id`, `platenumber`) VALUES
-(3, 'XSDH10'),
-(4, '123'),
-(5, '123');
+INSERT INTO `vehicle` (`vehicle_id`, `platenumber`, `vehicle_model`, `vehicle_color`, `transmission_type`, `driver`) VALUES
+(3, 'XSDH10', '', '', '', 'josh mojika'),
+(4, '123', '', '', '', '6'),
+(5, '123', '', '', '', ''),
+(8, 'dsa', '', '', '', ''),
+(9, 'wassup', 'sadsa', 'white', 'manual', 'gar  flores');
 
 --
 -- Indexes for dumped tables
@@ -172,7 +179,7 @@ ALTER TABLE `route`
 -- AUTO_INCREMENT for table `vehicle`
 --
 ALTER TABLE `vehicle`
-  MODIFY `vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
