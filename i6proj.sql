@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2025 at 07:33 AM
+-- Generation Time: Feb 21, 2025 at 02:25 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cashier` (
-  `id` int(11) NOT NULL,
+  `cashier_id` int(11) NOT NULL,
   `cashier_fname` varchar(50) NOT NULL,
   `cashier_lname` varchar(50) NOT NULL,
   `cashier_address` varchar(100) NOT NULL,
@@ -39,13 +39,13 @@ CREATE TABLE `cashier` (
 -- Dumping data for table `cashier`
 --
 
-INSERT INTO `cashier` (`id`, `cashier_fname`, `cashier_lname`, `cashier_address`, `cashier_contactNum`) VALUES
-(17, 'Elnickk', 'Castillo', 'jsdhsjgfj', '094095497'),
+INSERT INTO `cashier` (`cashier_id`, `cashier_fname`, `cashier_lname`, `cashier_address`, `cashier_contactNum`) VALUES
 (18, 'Mj', 'Sarona', 'jskyurghsghf', '0998475'),
 (19, 'dharyl', 'jay', 'weqwe', '09123456789'),
 (20, 'chris', 'elnick', 'zxcz', '09123456789'),
 (21, 'dharyl', 'jay', 'qweqreq', '09123456789'),
-(23, 'dharyl', 'dharyl', 'cabantian', '12312154');
+(23, 'dharyl', 'dharyl', 'cabantian', '12312154'),
+(26, 'SHSH', 'shhshshs', 'sdsd0990', '9988');
 
 -- --------------------------------------------------------
 
@@ -54,9 +54,10 @@ INSERT INTO `cashier` (`id`, `cashier_fname`, `cashier_lname`, `cashier_address`
 --
 
 CREATE TABLE `driver` (
-  `id` int(11) NOT NULL,
+  `driver_id` int(11) NOT NULL,
   `driver_fname` varchar(255) NOT NULL,
   `driver_lname` varchar(255) NOT NULL,
+  `driver_name` varchar(255) NOT NULL,
   `driver_address` varchar(255) NOT NULL,
   `driver_contactNum` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -65,13 +66,13 @@ CREATE TABLE `driver` (
 -- Dumping data for table `driver`
 --
 
-INSERT INTO `driver` (`id`, `driver_fname`, `driver_lname`, `driver_address`, `driver_contactNum`) VALUES
-(3, 'dharyllll', 'jay', 'qweqwe', '645465'),
-(6, 'josh', 'mojika', 'tugbok,maa,calinan', '5559974'),
-(7, 'dharyllll', 'dharyl', 'cabantian', '498456168'),
-(8, 'gar ', 'flores', 'buhangin', '4884894865'),
-(9, 'chris', '', '', ''),
-(10, 'MJ', '', '', '');
+INSERT INTO `driver` (`driver_id`, `driver_fname`, `driver_lname`, `driver_name`, `driver_address`, `driver_contactNum`) VALUES
+(6, 'josh', 'mojika', 'josh mojika', 'tugbok,maa,calinan', '5559974'),
+(7, 'dharyllll', 'dharyl', 'dharyllll dharyl', 'cabantian', '498456168'),
+(8, 'gar ', 'flores', 'gar  flores', 'buhangin', '4884894865'),
+(9, 'chris', '', 'chris ', '', ''),
+(10, 'MJ', '', 'MJ ', '', ''),
+(11, 'jay', 'jjpo', 'jay jjpo', 'dsd', '9283784');
 
 -- --------------------------------------------------------
 
@@ -106,17 +107,23 @@ INSERT INTO `route` (`route_id`, `route`, `fare`) VALUES
 
 CREATE TABLE `vehicle` (
   `vehicle_id` int(11) NOT NULL,
-  `platenumber` varchar(100) NOT NULL
+  `platenumber` varchar(100) NOT NULL,
+  `vehicle_model` varchar(255) NOT NULL,
+  `vehicle_color` varchar(255) NOT NULL,
+  `transmission_type` varchar(255) NOT NULL,
+  `driver` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `vehicle`
 --
 
-INSERT INTO `vehicle` (`vehicle_id`, `platenumber`) VALUES
-(3, 'XSDH10'),
-(4, '123'),
-(5, '123');
+INSERT INTO `vehicle` (`vehicle_id`, `platenumber`, `vehicle_model`, `vehicle_color`, `transmission_type`, `driver`) VALUES
+(3, 'XSDH10', '', '', '', 'josh mojika'),
+(4, '123', '', '', '', '6'),
+(5, '123', '', '', '', ''),
+(8, 'dsa', '', '', '', ''),
+(9, 'wassup', 'sadsa', 'white', 'manual', 'gar  flores');
 
 --
 -- Indexes for dumped tables
@@ -126,13 +133,13 @@ INSERT INTO `vehicle` (`vehicle_id`, `platenumber`) VALUES
 -- Indexes for table `cashier`
 --
 ALTER TABLE `cashier`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`cashier_id`);
 
 --
 -- Indexes for table `driver`
 --
 ALTER TABLE `driver`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`driver_id`);
 
 --
 -- Indexes for table `route`
@@ -154,13 +161,13 @@ ALTER TABLE `vehicle`
 -- AUTO_INCREMENT for table `cashier`
 --
 ALTER TABLE `cashier`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `cashier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `driver`
 --
 ALTER TABLE `driver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `driver_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `route`
@@ -172,7 +179,7 @@ ALTER TABLE `route`
 -- AUTO_INCREMENT for table `vehicle`
 --
 ALTER TABLE `vehicle`
-  MODIFY `vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

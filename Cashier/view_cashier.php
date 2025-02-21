@@ -101,8 +101,8 @@ require "../global/head.php";
                                        </div>
                                     </div>
                                     <div class="group-btn">
-                                       <a href="../Cashier/edit_cashier.php?id=<?php echo $row['id']; ?>" class="btn"><i class="btn btn-outline-success bi bi-pencil-square"></i></a>
-                                       <a href="../Operations/op_delete_cashier.php?id=<?php echo $row['id']; ?>" class="btn"><i class="btn btn-outline-danger bi bi-trash"></i></a>
+                                       <a href="../Cashier/edit_cashier.php?id=<?php echo $row['cashier_id']; ?>" class="btn"><i class="btn btn-outline-success bi bi-pencil-square"></i></a>
+                                       <a href="../Operations/op_delete_cashier.php?id=<?php echo $row['cashier_id']; ?>" class="btn"><i class="btn btn-outline-danger bi bi-trash"></i></a>
                                     </div>
                                  </li>
                               </ul>

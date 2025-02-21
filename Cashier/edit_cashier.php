@@ -5,7 +5,7 @@
 include "../Database/db_connect.php";
 
 $id = $_GET['id'];
-$sql = "SELECT * FROM cashier WHERE id=" . $id;
+$sql = "SELECT * FROM cashier WHERE cashier_id=" . $id;
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 $title = 'Cashier Lists | ' . $row['cashier_fname'] . ' ' . $row['cashier_lname'];
