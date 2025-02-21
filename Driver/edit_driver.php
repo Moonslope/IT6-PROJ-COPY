@@ -52,25 +52,21 @@ require "../global/head.php";
             <div class="col col-9">
                 <div class="card shadow-lg">
                     <div class="card-body">
-
-                        <div class="row mt-3 ms-3">
-                            <div class="col col-3">
-                                <img class="img-fluid border border-2 border-black rounded-pill" src="../images/driver.png" alt="" width="150" height="150">
-                            </div>
-
-                            <div class="col">
-                                <h1 class="mt-3">DRIVER</h1>
+                        <div class="row border border-top-0 border-start-0 border-end-0 border-2 pb-3 mb-5">
+                            <div class="col col-2 d-flex gap-4">
+                                <img class="img-fluid border border-2 border-black rounded-pill" src="../images/driver.png" alt="" width="100" height="100">
+                                <p class="mt-3 fs-2 fw-semibold">DRIVER</p>
                             </div>
                         </div>
 
-                        <div class="row d-flex justify-content-center align-items-center mt-4">
+                        <div class="row d-flex justify-content-center align-items-center mt-4 mb-4">
                             <div class="col col-10">
 
                                 <div class="card shadow-lg bg-light ">
                                     <div class="card-body">
                                         <form action="../Operations//op_edit_driver.php" method="POST">
                                             <input type="hidden" name="id" value="<?php echo $id; ?>">
-                                            <div class="row">
+                                            <div class="row mb-4">
                                                 <div class="col">
                                                     <label for="driver_fname" class="fw-semibold mb-3">First Name</label>
                                                     <input type="text" id="driver_fname" name="driver_fname" value="<?php echo $row['driver_fname'] ?>" class="form-control border-dark" required>

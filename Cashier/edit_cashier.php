@@ -35,7 +35,7 @@ require "../global/head.php";
                   </div>
 
                   <div class="mx-3 mb-3">
-                     <a class="btn btn-h w-100 fw-semibold mb-2 border border-1 border-dark" href="../Driver/add_driver.php">Driver</a>
+                     <a class="btn btn-h w-100 fw-semibold mb-2 border border-1 border-dark" href="../Driver/view_driver.php">Driver</a>
                   </div>
 
                   <div class="mx-3 mb-3">
@@ -52,25 +52,21 @@ require "../global/head.php";
          <div class="col col-9">
             <div class="card shadow-lg">
                <div class="card-body">
-
-                  <div class="row mt-3 ms-3">
-                     <div class="col col-3">
-                        <img class="img-fluid border border-2 border-black rounded-pill" src="../images/cashier.png" alt="" width="150" height="150">
-                     </div>
-
-                     <div class="col">
-                        <h1 class="mt-3">CASHIER</h1>
+                  <div class="row border border-top-0 border-start-0 border-end-0 border-2 pb-3 mb-5">
+                     <div class="col col-2 d-flex gap-4">
+                        <img class="img-fluid border border-2 border-black rounded-pill" src="../images/cashier.png" alt="" width="100" height="100">
+                        <p class="mt-3 fs-2 fw-semibold">CASHIER</p>
                      </div>
                   </div>
 
-                  <div class="row d-flex justify-content-center align-items-center mt-4">
+                  <div class="row d-flex justify-content-center align-items-center mt-4 pb-3">
                      <div class="col col-10">
 
                         <div class="card shadow-lg bg-light ">
                            <div class="card-body">
                               <form action="../Operations//op_edit_cashier.php" method="POST">
                                  <input type="hidden" name="id" value="<?php echo $id; ?>">
-                                 <div class="row">
+                                 <div class="row mb-4">
                                     <div class="col">
                                        <label for="cashier_fname" class="fw-semibold mb-3">First Name</label>
                                        <input type="text" id="cashier_fname" name="cashier_fname" value="<?php echo $row['cashier_fname'] ?>" class="form-control border-dark" required>
@@ -96,10 +92,10 @@ require "../global/head.php";
 
                                  <div class="row mt-4">
                                     <div class="col">
-                                       <a href="view_cashier.php" class="btn btn-outline-info w-100 text-dark fw-semibold">CANCEL</a>
+                                       <a href="view_cashier.php" class="btn btn-outline-info w-100 text-dark fw-semibold">Cancel</a>
                                     </div>
                                     <div class="col">
-                                       <button type="submit" class="btn btn-info w-100 border border-dark fw-semibold">UPDATE</button>
+                                       <button type="submit" class="btn btn-info w-100 border border-dark fw-semibold">Save Changes</button>
                                     </div>
                                  </div>
                               </form>

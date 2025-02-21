@@ -53,17 +53,14 @@ require "../global/head.php";
                 <div class="card shadow-lg">
                     <div class="card-body">
 
-                        <div class="row mt-3 ms-3">
-                            <div class="col col-3">
-                                <img class="img-fluid border border-2 border-black rounded-pill" src="../images/van.png" alt="" width="150" height="150">
-                            </div>
-
-                            <div class="col">
-                                <h1 class="mt-3">VEHICLE</h1>
+                        <div class="row border border-top-0 border-start-0 border-end-0 border-2 pb-3 mb-5">
+                            <div class="col col-2 d-flex gap-4">
+                                <img class="img-fluid border border-2 border-black rounded-pill" src="../images/van.png" alt="" width="100" height="100">
+                                <p class="mt-3 fs-2 fw-semibold">VEHICLE</p>
                             </div>
                         </div>
 
-                        <div class="row d-flex justify-content-center align-items-center mt-4">
+                        <div class="row d-flex justify-content-center align-items-center mt-4 ">
                             <div class="col col-10">
 
                                 <div class="card shadow-lg bg-light ">
@@ -98,7 +95,8 @@ require "../global/head.php";
                                                 </div>
 
                                             </div>
-                                            <div class="row mt-2">
+
+                                            <div class="row mt-4 mb-5">
                                                 <div class="col">
                                                     <label for="vehicle_model" class="fw-semibold mb-3">Vehicle Model</label>
                                                     <input type="text" id="vehicle_model" name="vehicle_model" value="<?php echo $row['vehicle_model'] ?>" class="form-control border-dark" required>
@@ -115,22 +113,20 @@ require "../global/head.php";
 
 
                                                 </div>
-                                            </div>
-
-                                            <div class="row mt-2">
                                                 <div class="col">
                                                     <label for="vehicle_color" class="fw-semibold mb-3">Vehicle Color</label>
                                                     <input type="text" id="vehicle_color" name="vehicle_color" value="<?php echo $row['vehicle_color'] ?>" class="form-control border-dark" required>
                                                 </div>
+                                            </div>
 
-                                                <div class="row mt-4">
-                                                    <div class="col">
-                                                        <a href="view_vehicle.php" class="btn btn-outline-info w-100 text-dark fw-semibold">CANCEL</a>
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="submit" class="btn btn-h w-100 border border-dark fw-semibold"><i class="bi bi-floppy-fill me-2"></i> Save Changes </button>
-                                                    </div>
+                                            <div class="row mt-2">
+                                                <div class="col">
+                                                    <a href="view_vehicle.php" class="btn btn-outline-info w-100 text-dark fw-semibold">CANCEL</a>
                                                 </div>
+                                                <div class="col border">
+                                                    <button type="submit" class="btn btn-h w-100 border-dark fw-semibold"><i class="bi bi-floppy-fill me-2"></i> Save Changes </button>
+                                                </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
