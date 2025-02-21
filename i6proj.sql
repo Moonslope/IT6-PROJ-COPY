@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2025 at 05:24 PM
+-- Generation Time: Feb 21, 2025 at 06:37 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `card` (
   `card_id` int(11) NOT NULL,
-  `card_color` varchar(255) NOT NULL
+  `card_color` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -37,10 +37,11 @@ CREATE TABLE `card` (
 --
 
 INSERT INTO `card` (`card_id`, `card_color`) VALUES
-(1, 'Blue\r\n'),
+(1, 'Green'),
 (2, 'Red'),
 (3, 'Yellow'),
-(4, 'Orange');
+(4, 'Blue'),
+(5, 'Pink');
 
 -- --------------------------------------------------------
 
@@ -93,25 +94,26 @@ INSERT INTO `driver` (`driver_id`, `driver_fname`, `driver_lname`, `driver_name`
 (8, 'gar ', 'flores', 'gar  flores', 'buhangin', '4884894865'),
 (9, 'chris', '', 'chris ', '', ''),
 (10, 'MJ', '', 'MJ ', '', ''),
-(11, 'jay', 'jjpo', 'jay jjpo', 'dsd', '9283784');
+(11, 'jay', 'jjpo', 'jay jjpo', 'dsd', '9283784'),
+(12, 'Lawrence', 'Bisnar', '', 'aa', '232');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `routes`
+-- Table structure for table `route`
 --
 
-CREATE TABLE `routes` (
+CREATE TABLE `route` (
   `route_id` int(11) NOT NULL,
   `route` varchar(100) NOT NULL,
   `fare` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `routes`
+-- Dumping data for table `route`
 --
 
-INSERT INTO `routes` (`route_id`, `route`, `fare`) VALUES
+INSERT INTO `route` (`route_id`, `route`, `fare`) VALUES
 (1, 'Mintal', 35.00),
 (2, 'Tugbok', 38.00),
 (3, 'Los Amigos', 40.00),
@@ -169,9 +171,9 @@ ALTER TABLE `driver`
   ADD PRIMARY KEY (`driver_id`);
 
 --
--- Indexes for table `routes`
+-- Indexes for table `route`
 --
-ALTER TABLE `routes`
+ALTER TABLE `route`
   ADD PRIMARY KEY (`route_id`);
 
 --
@@ -188,7 +190,7 @@ ALTER TABLE `vehicle`
 -- AUTO_INCREMENT for table `card`
 --
 ALTER TABLE `card`
-  MODIFY `card_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `card_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `cashier`
@@ -200,12 +202,12 @@ ALTER TABLE `cashier`
 -- AUTO_INCREMENT for table `driver`
 --
 ALTER TABLE `driver`
-  MODIFY `driver_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `driver_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `routes`
+-- AUTO_INCREMENT for table `route`
 --
-ALTER TABLE `routes`
+ALTER TABLE `route`
   MODIFY `route_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
