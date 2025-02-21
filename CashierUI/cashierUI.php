@@ -36,7 +36,7 @@ require  "../global/head.php";
                               <option value="">None</option>
                               <?php
                               try {
-                                 $sqll = "SELECT * FROM route";
+                                 $sqll = "SELECT * FROM routes";
                                  $resultt = $conn->query($sqll);
 
                                  while ($roww = $resultt->fetch_assoc()) {
@@ -64,8 +64,6 @@ require  "../global/head.php";
                                  while ($roww = $resultt->fetch_assoc()) {
                                     echo '<option value="' . $roww['card_color'] . '">' . $roww['card_color'] . '</option>';
                                  }
-
-                                 $conn->close();
                               } catch (\Exception $e) {
                                  die($e);
                               }
@@ -102,9 +100,29 @@ require  "../global/head.php";
                   </div>
 
                   <div class="container m-0 p-0">
-                     <div class="row">
-                        <div class="col">
+                     <div class="row justify-content-center align-items-center">
+                        <div class="d-flex col">
                            <p class="fw-semibold">Driver Name:</p>
+                           <div>
+                              <select class="form-select" name="driver_name" id="driver_name">
+                                 <option value="">None</option>
+                                 <?php
+                                 try {
+                                    $sql = "SELECT * FROM driver";
+                                    $result = $conn->query($sql);
+
+                                    while ($row = $result->fetch_assoc()) {
+                                       echo '<option value="' . $row['driver_name'] .  '">' . $row['driver_name'] .  '</option>';
+                                    }
+                                    $conn->close();
+                                 } catch (\Exception $e) {
+                                    die($e);
+                                 }
+
+                                 ?>
+                              </select>
+                           </div>
+
                            <!-- dropdown ni dre -->
                         </div>
 
