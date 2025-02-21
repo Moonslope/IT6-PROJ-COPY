@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2025 at 02:25 PM
+-- Generation Time: Feb 21, 2025 at 05:24 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `i6proj`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `card`
+--
+
+CREATE TABLE `card` (
+  `card_id` int(11) NOT NULL,
+  `card_color` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `card`
+--
+
+INSERT INTO `card` (`card_id`, `card_color`) VALUES
+(1, 'Blue\r\n'),
+(2, 'Red'),
+(3, 'Yellow'),
+(4, 'Orange');
 
 -- --------------------------------------------------------
 
@@ -77,20 +98,20 @@ INSERT INTO `driver` (`driver_id`, `driver_fname`, `driver_lname`, `driver_name`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `route`
+-- Table structure for table `routes`
 --
 
-CREATE TABLE `route` (
+CREATE TABLE `routes` (
   `route_id` int(11) NOT NULL,
   `route` varchar(100) NOT NULL,
   `fare` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `route`
+-- Dumping data for table `routes`
 --
 
-INSERT INTO `route` (`route_id`, `route`, `fare`) VALUES
+INSERT INTO `routes` (`route_id`, `route`, `fare`) VALUES
 (1, 'Mintal', 35.00),
 (2, 'Tugbok', 38.00),
 (3, 'Los Amigos', 40.00),
@@ -130,6 +151,12 @@ INSERT INTO `vehicle` (`vehicle_id`, `platenumber`, `vehicle_model`, `vehicle_co
 --
 
 --
+-- Indexes for table `card`
+--
+ALTER TABLE `card`
+  ADD PRIMARY KEY (`card_id`);
+
+--
 -- Indexes for table `cashier`
 --
 ALTER TABLE `cashier`
@@ -142,9 +169,9 @@ ALTER TABLE `driver`
   ADD PRIMARY KEY (`driver_id`);
 
 --
--- Indexes for table `route`
+-- Indexes for table `routes`
 --
-ALTER TABLE `route`
+ALTER TABLE `routes`
   ADD PRIMARY KEY (`route_id`);
 
 --
@@ -156,6 +183,12 @@ ALTER TABLE `vehicle`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `card`
+--
+ALTER TABLE `card`
+  MODIFY `card_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `cashier`
@@ -170,9 +203,9 @@ ALTER TABLE `driver`
   MODIFY `driver_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `route`
+-- AUTO_INCREMENT for table `routes`
 --
-ALTER TABLE `route`
+ALTER TABLE `routes`
   MODIFY `route_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --

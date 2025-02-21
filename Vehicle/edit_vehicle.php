@@ -86,10 +86,8 @@ require "../global/head.php";
                                                             $sqll = "SELECT * FROM driver";
                                                             $resultt = $conn->query($sqll);
 
-                                                            if ($resultt->num_rows > 0) {
-                                                                while ($roww = $resultt->fetch_assoc()) {
-                                                                    echo '<option value="' . $roww['driver_name'] . '">' . $roww['driver_name'] . '</option>';
-                                                                }
+                                                            while ($roww = $resultt->fetch_assoc()) {
+                                                                echo '<option value="' . $roww['driver_name'] . '">' . $roww['driver_name'] . '</option>';
                                                             }
                                                             $conn->close();
                                                         } catch (\Exception $e) {
@@ -108,7 +106,14 @@ require "../global/head.php";
 
                                                 <div class="col">
                                                     <label for="transmission_type" class="fw-semibold mb-3">Transmission Type</label>
-                                                    <input type="text" id="transmission_type" name="transmission_type" value="<?php echo $row['transmission_type'] ?>" class="form-control border-dark" required>
+                                                    <select class="form-select border border-dark" name="transmission_type" id="transmission_type">
+                                                        <option value="">None</option>
+                                                        <option value="Manual"> <?php echo (isset($_POST['transmission_type']) && $_POST['transmission_type'] == "Manual") ? "Selected" : ""; ?>Manual</option>
+
+                                                        <option value="Automatic"> <?php echo (isset($_POST['transmission_type']) && $_POST['transmission_type'] == "Automatic") ? "Selected" : ""; ?>Automatic</option>
+                                                    </select>
+
+
                                                 </div>
                                             </div>
 
@@ -120,7 +125,7 @@ require "../global/head.php";
 
                                                 <div class="row mt-4">
                                                     <div class="col">
-                                                        <a href="../AdminUI/adminDashboard.php" class="btn btn-outline-info w-100 text-dark fw-semibold">CANCEL</a>
+                                                        <a href="view_vehicle.php" class="btn btn-outline-info w-100 text-dark fw-semibold">CANCEL</a>
                                                     </div>
                                                     <div class="col">
                                                         <button type="submit" class="btn btn-h w-100 border border-dark fw-semibold"><i class="bi bi-floppy-fill me-2"></i> Save Changes </button>
