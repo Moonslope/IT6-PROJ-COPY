@@ -2,7 +2,7 @@
 <html lang="en">
 
 <?php
-$title = "Add New Vehicle";
+$title = "Add New Cashier";
 require "../global/head.php";
 ?>
 
@@ -68,20 +68,6 @@ require "../global/head.php";
                                                 <div class="col">
                                                     <label for="platenumber" class="fw-semibold mb-3">Plate Number</label>
                                                     <input type="text" id="platenumber" name="platenumber" class="form-control border-dark" required>
-                                                </div>
-                                                <div class="col">
-                                                    <label for="vehicle_model" class="fw-semibold mb-3">Vehicle Model</label>
-                                                    <input type="text" id="vehicle_model" name="vehicle_model" class="form-control border-dark" required>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-2">
-                                                <div class="col">
-                                                    <label for="vehicle_color" class="fw-semibold mb-3">Vehicle Color</label>
-                                                    <input type="text" id="vehicle_color" name="vehicle_color" class="form-control border-dark" required>
-                                                </div>
-                                                <div class="col">
-                                                    <label for="transmission_type" class="fw-semibold mb-3">Transmission Type</label>
-                                                    <input type="text" id="transmission_type" name="transmission_type" class="form-control border-dark" required>
                                                 </div>
                                             </div>
 

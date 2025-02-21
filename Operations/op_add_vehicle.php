@@ -6,15 +6,13 @@ $method = $_SERVER['REQUEST_METHOD'];
 if ($method == 'POST') {
     try {
         $platenumber = $_POST['platenumber'];
-        $vehicle_model = $_POST['vehicle_model'];
-        $transmission_type = $_POST['transmission_type'];
-        $vehicle_color = $_POST['vehicle_color'];
+        $dd_driver = $_POST['dd-driver'];
 
-
-        $sql = "INSERT INTO vehicle(platenumber,vehicle_model,transmission_type,vehicle_color) VALUES (?,?,?,?)";
+        $sql = "INSERT INTO vehicle(platenumber) VALUES (?)";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssss", $platenumber, $vehicle_model, $transmission_type, $vehicle_color);
+        $stmt->bind_param("s", $platenumber);
+
         $stmt->execute();
         $stmt->close();
         $conn->close();

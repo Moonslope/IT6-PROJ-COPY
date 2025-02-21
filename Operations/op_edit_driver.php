@@ -7,7 +7,7 @@ $driver_lname = $_POST['driver_lname'];
 $driver_contactNum = $_POST['driver_contactNum'];
 $driver_address = $_POST['driver_address'];
 
-$sql = "UPDATE driver SET driver_fname=?, driver_lname=?, driver_contactNum=?, driver_address=? WHERE driver_id=?";
+$sql = "UPDATE driver SET driver_fname=?, driver_lname=?, driver_contactNum=?, driver_address=? WHERE id=?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("sssss", $driver_fname, $driver_lname, $driver_contactNum, $driver_address, $id);
 

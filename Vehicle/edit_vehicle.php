@@ -88,7 +88,7 @@ require "../global/head.php";
 
                                                             if ($resultt->num_rows > 0) {
                                                                 while ($roww = $resultt->fetch_assoc()) {
-                                                                    echo '<option value="' . $roww['driver_name'] . '">' . $roww['driver_name'] . '</option>';
+                                                                    echo '<option value="' . $roww['driver_id'] . '">' . $roww['driver_fname'] . ' ' . $roww['driver_lname'] . '</option>';
                                                                 }
                                                             }
                                                             $conn->close();
@@ -98,34 +98,16 @@ require "../global/head.php";
                                                         ?>
                                                     </select>
                                                 </div>
-
-                                            </div>
-                                            <div class="row mt-2">
-                                                <div class="col">
-                                                    <label for="vehicle_model" class="fw-semibold mb-3">Vehicle Model</label>
-                                                    <input type="text" id="vehicle_model" name="vehicle_model" value="<?php echo $row['vehicle_model'] ?>" class="form-control border-dark" required>
-                                                </div>
-
-                                                <div class="col">
-                                                    <label for="transmission_type" class="fw-semibold mb-3">Transmission Type</label>
-                                                    <input type="text" id="transmission_type" name="transmission_type" value="<?php echo $row['transmission_type'] ?>" class="form-control border-dark" required>
-                                                </div>
                                             </div>
 
-                                            <div class="row mt-2">
+                                            <div class="row mt-4">
                                                 <div class="col">
-                                                    <label for="vehicle_color" class="fw-semibold mb-3">Vehicle Color</label>
-                                                    <input type="text" id="vehicle_color" name="vehicle_color" value="<?php echo $row['vehicle_color'] ?>" class="form-control border-dark" required>
+                                                    <a href="../AdminUI/adminDashboard.php" class="btn btn-outline-info w-100 text-dark fw-semibold">CANCEL</a>
                                                 </div>
-
-                                                <div class="row mt-4">
-                                                    <div class="col">
-                                                        <a href="../AdminUI/adminDashboard.php" class="btn btn-outline-info w-100 text-dark fw-semibold">CANCEL</a>
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="submit" class="btn btn-h w-100 border border-dark fw-semibold"><i class="bi bi-floppy-fill me-2"></i> Save Changes </button>
-                                                    </div>
+                                                <div class="col">
+                                                    <button type="submit" class="btn btn-h w-100 border border-dark fw-semibold"><i class="bi bi-floppy-fill me-2"></i> Save Changes </button>
                                                 </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>

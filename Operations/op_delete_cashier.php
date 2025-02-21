@@ -4,7 +4,7 @@ include "../Database/db_connect.php";
 try {
    $id = $_GET['id'];
 
-   $sql = "DELETE FROM cashier WHERE cashier_id=?";
+   $sql = "DELETE FROM cashier WHERE id=?";
    $stmt = $conn->prepare($sql);
    $stmt->bind_param("i", $id);
    $stmt->execute();

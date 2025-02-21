@@ -5,7 +5,7 @@
 include "../Database/db_connect.php";
 
 $id = $_GET['id'];
-$sql = "SELECT * FROM driver WHERE driver_id=" . $id;
+$sql = "SELECT * FROM driver WHERE id=" . $id;
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 $title = 'Driver Lists | ' . $row['driver_fname'] . ' ' . $row['driver_lname'];

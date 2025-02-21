@@ -103,8 +103,8 @@ require "../global/head.php";
                                                     </div>
                                                 </div>
                                                 <div class="group-btn">
-                                                    <a href="../Driver/edit_driver.php?id=<?php echo $row['driver_id']; ?>" class="btn"><i class="btn btn-outline-success bi bi-pencil-square"></i></a>
-                                                    <a href="../Operations/op_delete_driver.php?id=<?php echo $row['driver_id']; ?>" class="btn"><i class="btn btn-outline-danger bi bi-trash"></i></a>
+                                                    <a href="../Driver/edit_driver.php?id=<?php echo $row['id']; ?>" class="btn"><i class="btn btn-outline-success bi bi-pencil-square"></i></a>
+                                                    <a href="../Operations/op_delete_driver.php?id=<?php echo $row['id']; ?>" class="btn"><i class="btn btn-outline-danger bi bi-trash"></i></a>
                                                 </div>
                                             </li>
                                         </ul>
