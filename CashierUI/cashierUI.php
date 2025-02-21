@@ -22,61 +22,47 @@ require  "../global/head.php";
          </div>
       </div>
 
-      <div class="row">
-         <div class="col col-3 ">
-            <div style="height: 615px;" class="card shadow-lg">
+      <div class="row ">
+         <div class="col col-3">
+            <div style="height: 630px;" class="card shadow-lg">
                <div class="card-body">
-                  <h1 class="card-title fs-4 text-center border border-start-0 border-end-0 border-top-0 border-2 pb-3">Ticket</h1>
-
-                  <div>
-                     <form method="POST">
-                        <div class="mt-4">
-                           <label class="fw-semibold mb-2" for="dd-destination">DESTINATION</label>
-                           <select class="form-select mb-3" id="dd-destination" name="dd-destination">
-                              <option value="">None</option>
-                              <?php
-                              try {
-                                 $sqll = "SELECT * FROM routes";
-                                 $resultt = $conn->query($sqll);
-
-                                 while ($roww = $resultt->fetch_assoc()) {
-                                    echo '<option value="' . $roww['route'] . '">' . $roww['route'] . '</option>';
-                                 }
-                              } catch (\Exception $e) {
-                                 die($e);
-                              }
-                              ?>
-
-                           </select>
-
-                        </div>
-
-                        <div>
-                           <label for="dd-cardColor" class="fw-semibold mb-2">CARD COLOR</label>
-                           <select class="form-select mb-3" id="dd-cardColor" name="dd-cardColor">
-                              <option value="">None</option>
-
-                              <?php
-                              try {
-                                 $sqll = "SELECT * FROM card";
-                                 $resultt = $conn->query($sqll);
-
-                                 while ($roww = $resultt->fetch_assoc()) {
-                                    echo '<option value="' . $roww['card_color'] . '">' . $roww['card_color'] . '</option>';
-                                 }
-                              } catch (\Exception $e) {
-                                 die($e);
-                              }
-                              ?>
-                           </select>
-
-                        </div>
-
-                        <div class="d-flex justify-content-end">
-                           <button class="btn btn-h fw-semibold" type="submit">Okay</button>
-                        </div>
-                     </form>
+                  <div class="row  border border-start-0 border-end-0 border-top-0 border-2">
+                     <div class="col d-flex justify-content-center align-items-center gap-3 pb-3">
+                        <h1 class="card-title fs-3 pt-1">Ticket</h1>
+                        <i class="bi fs-1 bi-ticket-perforated-fill"></i>
+                     </div>
                   </div>
+
+                  <div class="row d-flex justify-content-center align-items-center">
+                     <div class="">
+                        <form method="POST">
+                           <div class="mt-4">
+                              <label class="fw-semibold mb-2" for="destination">DESTINATION</label>
+                              <select class="form-select mb-3" id="destination" name="destination">
+                                 <option value="">None</option>
+                                 <?php
+                                 try {
+                                    $sql = "SELECT * FROM route";
+                                    $result = $conn->query($sql);
+
+                                    while ($row = $result->fetch_assoc()) {
+                                       echo '<option value="' . $row['route'] . '">' . $row['route'] . '</option>';
+                                    }
+                                 } catch (\Exception $e) {
+                                    die($e);
+                                 }
+                                 ?>
+
+                              </select>
+                           </div>
+
+                           <div class="d-flex justify-content-end">
+                              <button class="btn btn-h fw-semibold w-100" type="submit">Okay</button>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+
                </div>
             </div>
          </div>
@@ -100,11 +86,11 @@ require  "../global/head.php";
                   </div>
 
                   <div class="container m-0 p-0">
-                     <div class="row justify-content-center align-items-center">
-                        <div class="d-flex col">
-                           <p class="fw-semibold">Driver Name:</p>
-                           <div>
-                              <select class="form-select" name="driver_name" id="driver_name">
+                     <div class="row justify-content-center align-items-center mb-4 ">
+                        <div class="col">
+                           <div class="d-flex align-items-center">
+                              <label class="fw-semibold me-3">Driver:</label>
+                              <select class="form-select form-select-sm w-75" name="driver_name" id="driver_name">
                                  <option value="">None</option>
                                  <?php
                                  try {
@@ -114,7 +100,6 @@ require  "../global/head.php";
                                     while ($row = $result->fetch_assoc()) {
                                        echo '<option value="' . $row['driver_name'] .  '">' . $row['driver_name'] .  '</option>';
                                     }
-                                    $conn->close();
                                  } catch (\Exception $e) {
                                     die($e);
                                  }
@@ -122,13 +107,11 @@ require  "../global/head.php";
                                  ?>
                               </select>
                            </div>
-
-                           <!-- dropdown ni dre -->
                         </div>
 
                         <div class="col">
                            <p class="fw-semibold">Plate Number:</p>
-                           <!-- dropdown ni dre -->
+
                         </div>
 
                         <div class="col">
@@ -148,50 +131,21 @@ require  "../global/head.php";
                                  </tr>
                               </thead>
                               <tbody>
-                                 <tr>
-                                    <td>Mintal</td>
-                                    <td>35</td>
-                                    <td></td>
-                                    <td></td>
-                                 </tr>
-                                 <tr>
-                                    <td>Tugbok</td>
-                                    <td>38</td>
-                                    <td></td>
-                                    <td></td>
-                                 </tr>
-                                 <tr>
-                                    <td>Los Amigos</td>
-                                    <td>40</td>
-                                    <td></td>
-                                    <td></td>
-                                 </tr>
-                                 <tr>
-                                    <td>Quarry</td>
-                                    <td>40</td>
-                                    <td></td>
-                                    <td></td>
-                                 </tr>
-                                 <tr>
-                                    <td>Puting Bato</td>
-                                    <td>45</td>
-                                    <td></td>
-                                    <td></td>
-                                 </tr>
-                                 <tr>
-                                    <td>Riverside</td>
-                                    <td>45</td>
-                                    <td></td>
-                                    <td></td>
-                                 </tr>
-                                 <tr>
-                                    <td>Calinan</td>
-                                    <td>50</td>
-                                    <td></td>
-                                    <td></td>
-                                 </tr>
+                                 <?php
+                                 $sql = "SELECT * FROM route";
+                                 $result = $conn->query($sql);
+                                 while ($row = $result->fetch_assoc()) {
+                                    echo "<tr>
+                                          <td>{$row['route']}</td>
+                                          <td>{$row['fare']}</td>
+                                          <td></td>
+                                          <td></td>
+                                          </tr>";
+                                 }
+                                 ?>
+
                               </tbody>
-                              <tfoot class="table-secondary fw-bold">
+                              <tfoot class="table-secondary fw-semibold">
                                  <tr>
                                     <td colspan="2">TOTAL:</td>
                                     <td></td>
@@ -204,12 +158,31 @@ require  "../global/head.php";
                               <div class="col">
                                  <p class="fw-semibold">Cashier: </p>
                               </div>
-                              <div class="col">
-                                 <p class="fw-semibold">Card Color: </p>
+                              <div class="col d-flex align-items-center">
+
+                                 <label for=" card_color" class="fw-semibold me-3">CARD COLOR</label>
+                                 <select class="form-select form-select-sm w-50" id="card_color" name="card_color">
+                                    <option value="">None</option>
+
+                                    <?php
+                                    try {
+                                       $sql = "SELECT * FROM card";
+                                       $result = $conn->query($sql);
+
+                                       while ($row = $result->fetch_assoc()) {
+                                          echo '<option value="' . $row['card_color'] . '">' . $row['card_color'] . '</option>';
+                                       }
+                                       $conn->close();
+                                    } catch (\Exception $e) {
+                                       die($e);
+                                    }
+                                    ?>
+                                 </select>
+
                               </div>
                               <div class="col d-flex gap-3 justify-content-end">
-                                 <button class="btn btn-outline-info text-dark fw-semibold">On Hold</button>
-                                 <button class="btn btn-h fw-semibold">Depart</button>
+                                 <button class="btn btn-outline-info text-dark fw-semibold w-100">On Hold</button>
+                                 <button class="btn btn-h fw-semibold w-100">Depart</button>
                               </div>
                            </div>
                         </div>
