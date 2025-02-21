@@ -96,7 +96,7 @@ require "../global/head.php";
 
                                             <div class="row mt-4">
                                                 <div class="col">
-                                                    <a href="../AdminUI/adminDashboard.php" class="btn btn-outline-info w-100 text-dark fw-semibold">CANCEL</a>
+                                                    <a href="view_driver.php" class="btn btn-outline-info w-100 text-dark fw-semibold">CANCEL</a>
                                                 </div>
                                                 <div class="col">
                                                     <button type="submit" class="btn btn-info w-100 border border-dark fw-semibold">UPDATE</button>
