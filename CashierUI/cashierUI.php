@@ -16,27 +16,15 @@ require  "../global/head.php";
          </div>
 
          <div class="col d-flex gap-5 align-items-center">
-            <div>
-               <a class="btn btn-nav px-5 fw-semibold" href="#">New
-                  <img src="../images/new-document.png" alt="" width="15" height="15">
-               </a>
-            </div>
-
-            <div>
-               <a class="btn btn-nav px-5 fw-semibold" href="#">View
-                  <img src="../images/view.png" alt="" width="15" height="15">
-               </a>
-            </div>
-
-            <div>
-               <a class="btn btn-nav px-5 fw-semibold" href="../Login-Register/Login.php">Log out <img src="../images/logout.png" alt="" width="15" height="15"></a>
-            </div>
+            <a class="btn btn-nav" href="">New <i class="bi bi-plus"></i></a>
+            <a class="btn btn-nav" href="">View <i class="bi bi-eye"></i></a>
+            <a class="btn btn-nav" href="../Login-Register/Login.php">Log out <i class="bi bi-box-arrow-right"></i></a>
          </div>
       </div>
 
       <div class="row">
          <div class="col col-3">
-            <div style="height: 540px;" class="card shadow-lg">
+            <div style="height: 550px;" class="card shadow-lg">
                <div class="card-body mx-3">
                   <h1 class="card-title fs-4 text-center border border-start-0 border-end-0 border-top-0 border-2 pb-3">Ticket</h1>
 
@@ -92,7 +80,6 @@ require  "../global/head.php";
                         <div class="d-flex justify-content-end">
                            <button class="btn btn-h fw-semibold" type="submit">Okay</button>
                         </div>
-
                      </form>
                   </div>
                </div>
@@ -100,9 +87,9 @@ require  "../global/head.php";
          </div>
 
          <div class="col col-9">
-            <div class="card shadow-lg">
+            <div style="height: 550px;" class="card shadow-lg">
                <div class="card-body">
-                  <p class="card-title fw-semibold fs-5 text-center">Caltransco | Travel Pass(Davao)</p>
+                  <p class="card-title fw-semibold fs-5 text-center border border-top-0 border-end-0 border-start-0 border-2 pb-2">Caltransco | Travel Pass(Davao)</p>
                   <div class="container mt-3">
                      <div class="row">
                         <div class="col d-flex gap-2">
