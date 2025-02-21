@@ -6,7 +6,7 @@ require  "../global/head.php";
 ?>
 
 <body>
-   <div style="height: 650px;" class="con-bg container-fluid">
+   <div class="con-bg container-fluid vh-100">
       <div class="row border border-top-0 border-end-0 border-start-0 border-light border-2 pb-2 mb-3">
          <div class="col col-4 d-flex gap-2 ms-2 mt-2">
             <h1 class="fs-3 mt-2 text-white" style="text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);">CALTRANSCO</h1>
