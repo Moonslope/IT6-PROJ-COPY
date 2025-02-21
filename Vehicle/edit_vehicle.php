@@ -28,6 +28,9 @@ require "../global/head.php";
                 <div class="card shadow-lg">
                     <div style="height: 500px;" class="card_css card-body">
                         <div class="mx-3 mb-3">
+                            <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../AdminUI/adminDashboard.php"><i class="bi bi-house me-2"></i>Dashboard</a>
+                        </div>
+                        <div class="mx-3 mb-3">
                             <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Cashier/view_cashier.php">Cashier</a>
                         </div>
 
@@ -40,7 +43,7 @@ require "../global/head.php";
                         </div>
 
                         <div class="mx-3">
-                            <a href="../Login-Register/Login.php" class="btn btn-h w-100 border border-1 border-dark fw-semibold">Log Out</a>
+                            <a href="../Login-Register/Login.php" class="btn btn-h w-100 border border-1 border-dark fw-semibold"><i class="bi bi-box-arrow-left me-2"></i>Log Out</a>
                         </div>
                     </div>
                 </div>
@@ -71,7 +74,7 @@ require "../global/head.php";
 
                                                 <div class="col">
                                                     <label for="platenumber" class="fw-semibold mb-3">Plate Number</label>
-                                                    <input type="text" id="platenumber" name="platenumber" value="<?php echo $row['platenumber'] ?>" class="form-control w-100 border-dark">
+                                                    <input type="text" id="platenumber" name="platenumber" value="<?php echo $row['platenumber'] ?>" class="form-control w-100 border-dark" required>
                                                 </div>
 
                                                 <div class="col">

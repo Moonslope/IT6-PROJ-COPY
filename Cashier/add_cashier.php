@@ -23,6 +23,9 @@ require "../global/head.php";
             <div class="card shadow-lg">
                <div style="height: 500px;" class="card_css card-body">
                   <div class="mx-3 mb-3">
+                     <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../AdminUI/adminDashboard.php"><i class="bi bi-house me-2"></i>Dashboard</a>
+                  </div>
+                  <div class="mx-3 mb-3">
                      <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Cashier/view_cashier.php">Cashier</a>
                   </div>
 
@@ -35,7 +38,7 @@ require "../global/head.php";
                   </div>
 
                   <div class="mx-3">
-                     <a href="../Login-Register/Login.php" class="btn btn-h w-100 border border-1 border-dark fw-semibold">Log Out</a>
+                     <a href="../Login-Register/Login.php" class="btn btn-h w-100 border border-1 border-dark fw-semibold"><i class="bi bi-box-arrow-left me-2"></i>Log Out</a>
                   </div>
                </div>
             </div>
@@ -64,24 +67,24 @@ require "../global/head.php";
                                  <div class="row">
                                     <div class="col">
                                        <label for="cashier_fname" class="fw-semibold mb-3">First Name</label>
-                                       <input type="text" id="cashier_fname" name="cashier_fname" class="form-control border-dark">
+                                       <input type="text" id="cashier_fname" name="cashier_fname" class="form-control border-dark" required>
                                     </div>
 
                                     <div class="col">
                                        <label for="cashier_lname" class="fw-semibold mb-3">Last Name</label>
-                                       <input type="text" id="cashier_lname" name="cashier_lname" class="form-control border-dark">
+                                       <input type="text" id="cashier_lname" name="cashier_lname" class="form-control border-dark" required>
                                     </div>
                                  </div>
 
                                  <div class="row mt-2">
                                     <div class="col">
                                        <label for="cashier_address" class="fw-semibold mb-3">Address</label>
-                                       <input type="text" id="cashier_address" name="cashier_address" class="form-control border-dark">
+                                       <input type="text" id="cashier_address" name="cashier_address" class="form-control border-dark" required>
                                     </div>
 
                                     <div class="col">
                                        <label for="cashier_contactNum" class="fw-semibold mb-3">Contact Number</label>
-                                       <input type="text" id="cashier_contactNum" name="cashier_contactNum" class="form-control border-dark">
+                                       <input type="text" id="cashier_contactNum" name="cashier_contactNum" class="form-control border-dark" required>
                                     </div>
                                  </div>
 
