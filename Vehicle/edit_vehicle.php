@@ -86,10 +86,8 @@ require "../global/head.php";
                                                             $sqll = "SELECT * FROM driver";
                                                             $resultt = $conn->query($sqll);
 
-                                                            if ($resultt->num_rows > 0) {
-                                                                while ($roww = $resultt->fetch_assoc()) {
-                                                                    echo '<option value="' . $roww['driver_name'] . '">' . $roww['driver_name'] . '</option>';
-                                                                }
+                                                            while ($roww = $resultt->fetch_assoc()) {
+                                                                echo '<option value="' . $roww['driver_name'] . '">' . $roww['driver_name'] . '</option>';
                                                             }
                                                             $conn->close();
                                                         } catch (\Exception $e) {

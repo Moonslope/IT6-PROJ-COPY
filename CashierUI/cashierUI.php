@@ -39,10 +39,8 @@ require  "../global/head.php";
                                  $sqll = "SELECT * FROM routes";
                                  $resultt = $conn->query($sqll);
 
-                                 if ($resultt->num_rows > 0) {
-                                    while ($roww = $resultt->fetch_assoc()) {
-                                       echo '<option value="' . $roww['route'] . '">' . $roww['route'] . '</option>';
-                                    }
+                                 while ($roww = $resultt->fetch_assoc()) {
+                                    echo '<option value="' . $roww['route'] . '">' . $roww['route'] . '</option>';
                                  }
                               } catch (\Exception $e) {
                                  die($e);
@@ -63,11 +61,10 @@ require  "../global/head.php";
                                  $sqll = "SELECT * FROM card";
                                  $resultt = $conn->query($sqll);
 
-                                 if ($resultt->num_rows > 0) {
-                                    while ($roww = $resultt->fetch_assoc()) {
-                                       echo '<option value="' . $roww['card_color'] . '">' . $roww['card_color'] . '</option>';
-                                    }
+                                 while ($roww = $resultt->fetch_assoc()) {
+                                    echo '<option value="' . $roww['card_color'] . '">' . $roww['card_color'] . '</option>';
                                  }
+
                                  $conn->close();
                               } catch (\Exception $e) {
                                  die($e);
