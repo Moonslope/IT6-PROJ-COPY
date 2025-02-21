@@ -77,7 +77,11 @@ require "../global/head.php";
                                 if (isset($_GET['query']) && !empty($_GET['query'])) {
                                     $search = $conn->real_escape_string($_GET['query']);
                                     $sql .= " WHERE 
-                                       platenumber LIKE '%$search%'";
+                                       platenumber, LIKE '%$search%' OR
+                                       driver, LIKE '%$search%' OR
+                                       vehicle_model, LIKE '%$search%' OR
+                                       vehicle_color, LIKE '%$search%' OR
+                                       transmission_type, LIKE '%$search%' OR";
                                 }
 
                                 $result = $conn->query($sql);
@@ -93,7 +97,10 @@ require "../global/head.php";
                                                     </div>
                                                     <div>
                                                         <span><strong>Plate Number : </strong><?php echo $row['platenumber']; ?></span><br>
-                                                        <span><strong>Driver: </strong></span>
+                                                        <span><strong>Driver: </strong><?php echo $row['driver']; ?></span><br>
+                                                        <span><strong>Vehicle Model: </strong><?php echo $row['vehicle_model']; ?></span><br>
+                                                        <span><strong>Transmission Type: </strong><?php echo $row['transmission_type']; ?></span><br>
+                                                        <span><strong>Vehicle Color: </strong><?php echo $row['vehicle_color']; ?></span><br>
                                                     </div>
                                                 </div>
                                                 <div class="group-btn">
