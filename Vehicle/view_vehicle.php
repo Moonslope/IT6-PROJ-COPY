@@ -4,7 +4,7 @@
 <?php
 include "../Database/db_connect.php";
 
-$title = "View Cashier Lists";
+$title = "View Vehicle Lists";
 require "../global/head.php";
 ?>
 
