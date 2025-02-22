@@ -85,154 +85,111 @@ require  "../global/head.php";
                      </div>
                   </div>
 
-                  <div class="container m-0 p-0">
-                     <div class="row justify-content-center align-items-center mb-4 ">
-                        <div class="col">
-                           <div class="d-flex align-items-center">
-                              <label class="fw-semibold me-3">Driver:</label>
-                              <select class="form-select form-select-sm w-75" name="driver_name" id="driver_name">
-                                 <option value="">None</option>
-                                 <?php
-                                 try {
-                                    $sql = "SELECT * FROM driver";
-                                    $result = $conn->query($sql);
+                  <div class="row">
+                     <div class="col pb-3">
+                        <div class="card shadow-lg">
+                           <div class="card-body">
+                              <form method="POST" action="depart_operation.php">
+                                 <div class="row mb-4">
+                                    <div class="col d-flex gap-3 align-items-center">
+                                       <label class="fw-semibold">Driver:</label>
+                                       <select class="form-select form-select-sm" name="driver_id">
+                                          <option value="">None</option>
+                                          <?php
+                                          $sql = "SELECT driver_id, driver_name FROM driver";
+                                          $result = $conn->query($sql);
+                                          while ($row = $result->fetch_assoc()) {
+                                             echo '<option value="' . $row['driver_id'] . '">' . $row['driver_name'] . '</option>';
+                                          }
+                                          ?>
+                                       </select>
+                                    </div>
+                                    <div class="col d-flex gap-3 align-items-center">
+                                       <label class="fw-semibold">Plate Number:</label>
+                                       <select class="form-select w-50 form-select-sm" name="vehicle_id">
+                                          <option value="">None</option>
+                                          <?php
+                                          $sql = "SELECT vehicle_id, platenumber FROM vehicle";
+                                          $result = $conn->query($sql);
+                                          while ($row = $result->fetch_assoc()) {
+                                             echo '<option value="' . $row['vehicle_id'] . '">' . $row['platenumber'] . '</option>';
+                                          }
+                                          ?>
+                                       </select>
+                                    </div>
 
-                                    while ($row = $result->fetch_assoc()) {
-                                       echo '<option value="' . $row['driver_name'] .  '">' . $row['driver_name'] .  '</option>';
-                                    }
-                                 } catch (\Exception $e) {
-                                    die($e);
-                                 }
+                                    <div class="col d-flex gap-3 align-items-center">
+                                       <label class="fw-semibold">Card Color:</label>
+                                       <select class="form-select w-50 form-select-sm" name="card_id">
+                                          <option value="">None</option>
+                                          <?php
+                                          $sql = "SELECT card_id, card_color FROM card";
+                                          $result = $conn->query($sql);
+                                          while ($row = $result->fetch_assoc()) {
+                                             echo '<option value="' . $row['card_id'] . '">' . $row['card_color'] . '</option>';
+                                          }
+                                          ?>
+                                       </select>
+                                    </div>
+                                 </div>
 
-                                 ?>
-                              </select>
-                           </div>
-                        </div>
+                                 <div class="row mt-2">
+                                    <div class="col">
+                                       <table class="table table-bordered text-center">
+                                          <thead class="table-secondary">
+                                             <tr>
+                                                <th>DESTINATION</th>
+                                                <th>FARE</th>
+                                                <th>TOTAL PASSENGERS</th>
+                                                <th>TOTAL FARE</th>
+                                             </tr>
+                                          </thead>
+                                          <tbody>
+                                             <?php
+                                             $total_passengers = 0;
+                                             $total_fare = 0;
+                                             $sql = "SELECT r.route, r.fare, COALESCE(t.total_passengers, 0) AS total_passengers, COALESCE(t.total_fare, 0) AS total_fare FROM route r LEFT JOIN ticket t ON r.route_id = t.route_id";
+                                             $result = $conn->query($sql);
+                                             while ($row = $result->fetch_assoc()) {
+                                                $total_passengers += $row['total_passengers'];
+                                                $total_fare += $row['total_fare'];
+                                                echo "<tr><td>{$row['route']}</td><td>{$row['fare']}</td><td>{$row['total_passengers']}</td><td>{$row['total_fare']}</td></tr>";
+                                             }
+                                             ?>
+                                          </tbody>
+                                          <tfoot class="table-secondary fw-semibold">
+                                             <tr>
+                                                <td colspan="2">TOTAL:</td>
+                                                <td><?php echo $total_passengers; ?></td>
+                                                <td><?php echo number_format($total_fare, 2); ?></td>
+                                             </tr>
+                                          </tfoot>
+                                       </table>
+                                       <input type="hidden" name="total_passengers" value="<?php echo $total_passengers; ?>">
+                                       <input type="hidden" name="total_fare" value="<?php echo $total_fare; ?>">
+                                    </div>
+                                 </div>
+                                 <div class="row mt-3">
+                                    <div class="col d-flex gap-3 align-items-center">
+                                       <label class="fw-semibold">Cashier:</label>
+                                       <select class="form-select w-50 form-select-sm" name="cashier_id">
+                                          <option value="">None</option>
+                                          <?php
+                                          $sql = "SELECT cashier_id, cashier_name FROM cashier";
+                                          $result = $conn->query($sql);
+                                          while ($row = $result->fetch_assoc()) {
+                                             echo '<option value="' . $row['cashier_id'] . '">' . $row['cashier_name'] . '</option>';
+                                          }
+                                          ?>
+                                       </select>
+                                    </div>
 
-                        <div class="col">
-                           <div class="d-flex align-items-center">
-                              <label class="fw-semibold w-75">Plate number:</label>
-                              <select name="platenumber" id="platenumber" class="form-select form-select-sm w-75">
-                                 <option value="">None</option>
-                                 <?php
-                                 try {
-                                    $sql = "SELECT * FROM vehicle";
-                                    $result = $conn->query($sql);
-                                    while ($row = $result->fetch_assoc()) {
-                                       echo '<option value="' . $row['platenumber'] . '"> ' . $row['platenumber'] . '</option>';
-                                    }
-                                 } catch (\Throwable $th) {
-                                    //throw $th;
-                                 }
-                                 ?>
-                              </select>
-                           </div>
-
-                        </div>
-
-                        <div class="col">
-                           <div class="d-flex align-items-center">
-                              <label class="fw-semibold" for="deprat">Departure time:</label>
-                           </div>
-                        </div>
-                     </div>
-
-                     <div class="row mt-2">
-                        <div class="col">
-                           <table class="table table-bordered table-hover text-center">
-                              <thead class="table-secondary">
-                                 <tr>
-                                    <th>DESTINATION</th>
-                                    <th>FARE</th>
-                                    <th>TOTAL PASSENGERS</th>
-                                    <th>TOTAL FARE</th>
-                                 </tr>
-                              </thead>
-                              <tbody>
-                                 <?php
-                                 $total_passengers = 0;
-                                 $total_fare = 0;
-
-                                 $sql = "SELECT r.route, r.fare, 
-                                 COALESCE(t.total_passengers, 0) AS total_passengers, 
-                                 COALESCE(t.total_fare, 0) AS total_fare 
-                                 FROM route r 
-                                 LEFT JOIN ticket t ON r.route_id = t.route_id";
-
-                                 $result = $conn->query($sql);
-
-                                 if (!$result) {
-                                    die("Query failed: " . $conn->error);
-                                 }
-
-                                 while ($row = $result->fetch_assoc()) {
-                                    $total_passengers += $row['total_passengers'];
-                                    $total_fare += $row['total_fare'];
-
-                                    echo "<tr>
-                                             <td>{$row['route']}</td>
-                                             <td>{$row['fare']}</td>
-                                             <td>{$row['total_passengers']}</td>
-                                             <td>{$row['total_fare']}</td>
-                                          </tr>";
-                                 }
-                                 ?>
-                              </tbody>
-                              <tfoot class="table-secondary fw-semibold">
-                                 <tr>
-                                    <td colspan="2">TOTAL:</td>
-                                    <td><?php echo $total_passengers; ?></td>
-                                    <td><?php echo number_format($total_fare, 2); ?></td>
-                                 </tr>
-                              </tfoot>
-                           </table>
-
-                           <div class="row mt-4">
-                              <div class="col col-4 d-flex align-items-center">
-                                 <label for=" cashier" class="fw-semibold me-3">CASHIER</label>
-                                 <select class="form-select form-select-sm w-50" id="cashier" name="cashier">
-                                    <option value="">None</option>
-
-                                    <?php
-                                    try {
-                                       $sql = "SELECT * FROM cashier";
-                                       $result = $conn->query($sql);
-
-                                       while ($row = $result->fetch_assoc()) {
-                                          echo '<option value="' . $row['cashier_fname'] . '">' . $row['cashier_lname'] . '</option>';
-                                       }
-                                    } catch (\Exception $e) {
-                                       die($e);
-                                    }
-                                    ?>
-                                 </select>
-                              </div>
-                              <div class="col col-4 d-flex align-items-center">
-
-                                 <label for=" card_color" class="fw-semibold me-3">CARD COLOR</label>
-                                 <select class="form-select form-select-sm w-50" id="card_color" name="card_color">
-                                    <option value="">None</option>
-
-                                    <?php
-                                    try {
-                                       $sql = "SELECT * FROM card";
-                                       $result = $conn->query($sql);
-
-                                       while ($row = $result->fetch_assoc()) {
-                                          echo '<option value="' . $row['card_color'] . '">' . $row['card_color'] . '</option>';
-                                       }
-                                       $conn->close();
-                                    } catch (\Exception $e) {
-                                       die($e);
-                                    }
-                                    ?>
-                                 </select>
-
-                              </div>
-                              <div class="col d-flex gap-3 justify-content-end">
-                                 <button class="btn btn-outline-info text-dark fw-semibold w-100">On Hold</button>
-                                 <button class="btn btn-h fw-semibold w-100">Depart</button>
-                              </div>
+                                    <div class="col col-6 d-flex gap-3 justify-content-end">
+                                       <button type="submit" class="btn btn-outline-info">On Hold</button>
+                                       <button type="submit" class="btn btn-info">Depart</button>
+                                    </div>
+                                 </div>
+                              </form>
                            </div>
                         </div>
                      </div>

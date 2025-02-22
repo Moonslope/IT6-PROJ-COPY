@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2025 at 03:01 PM
+-- Generation Time: Feb 22, 2025 at 05:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -54,20 +54,28 @@ CREATE TABLE `cashier` (
   `cashier_fname` varchar(50) NOT NULL,
   `cashier_lname` varchar(50) NOT NULL,
   `cashier_address` varchar(100) NOT NULL,
-  `cashier_contactNum` varchar(20) NOT NULL
+  `cashier_contactNum` varchar(20) NOT NULL,
+  `cashier_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `cashier`
 --
 
-INSERT INTO `cashier` (`cashier_id`, `cashier_fname`, `cashier_lname`, `cashier_address`, `cashier_contactNum`) VALUES
-(18, 'Mj', 'Sarona', 'jskyurghsghf', '0998475'),
-(19, 'dharyl', 'jay', 'weqwe', '09123456789'),
-(20, 'chris', 'elnick', 'zxcz', '09123456789'),
-(21, 'dharyl', 'jay', 'qweqreq', '09123456789'),
-(23, 'dharyl', 'dharyl', 'cabantian', '12312154'),
-(26, 'SHSH', 'shhshshs', 'sdsd0990', '9988');
+INSERT INTO `cashier` (`cashier_id`, `cashier_fname`, `cashier_lname`, `cashier_address`, `cashier_contactNum`, `cashier_name`) VALUES
+(27, 'Lawrence', 'Bisnar', 'Calinan', '09668543874', 'Lawrence Bisnar'),
+(28, 'Gar', 'Flores', 'Buhanghin', '098656565', 'Gar Flores'),
+(29, 'Dharyl', 'Castillo', 'Cabantian', '0963274524', 'Dharyl Castillo');
+
+--
+-- Triggers `cashier`
+--
+DELIMITER $$
+CREATE TRIGGER `set_cashier_name` BEFORE INSERT ON `cashier` FOR EACH ROW BEGIN
+    SET NEW.cashier_name = CONCAT(NEW.cashier_fname, ' ', NEW.cashier_lname);
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -79,23 +87,30 @@ CREATE TABLE `driver` (
   `driver_id` int(11) NOT NULL,
   `driver_fname` varchar(255) NOT NULL,
   `driver_lname` varchar(255) NOT NULL,
-  `driver_name` varchar(255) NOT NULL,
   `driver_address` varchar(255) NOT NULL,
-  `driver_contactNum` varchar(255) NOT NULL
+  `driver_contactNum` varchar(255) NOT NULL,
+  `driver_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `driver`
 --
 
-INSERT INTO `driver` (`driver_id`, `driver_fname`, `driver_lname`, `driver_name`, `driver_address`, `driver_contactNum`) VALUES
-(6, 'josh', 'mojika', 'josh mojika', 'tugbok,maa,calinan', '5559974'),
-(7, 'dharyllll', 'dharyl', 'dharyllll dharyl', 'cabantian', '498456168'),
-(8, 'gar ', 'flores', 'gar  flores', 'buhangin', '4884894865'),
-(9, 'chris', '', 'chris ', '', ''),
-(10, 'MJ', '', 'MJ ', '', ''),
-(11, 'jay', 'jjpo', 'jay jjpo', 'dsd', '9283784'),
-(12, 'Lawrence', 'Bisnar', '', 'aa', '232');
+INSERT INTO `driver` (`driver_id`, `driver_fname`, `driver_lname`, `driver_address`, `driver_contactNum`, `driver_name`) VALUES
+(13, 'Earl', 'Cerbo', 'Maa', '09768656', 'Earl Cerbo'),
+(14, 'Geop', 'Olano', 'Toril', '0984576763', 'Geop Olano'),
+(15, 'Kane', 'Ga', 'Calinan', '09768656', 'Kane Ga'),
+(16, 'John', 'DDoe', 'Toril', '0984576763', 'John DDoe');
+
+--
+-- Triggers `driver`
+--
+DELIMITER $$
+CREATE TRIGGER `set_driver_name` BEFORE INSERT ON `driver` FOR EACH ROW BEGIN
+    SET NEW.driver_name = CONCAT(NEW.driver_fname, ' ', NEW.driver_lname);
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -137,13 +152,6 @@ CREATE TABLE `ticket` (
   `total_fare` decimal(10,2) DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `ticket`
---
-
-INSERT INTO `ticket` (`ticket_id`, `route_id`, `route_name`, `fare`, `total_passengers`, `total_fare`) VALUES
-(17, 1, 'Mintal', 35.00, 1, 35.00);
-
 -- --------------------------------------------------------
 
 --
@@ -161,6 +169,31 @@ CREATE TABLE `travel_pass` (
   `travel_date` date DEFAULT curdate(),
   `departure_time` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `travel_pass`
+--
+
+INSERT INTO `travel_pass` (`travel_pass_id`, `driver_id`, `vehicle_id`, `cashier_id`, `card_id`, `total_passengers`, `total_fare`, `travel_date`, `departure_time`) VALUES
+(13, 15, 3, 27, 1, 16, 681.00, '2025-02-22', '17:05:19');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `travel_pass_view`
+-- (See below for the actual view)
+--
+CREATE TABLE `travel_pass_view` (
+`travel_pass_id` int(11)
+,`driver` varchar(255)
+,`vehicle` varchar(100)
+,`cashier` varchar(255)
+,`card` varchar(50)
+,`total_passengers` int(11)
+,`total_fare` decimal(10,2)
+,`travel_date` date
+,`departure_time` time
+);
 
 -- --------------------------------------------------------
 
@@ -182,11 +215,18 @@ CREATE TABLE `vehicle` (
 --
 
 INSERT INTO `vehicle` (`vehicle_id`, `platenumber`, `vehicle_model`, `vehicle_color`, `transmission_type`, `driver`) VALUES
-(3, 'XSDH10', '', '', '', 'josh mojika'),
-(4, '123', '', '', '', '6'),
-(5, '123', '', '', '', ''),
-(8, 'dsa', '', '', '', ''),
-(9, 'wassup', 'sadsa', 'white', 'manual', 'gar  flores');
+(3, 'XSDH10', 's', 'White', 'Manual', ''),
+(10, 'YY634', 's', 'White', 'Manual', ''),
+(11, 'WBHD2', 's', 'White', 'Manual', '');
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `travel_pass_view`
+--
+DROP TABLE IF EXISTS `travel_pass_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `travel_pass_view`  AS SELECT `tp`.`travel_pass_id` AS `travel_pass_id`, `d`.`driver_name` AS `driver`, `v`.`platenumber` AS `vehicle`, `c`.`cashier_name` AS `cashier`, `cd`.`card_color` AS `card`, `tp`.`total_passengers` AS `total_passengers`, `tp`.`total_fare` AS `total_fare`, `tp`.`travel_date` AS `travel_date`, `tp`.`departure_time` AS `departure_time` FROM ((((`travel_pass` `tp` join `driver` `d` on(`tp`.`driver_id` = `d`.`driver_id`)) join `vehicle` `v` on(`tp`.`vehicle_id` = `v`.`vehicle_id`)) join `cashier` `c` on(`tp`.`cashier_id` = `c`.`cashier_id`)) join `card` `cd` on(`tp`.`card_id` = `cd`.`card_id`)) ;
 
 --
 -- Indexes for dumped tables
@@ -253,13 +293,13 @@ ALTER TABLE `card`
 -- AUTO_INCREMENT for table `cashier`
 --
 ALTER TABLE `cashier`
-  MODIFY `cashier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `cashier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `driver`
 --
 ALTER TABLE `driver`
-  MODIFY `driver_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `driver_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `route`
@@ -271,19 +311,19 @@ ALTER TABLE `route`
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `travel_pass`
 --
 ALTER TABLE `travel_pass`
-  MODIFY `travel_pass_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `travel_pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `vehicle`
 --
 ALTER TABLE `vehicle`
-  MODIFY `vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
