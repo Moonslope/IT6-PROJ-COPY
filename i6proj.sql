@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2025 at 06:37 PM
+-- Generation Time: Feb 22, 2025 at 03:01 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -125,6 +125,46 @@ INSERT INTO `route` (`route_id`, `route`, `fare`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ticket`
+--
+
+CREATE TABLE `ticket` (
+  `ticket_id` int(11) NOT NULL,
+  `route_id` int(11) NOT NULL,
+  `route_name` varchar(100) NOT NULL,
+  `fare` decimal(10,2) NOT NULL,
+  `total_passengers` int(11) DEFAULT 0,
+  `total_fare` decimal(10,2) DEFAULT 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ticket`
+--
+
+INSERT INTO `ticket` (`ticket_id`, `route_id`, `route_name`, `fare`, `total_passengers`, `total_fare`) VALUES
+(17, 1, 'Mintal', 35.00, 1, 35.00);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `travel_pass`
+--
+
+CREATE TABLE `travel_pass` (
+  `travel_pass_id` int(11) NOT NULL,
+  `driver_id` int(11) NOT NULL,
+  `vehicle_id` int(11) NOT NULL,
+  `cashier_id` int(11) NOT NULL,
+  `card_id` int(11) NOT NULL,
+  `total_passengers` int(11) NOT NULL,
+  `total_fare` decimal(10,2) NOT NULL,
+  `travel_date` date DEFAULT curdate(),
+  `departure_time` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `vehicle`
 --
 
@@ -177,6 +217,23 @@ ALTER TABLE `route`
   ADD PRIMARY KEY (`route_id`);
 
 --
+-- Indexes for table `ticket`
+--
+ALTER TABLE `ticket`
+  ADD PRIMARY KEY (`ticket_id`),
+  ADD KEY `route_id` (`route_id`);
+
+--
+-- Indexes for table `travel_pass`
+--
+ALTER TABLE `travel_pass`
+  ADD PRIMARY KEY (`travel_pass_id`),
+  ADD KEY `driver_id` (`driver_id`),
+  ADD KEY `vehicle_id` (`vehicle_id`),
+  ADD KEY `cashier_id` (`cashier_id`),
+  ADD KEY `card_id` (`card_id`);
+
+--
 -- Indexes for table `vehicle`
 --
 ALTER TABLE `vehicle`
@@ -211,10 +268,41 @@ ALTER TABLE `route`
   MODIFY `route_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `ticket`
+--
+ALTER TABLE `ticket`
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `travel_pass`
+--
+ALTER TABLE `travel_pass`
+  MODIFY `travel_pass_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `vehicle`
 --
 ALTER TABLE `vehicle`
   MODIFY `vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `ticket`
+--
+ALTER TABLE `ticket`
+  ADD CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`route_id`) REFERENCES `route` (`route_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `travel_pass`
+--
+ALTER TABLE `travel_pass`
+  ADD CONSTRAINT `travel_pass_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `driver` (`driver_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `travel_pass_ibfk_2` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`vehicle_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `travel_pass_ibfk_3` FOREIGN KEY (`cashier_id`) REFERENCES `cashier` (`cashier_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `travel_pass_ibfk_4` FOREIGN KEY (`card_id`) REFERENCES `card` (`card_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
