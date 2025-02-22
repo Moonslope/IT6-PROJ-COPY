@@ -42,7 +42,7 @@ require  "../global/head.php";
                                  <option value="">None</option>
                                  <?php
                                  try {
-                                    $sql = "SELECT * FROM route";
+                                    $sql = "SELECT * FROM routes";
                                     $result = $conn->query($sql);
 
                                     while ($row = $result->fetch_assoc()) {
@@ -110,12 +110,30 @@ require  "../global/head.php";
                         </div>
 
                         <div class="col">
-                           <p class="fw-semibold">Plate Number:</p>
+                           <div class="d-flex align-items-center">
+                              <label class="fw-semibold w-75">Plate number:</label>
+                              <select name="platenumber" id="platenumber" class="form-select form-select-sm w-75">
+                                 <option value="">None</option>
+                                 <?php
+                                 try {
+                                    $sql = "SELECT * FROM vehicle";
+                                    $result = $conn->query($sql);
+                                    while ($row = $result->fetch_assoc()) {
+                                       echo '<option value="' . $row['platenumber'] . '"> ' . $row['platenumber'] . '</option>';
+                                    }
+                                 } catch (\Throwable $th) {
+                                    //throw $th;
+                                 }
+                                 ?>
+                              </select>
+                           </div>
 
                         </div>
 
                         <div class="col">
-                           <p class="fw-semibold">Departure Time:</p>
+                           <div class="d-flex align-items-center">
+                              <label class="fw-semibold" for="deprat">Departure time:</label>
+                           </div>
                         </div>
                      </div>
 
@@ -132,7 +150,7 @@ require  "../global/head.php";
                               </thead>
                               <tbody>
                                  <?php
-                                 $sql = "SELECT * FROM route";
+                                 $sql = "SELECT * FROM routes";
                                  $result = $conn->query($sql);
                                  while ($row = $result->fetch_assoc()) {
                                     echo "<tr>
