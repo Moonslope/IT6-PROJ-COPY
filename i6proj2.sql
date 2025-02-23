@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+<<<<<<< HEAD:i6proj2.sql
 -- Generation Time: Feb 23, 2025 at 03:12 PM
+=======
+-- Generation Time: Feb 23, 2025 at 12:52 PM
+>>>>>>> 6ab159b3c6e7a8dc10faa682b78298955d615957:i6proj.sql
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -207,7 +211,13 @@ CREATE TABLE `travel_pass` (
 --
 
 INSERT INTO `travel_pass` (`travel_pass_id`, `driver_id`, `vehicle_id`, `cashier_id`, `card_id`, `total_passengers`, `total_fare`, `travel_date`, `departure_time`) VALUES
+<<<<<<< HEAD:i6proj2.sql
 (26, 13, 11, 28, 4, 16, 679.00, '2025-02-23', '10:10:35');
+=======
+(13, 15, 3, 27, 1, 16, 681.00, '2025-02-22', '17:05:19'),
+(14, 14, 3, 27, 2, 17, 732.00, '2025-02-23', '10:59:54'),
+(15, 13, 10, 28, 4, 13, 514.00, '2025-02-23', '12:08:18');
+>>>>>>> 6ab159b3c6e7a8dc10faa682b78298955d615957:i6proj.sql
 
 -- --------------------------------------------------------
 
@@ -230,6 +240,25 @@ CREATE TABLE `travel_pass_view` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `username`, `password`) VALUES
+(1, 'cashier1', '123');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `vehicle`
 --
 
@@ -247,6 +276,7 @@ CREATE TABLE `vehicle` (
 -- Dumping data for table `vehicle`
 --
 
+<<<<<<< HEAD:i6proj2.sql
 INSERT INTO `vehicle` (`vehicle_id`, `driver_id`, `platenumber`, `vehicle_model`, `vehicle_color`, `transmission_type`, `driver`) VALUES
 (3, NULL, 'XSDH10', 's', 'White', 'Automatic', 'John DDoe'),
 (10, NULL, 'YY634', 's', 'White', '', 'Kane Ga'),
@@ -267,6 +297,13 @@ CREATE TRIGGER `before_vehicle_update` BEFORE UPDATE ON `vehicle` FOR EACH ROW B
 END
 $$
 DELIMITER ;
+=======
+INSERT INTO `vehicle` (`vehicle_id`, `platenumber`, `vehicle_model`, `vehicle_color`, `transmission_type`, `driver`) VALUES
+(3, 'XSDH10', 's', 'White', '', 'Earl Cerbo'),
+(10, 'YY634', 's', 'White', '', 'Geop Olano'),
+(11, 'WBHD2', 's', 'White', '', 'John DDoe'),
+(12, 'LT23S', 'Mitsubishi ', 'White', '', 'Kane Ga');
+>>>>>>> 6ab159b3c6e7a8dc10faa682b78298955d615957:i6proj.sql
 
 -- --------------------------------------------------------
 
@@ -323,6 +360,13 @@ ALTER TABLE `travel_pass`
   ADD KEY `card_id` (`card_id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
 -- Indexes for table `vehicle`
 --
 ALTER TABLE `vehicle`
@@ -361,19 +405,37 @@ ALTER TABLE `route`
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
+<<<<<<< HEAD:i6proj2.sql
   MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+=======
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+>>>>>>> 6ab159b3c6e7a8dc10faa682b78298955d615957:i6proj.sql
 
 --
 -- AUTO_INCREMENT for table `travel_pass`
 --
 ALTER TABLE `travel_pass`
+<<<<<<< HEAD:i6proj2.sql
   MODIFY `travel_pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+=======
+  MODIFY `travel_pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+>>>>>>> 6ab159b3c6e7a8dc10faa682b78298955d615957:i6proj.sql
 
 --
 -- AUTO_INCREMENT for table `vehicle`
 --
 ALTER TABLE `vehicle`
+<<<<<<< HEAD:i6proj2.sql
   MODIFY `vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+=======
+  MODIFY `vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+>>>>>>> 6ab159b3c6e7a8dc10faa682b78298955d615957:i6proj.sql
 
 --
 -- Constraints for dumped tables

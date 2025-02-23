@@ -16,7 +16,16 @@ require  "../global/head.php";
 
          <div class="col d-flex gap-5 align-items-center justify-content-end me-5   ">
             <a class="btn btn-nav" href="">New <i class="bi bi-plus"></i></a>
-            <a class="btn btn-nav" href="">View <i class="bi bi-eye"></i></a>
+            <div class="dropdown">
+               <a class="btn btn-nav dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  View <i class="bi bi-eye"></i>
+               </a>
+               <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="../TravelPass/onHold.php">On Hold</a></li>
+                  <li><a class="dropdown-item" href="travel_pass_history.php">Travel Pass History</a></li>
+               </ul>
+            </div>
+
             <a class="btn btn-nav" href="../Login-Register/Login.php">Log out <i class="bi bi-box-arrow-right"></i></a>
          </div>
       </div>
@@ -234,6 +243,7 @@ require  "../global/head.php";
          }
       });
    </script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>
