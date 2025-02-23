@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2025 at 05:10 PM
+-- Generation Time: Feb 23, 2025 at 03:12 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,8 +18,29 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `i6proj`
+-- Database: `i6proj2`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_driver_name` (IN `vehicle_id` INT, IN `driver_id` INT)   BEGIN
+    DECLARE driver_fname VARCHAR(255);
+    DECLARE driver_lname VARCHAR(255);
+
+    -- Ensure only one row is selected
+    SELECT driver_fname, driver_lname INTO driver_fname, driver_lname
+    FROM driver
+    WHERE driver_id = driver_id
+    LIMIT 1;
+
+    UPDATE vehicle
+    SET driver_name = CONCAT(driver_fname, ' ', driver_lname)
+    WHERE vehicle_id = vehicle_id;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -152,6 +173,17 @@ CREATE TABLE `ticket` (
   `total_fare` decimal(10,2) DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `ticket`
+--
+
+INSERT INTO `ticket` (`ticket_id`, `route_id`, `route_name`, `fare`, `total_passengers`, `total_fare`) VALUES
+(50, 3, 'Los Amigos', 40.00, 5, 200.00),
+(51, 2, 'Tugbok', 38.00, 2, 76.00),
+(52, 6, 'Riverside', 45.00, 2, 90.00),
+(54, 4, 'Quarry', 40.00, 4, 160.00),
+(56, 5, 'Puting Bato', 45.00, 3, 135.00);
+
 -- --------------------------------------------------------
 
 --
@@ -175,7 +207,7 @@ CREATE TABLE `travel_pass` (
 --
 
 INSERT INTO `travel_pass` (`travel_pass_id`, `driver_id`, `vehicle_id`, `cashier_id`, `card_id`, `total_passengers`, `total_fare`, `travel_date`, `departure_time`) VALUES
-(13, 15, 3, 27, 1, 16, 681.00, '2025-02-22', '17:05:19');
+(26, 13, 11, 28, 4, 16, 679.00, '2025-02-23', '10:10:35');
 
 -- --------------------------------------------------------
 
@@ -203,6 +235,7 @@ CREATE TABLE `travel_pass_view` (
 
 CREATE TABLE `vehicle` (
   `vehicle_id` int(11) NOT NULL,
+  `driver_id` int(11) DEFAULT NULL,
   `platenumber` varchar(100) NOT NULL,
   `vehicle_model` varchar(255) NOT NULL,
   `vehicle_color` varchar(255) NOT NULL,
@@ -214,10 +247,26 @@ CREATE TABLE `vehicle` (
 -- Dumping data for table `vehicle`
 --
 
-INSERT INTO `vehicle` (`vehicle_id`, `platenumber`, `vehicle_model`, `vehicle_color`, `transmission_type`, `driver`) VALUES
-(3, 'XSDH10', 's', 'White', 'Manual', ''),
-(10, 'YY634', 's', 'White', 'Manual', ''),
-(11, 'WBHD2', 's', 'White', 'Manual', '');
+INSERT INTO `vehicle` (`vehicle_id`, `driver_id`, `platenumber`, `vehicle_model`, `vehicle_color`, `transmission_type`, `driver`) VALUES
+(3, NULL, 'XSDH10', 's', 'White', 'Automatic', 'John DDoe'),
+(10, NULL, 'YY634', 's', 'White', '', 'Kane Ga'),
+(11, NULL, 'WBHD2', 's', 'White', '', 'John DDoe'),
+(12, NULL, '123', 'QQQ', 'BLACK', '', 'Earl Cerbo'),
+(13, NULL, 'PPP', 'MMM', 'RED', '', 'Geop Olano');
+
+--
+-- Triggers `vehicle`
+--
+DELIMITER $$
+CREATE TRIGGER `before_vehicle_update` BEFORE UPDATE ON `vehicle` FOR EACH ROW BEGIN
+    DECLARE driver_id INT;
+    -- Fetch the driver_id based on the driver name
+    SELECT driver_id INTO driver_id FROM driver WHERE driver_name = NEW.driver;
+    -- Set the driver_id in the vehicle table
+    SET NEW.driver_id = driver_id;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -277,7 +326,8 @@ ALTER TABLE `travel_pass`
 -- Indexes for table `vehicle`
 --
 ALTER TABLE `vehicle`
-  ADD PRIMARY KEY (`vehicle_id`);
+  ADD PRIMARY KEY (`vehicle_id`),
+  ADD KEY `fk_vehicle_driver` (`driver_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -311,19 +361,19 @@ ALTER TABLE `route`
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `travel_pass`
 --
 ALTER TABLE `travel_pass`
-  MODIFY `travel_pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `travel_pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `vehicle`
 --
 ALTER TABLE `vehicle`
-  MODIFY `vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
@@ -343,6 +393,12 @@ ALTER TABLE `travel_pass`
   ADD CONSTRAINT `travel_pass_ibfk_2` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`vehicle_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `travel_pass_ibfk_3` FOREIGN KEY (`cashier_id`) REFERENCES `cashier` (`cashier_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `travel_pass_ibfk_4` FOREIGN KEY (`card_id`) REFERENCES `card` (`card_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `vehicle`
+--
+ALTER TABLE `vehicle`
+  ADD CONSTRAINT `fk_vehicle_driver` FOREIGN KEY (`driver_id`) REFERENCES `driver` (`driver_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
