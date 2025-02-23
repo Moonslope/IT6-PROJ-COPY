@@ -176,7 +176,7 @@ require  "../global/head.php";
 
                                     <div class="col col-6 d-flex gap-3 justify-content-end">
                                        <button type="submit" class="btn btn-outline-info">On Hold</button>
-                                       <button type="submit" class="btn btn-info">Depart</button>
+                                       <button type="submit" class="btn btn-info" id="departButton">Depart</button>
                                     </div>
                                  </div>
                               </form>
@@ -206,6 +206,24 @@ require  "../global/head.php";
          if (totalPassengers >= 16) {
             // Disable the "Okay" button if the total number of passengers is 16 or more
             document.getElementById('okayButton').disabled = true;
+         }
+      };
+
+      // Function to validate the number of passengers before form submission
+      function ddepart() {
+         // Get the total number of passengers from the PHP variable
+         var depart = <?php echo $total_passengers; ?>;
+      }
+
+      // Disable the "Depart" button if total passengers are 16 or more
+      window.onload = function() {
+         // Get the total number of passengers from the PHP variable
+         var depart = <?php echo $total_passengers; ?>;
+
+         // Check if the total number of passengers is less than 16 
+         if (depart < 16) {
+            // Disable the "Okay" button if the total number of passengers is 16 or more
+            document.getElementById('departButton').disabled = true;
          }
       };
 
