@@ -202,9 +202,7 @@ require  "../global/head.php";
    <script>
       function validatePassengers() {
          var totalPassengers = <?php echo $total_passengers; ?>;
-
       }
-
       // Disable the "Okay" button if total passengers are 16 or more
       window.onload = function() {
          var totalPassengers = <?php echo $total_passengers; ?>;
