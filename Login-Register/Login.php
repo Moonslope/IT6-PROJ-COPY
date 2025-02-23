@@ -36,7 +36,7 @@ require "../global/head.php";
                                 <div class="card-body ">
                                     <div class="p-3">
                                         <!-- Login Form -->
-                                        <form action="#" method="POST">
+                                        <form action="op_login.php" method="POST">
                                             <div class="row mt-2">
                                                 <label for="username" class="mb-2 fw-semibold">USERNAME</label>
 
@@ -51,7 +51,7 @@ require "../global/head.php";
                                                 <label for="password" class="mb-2 fw-semibold">PASSWORD</label>
 
                                                 <div class="col col-12 d-flex align-items-center">
-                                                    <input type="text" id="password" name="password" class="rounded-pill form-control border-black">
+                                                    <input type="password" id="password" name="password" class="rounded-pill form-control border-black">
 
                                                     <img src="../images/padlock.png" class="img-fluid" alt="" width="35" height="35">
                                                 </div>
