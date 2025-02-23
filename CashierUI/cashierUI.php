@@ -93,6 +93,7 @@ require  "../global/head.php";
                                     <div class="col d-flex gap-3 align-items-center">
                                        <label class="fw-semibold">Driver:</label>
                                        <input type="text" class="form-control form-control-sm" id="driver_name" readonly>
+                                       <input type="hidden" id="driver_id" name="driver_id" value="<?php echo isset($driver_id) ? $driver_id : ''; ?>"> <!-- Added hidden input for driver_id -->
                                     </div>
                                     <div class="col d-flex gap-3 align-items-center">
                                        <label class="fw-semibold">Plate Number:</label>
@@ -207,22 +208,10 @@ require  "../global/head.php";
             // Disable the "Okay" button if the total number of passengers is 16 or more
             document.getElementById('okayButton').disabled = true;
          }
-      };
 
-      // Function to validate the number of passengers before form submission
-      function ddepart() {
-         // Get the total number of passengers from the PHP variable
-         var depart = <?php echo $total_passengers; ?>;
-      }
-
-      // Disable the "Depart" button if total passengers are 16 or more
-      window.onload = function() {
-         // Get the total number of passengers from the PHP variable
-         var depart = <?php echo $total_passengers; ?>;
-
-         // Check if the total number of passengers is less than 16 
-         if (depart < 16) {
-            // Disable the "Okay" button if the total number of passengers is 16 or more
+         // Check if the total number of passengers is less than 16
+         if (totalPassengers < 16) {
+            // Enable the "Depart" button if the total number of passengers is less than 16
             document.getElementById('departButton').disabled = true;
          }
       };
@@ -236,7 +225,9 @@ require  "../global/head.php";
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             xhr.onreadystatechange = function() {
                if (xhr.readyState == 4 && xhr.status == 200) {
-                  document.getElementById('driver_name').value = xhr.responseText;
+                  var response = JSON.parse(xhr.responseText);
+                  document.getElementById('driver_name').value = response.driver_name;
+                  document.getElementById('driver_id').value = response.driver_id; // Set driver_id value
                }
             };
             xhr.send('vehicle_id=' + vehicle_id);
