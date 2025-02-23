@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2025 at 05:10 PM
+-- Generation Time: Feb 23, 2025 at 12:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -175,7 +175,9 @@ CREATE TABLE `travel_pass` (
 --
 
 INSERT INTO `travel_pass` (`travel_pass_id`, `driver_id`, `vehicle_id`, `cashier_id`, `card_id`, `total_passengers`, `total_fare`, `travel_date`, `departure_time`) VALUES
-(13, 15, 3, 27, 1, 16, 681.00, '2025-02-22', '17:05:19');
+(13, 15, 3, 27, 1, 16, 681.00, '2025-02-22', '17:05:19'),
+(14, 14, 3, 27, 2, 17, 732.00, '2025-02-23', '10:59:54'),
+(15, 13, 10, 28, 4, 13, 514.00, '2025-02-23', '12:08:18');
 
 -- --------------------------------------------------------
 
@@ -198,6 +200,25 @@ CREATE TABLE `travel_pass_view` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `username`, `password`) VALUES
+(1, 'cashier1', '123');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `vehicle`
 --
 
@@ -215,9 +236,10 @@ CREATE TABLE `vehicle` (
 --
 
 INSERT INTO `vehicle` (`vehicle_id`, `platenumber`, `vehicle_model`, `vehicle_color`, `transmission_type`, `driver`) VALUES
-(3, 'XSDH10', 's', 'White', 'Manual', ''),
-(10, 'YY634', 's', 'White', 'Manual', ''),
-(11, 'WBHD2', 's', 'White', 'Manual', '');
+(3, 'XSDH10', 's', 'White', '', 'Earl Cerbo'),
+(10, 'YY634', 's', 'White', '', 'Geop Olano'),
+(11, 'WBHD2', 's', 'White', '', 'John DDoe'),
+(12, 'LT23S', 'Mitsubishi ', 'White', '', 'Kane Ga');
 
 -- --------------------------------------------------------
 
@@ -274,6 +296,13 @@ ALTER TABLE `travel_pass`
   ADD KEY `card_id` (`card_id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
 -- Indexes for table `vehicle`
 --
 ALTER TABLE `vehicle`
@@ -311,19 +340,25 @@ ALTER TABLE `route`
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `travel_pass`
 --
 ALTER TABLE `travel_pass`
-  MODIFY `travel_pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `travel_pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `vehicle`
 --
 ALTER TABLE `vehicle`
-  MODIFY `vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
