@@ -57,7 +57,7 @@ require  "../global/head.php";
                            </div>
 
                            <div class="d-flex justify-content-end">
-                              <button class="btn btn-h fw-semibold w-100" type="submit">Okay</button>
+                              <button class="btn btn-h fw-semibold w-100" type="submit" id="okayButton">Okay</button>
                            </div>
                         </form>
                      </div>
@@ -199,6 +199,20 @@ require  "../global/head.php";
          </div>
       </div>
    </div>
+   <script>
+      function validatePassengers() {
+         var totalPassengers = <?php echo $total_passengers; ?>;
+
+      }
+
+      // Disable the "Okay" button if total passengers are 16 or more
+      window.onload = function() {
+         var totalPassengers = <?php echo $total_passengers; ?>;
+         if (totalPassengers >= 16) {
+            document.getElementById('okayButton').disabled = true;
+         }
+      };
+   </script>
 </body>
 
 </html>
