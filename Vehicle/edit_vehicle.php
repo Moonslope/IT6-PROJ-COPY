@@ -123,7 +123,7 @@ require "../global/head.php";
                                                 <div class="col">
                                                     <a href="view_vehicle.php" class="btn btn-outline-info w-100 text-dark fw-semibold">CANCEL</a>
                                                 </div>
-                                                <div class="col border">
+                                                <div class="col">
                                                     <button type="submit" class="btn btn-h w-100 border-dark fw-semibold"><i class="bi bi-floppy-fill me-2"></i> Save Changes </button>
                                                 </div>
                                             </div>
