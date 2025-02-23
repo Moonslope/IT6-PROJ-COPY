@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-
 include "../Database/db_connect.php";
 $title = 'Cashier';
 require  "../global/head.php";
@@ -66,7 +65,7 @@ require  "../global/head.php";
                            </div>
 
                            <div class="d-flex justify-content-end">
-                              <button class="btn btn-h fw-semibold w-100" type="submit">Okay</button>
+                              <button class="btn btn-h fw-semibold w-100" type="submit" id="okayButton">Okay</button>
                            </div>
                         </form>
                      </div>
@@ -102,20 +101,11 @@ require  "../global/head.php";
                                  <div class="row mb-4">
                                     <div class="col d-flex gap-3 align-items-center">
                                        <label class="fw-semibold">Driver:</label>
-                                       <select class="form-select form-select-sm" name="driver_id">
-                                          <option value="">None</option>
-                                          <?php
-                                          $sql = "SELECT driver_id, driver_name FROM driver";
-                                          $result = $conn->query($sql);
-                                          while ($row = $result->fetch_assoc()) {
-                                             echo '<option value="' . $row['driver_id'] . '">' . $row['driver_name'] . '</option>';
-                                          }
-                                          ?>
-                                       </select>
+                                       <input type="text" class="form-control form-control-sm" id="driver_name" readonly>
                                     </div>
                                     <div class="col d-flex gap-3 align-items-center">
                                        <label class="fw-semibold">Plate Number:</label>
-                                       <select class="form-select w-50 form-select-sm" name="vehicle_id">
+                                       <select class="form-select w-50 form-select-sm" name="vehicle_id" id="platenumber">
                                           <option value="">None</option>
                                           <?php
                                           $sql = "SELECT vehicle_id, platenumber FROM vehicle";
@@ -195,7 +185,7 @@ require  "../global/head.php";
 
                                     <div class="col col-6 d-flex gap-3 justify-content-end">
                                        <button type="submit" class="btn btn-outline-info">On Hold</button>
-                                       <button type="submit" class="btn btn-info">Depart</button>
+                                       <button type="submit" class="btn btn-info" id="departButton">Depart</button>
                                     </div>
                                  </div>
                               </form>
@@ -208,6 +198,60 @@ require  "../global/head.php";
          </div>
       </div>
    </div>
+
+   <script>
+      // Function to validate the number of passengers before form submission
+      function validatePassengers() {
+         // Get the total number of passengers from the PHP variable
+         var totalPassengers = <?php echo $total_passengers; ?>;
+      }
+
+      // Disable the "Okay" button if total passengers are 16 or more
+      window.onload = function() {
+         // Get the total number of passengers from the PHP variable
+         var totalPassengers = <?php echo $total_passengers; ?>;
+
+         // Check if the total number of passengers is 16 or more
+         if (totalPassengers >= 16) {
+            // Disable the "Okay" button if the total number of passengers is 16 or more
+            document.getElementById('okayButton').disabled = true;
+         }
+      };
+
+      // Function to validate the number of passengers before form submission
+      function ddepart() {
+         // Get the total number of passengers from the PHP variable
+         var depart = <?php echo $total_passengers; ?>;
+      }
+
+      // Disable the "Depart" button if total passengers are 16 or more
+      window.onload = function() {
+         // Get the total number of passengers from the PHP variable
+         var depart = <?php echo $total_passengers; ?>;
+
+         // Check if the total number of passengers is less than 16 
+         if (depart < 16) {
+            // Disable the "Okay" button if the total number of passengers is 16 or more
+            document.getElementById('departButton').disabled = true;
+         }
+      };
+
+      // Add event listener to the plate number dropdown
+      document.getElementById('platenumber').addEventListener('change', function() {
+         var vehicle_id = this.value;
+         if (vehicle_id) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'get_driver.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+               if (xhr.readyState == 4 && xhr.status == 200) {
+                  document.getElementById('driver_name').value = xhr.responseText;
+               }
+            };
+            xhr.send('vehicle_id=' + vehicle_id);
+         }
+      });
+   </script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 

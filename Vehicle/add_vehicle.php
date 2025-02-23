@@ -81,7 +81,13 @@ require "../global/head.php";
                                                 </div>
                                                 <div class="col">
                                                     <label for="transmission_type" class="fw-semibold mb-3">Transmission Type</label>
-                                                    <input type="text" id="transmission_type" name="transmission_type" class="form-control border-dark" required>
+                                                    <select class="form-select border border-dark" name="transmission_type" id="transmission_type">
+                                                        <option value="">None</option>
+                                                        <option value="Manual"> <?php echo (isset($_POST['transmission_type']) && $_POST['transmission_type'] == "Manual") ? "Selected" : ""; ?>Manual</option>
+
+                                                        <option value="Automatic"> <?php echo (isset($_POST['transmission_type']) && $_POST['transmission_type'] == "Automatic") ? "Selected" : ""; ?>Automatic</option>
+                                                    </select>
+
                                                 </div>
                                             </div>
 
