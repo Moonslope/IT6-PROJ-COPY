@@ -38,6 +38,14 @@ require "../global/head.php";
                             <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="#">Vehicle</a>
                         </div>
 
+                        <div class="mx-3 mb-3">
+                            <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Route/view_route.php">Route</a>
+                        </div>
+
+                        <div class="mx-3 mb-3">
+                            <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Card-color/view_card_color.php">Card Color</a>
+                        </div>
+
                         <div class="mx-3">
                             <a href="../Login-Register/Login.php" class="btn btn-h w-100 border border-1 border-dark fw-semibold"><i class="bi bi-box-arrow-left me-2"></i>Log Out</a>
                         </div>
@@ -58,12 +66,11 @@ require "../global/head.php";
                                     <input type="text" name="query" class="form-control" placeholder="Search here" value="<?php echo isset($_GET['query']) ? $_GET['query'] : ''; ?>">
                                     <button type="submit" class="btn btn-outline-dark"><i class="bi bi-search"></i></button>
                                 </form>
-
                             </div>
 
                             <div class="col col-3 text-end">
                                 <a class="btn btn-success border border-1 border-dark fw-semibold" href="add_vehicle.php">ADD
-                                    <i class="bi fs-5 bi-person-add"></i>
+                                    <i class="bi bi-plus-circle-fill fs-5"></i>
                                 </a>
                             </div>
                         </div>

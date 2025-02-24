@@ -39,7 +39,7 @@ require "../global/head.php";
                         </div>
 
                         <div class="mx-3 mb-3">
-                            <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="">Route</a>
+                            <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Route/view_route.php">Route</a>
                         </div>
 
                         <div class="mx-3 mb-3">
@@ -76,7 +76,7 @@ require "../global/head.php";
                             </div>
                         </div>
 
-                        <div style="max-height: 400px; overflow-y: auto;">
+                        <div style="max-height: 370px; overflow-y: auto;">
 
                             <?php
                             try {
@@ -97,7 +97,7 @@ require "../global/head.php";
                                             <li class="list-group-item d-flex align-items-center justify-content-between border border-2">
                                                 <div class="d-flex align-items-center">
                                                     <div>
-                                                        <img src="../images/cashier.png" alt="" class="img-fluid rounded-pill border border-2 border-dark me-3" width="50" height="50">
+                                                        <img src="../images/card.png" alt="" class="img-fluid rounded-pill border border-2 border-dark me-3" width="50" height="50">
                                                     </div>
                                                     <div>
                                                         <span><strong>Color : </strong><?php echo $row['card_color']; ?></span><br>

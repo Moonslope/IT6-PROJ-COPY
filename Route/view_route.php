@@ -43,7 +43,7 @@ require "../global/head.php";
                   </div>
 
                   <div class="mx-3 mb-3">
-                     <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="">Card Color</a>
+                     <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Card-color/view_card_color.php">Card Color</a>
                   </div>
 
                   <div class="mx-3">
@@ -62,7 +62,7 @@ require "../global/head.php";
                      </div>
 
                      <div class="col col-6 d-flex gap-2  ps-5">
-                        <form method="GET" action="view_cashier.php" class="d-flex gap-2 ps-5">
+                        <form method="GET" action="view_route.php" class="d-flex gap-2 ps-5">
                            <input type="text" name="query" class="form-control" placeholder="Search here" value="<?php echo isset($_GET['query']) ? $_GET['query'] : ''; ?>">
                            <button type="submit" class="btn btn-outline-dark"><i class="bi bi-search"></i></button>
                         </form>
@@ -85,8 +85,7 @@ require "../global/head.php";
                         if (isset($_GET['query']) && !empty($_GET['query'])) {
                            $search = $conn->real_escape_string($_GET['query']);
                            $sql .= " WHERE 
-                                       route LIKE '%$search%' OR 
-                                       ";
+                                       route LIKE '%$search%'";
                         }
 
                         $result = $conn->query($sql);
