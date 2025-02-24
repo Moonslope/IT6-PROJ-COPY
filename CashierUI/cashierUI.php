@@ -14,25 +14,15 @@ require  "../global/head.php";
             <img src="../images/image.png" alt="" class="img-fluid " width="50" height="50">
          </div>
 
-         <div class="col d-flex gap-5 align-items-center justify-content-end me-5   ">
-            <a class="btn btn-nav" href="">New <i class="bi bi-plus"></i></a>
-            <div class="dropdown">
-               <a class="btn btn-nav dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  View <i class="bi bi-eye"></i>
-               </a>
-               <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="../TravelPass/onHold.php">On Hold</a></li>
-                  <li><a class="dropdown-item" href="travel_pass_history.php">Travel Pass History</a></li>
-               </ul>
-            </div>
-
-            <a class="btn btn-nav" href="../Login-Register/Login.php">Log out <i class="bi bi-box-arrow-right"></i></a>
+         <div class="col d-flex gap-5 align-items-center justify-content-end me-5">
+            <a class="btn btn-c text-white" href="travel_pass_history.php">Travel Pass History <i class="bi bi-clock-history"></i></a>
+            <a class="btn btn-c text-white w-25" href="../Login-Register/Login.php">Log out <i class="bi bi-box-arrow-right"></i></a>
          </div>
       </div>
 
       <div class="row ">
          <div class="col col-3">
-            <div style="height: 630px;" class="card shadow-lg">
+            <div style="height: 675px;" class="card shadow-lg">
                <div class="card-body">
                   <div class="row  border border-start-0 border-end-0 border-top-0 border-2">
                      <div class="col d-flex justify-content-center align-items-center gap-3 pb-3">
@@ -65,7 +55,7 @@ require  "../global/head.php";
                            </div>
 
                            <div class="d-flex justify-content-end">
-                              <button class="btn btn-h fw-semibold w-100" type="submit" id="okayButton">Okay</button>
+                              <button class="btn btn-info fw-semibold w-100" type="submit" id="okayButton">Okay</button>
                            </div>
                         </form>
                      </div>
@@ -185,8 +175,7 @@ require  "../global/head.php";
                                     </div>
 
                                     <div class="col col-6 d-flex gap-3 justify-content-end">
-                                       <button type="submit" class="btn btn-outline-info">On Hold</button>
-                                       <button type="submit" class="btn btn-info" id="departButton">Depart</button>
+                                       <button type="submit" class="btn btn-info w-50 fw-semibold" id="departButton">Depart</button>
                                     </div>
                                  </div>
                               </form>
