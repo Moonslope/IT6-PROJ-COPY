@@ -50,6 +50,14 @@ require "../global/head.php";
                      <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Vehicle/view_vehicle.php">Vehicle</a>
                   </div>
 
+                  <div class="mx-3 mb-3">
+                     <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="">Route</a>
+                  </div>
+
+                  <div class="mx-3 mb-3">
+                     <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="">Card Color</a>
+                  </div>
+
                   <div class="mx-3">
                      <a href="../Login-Register/Login.php" class="btn btn-h w-100 border border-1 border-dark fw-semibold"><i class="bi bi-box-arrow-left me-2"></i>Log Out</a>
                   </div>
