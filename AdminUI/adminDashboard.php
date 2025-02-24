@@ -55,7 +55,7 @@ require "../global/head.php";
                   </div>
 
                   <div class="mx-3 mb-3">
-                     <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="">Card Color</a>
+                     <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Card-color/view_card_color.php">Card Color</a>
                   </div>
 
                   <div class="mx-3">
