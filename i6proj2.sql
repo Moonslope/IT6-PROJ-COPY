@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
-<<<<<<< HEAD:i6proj2.sql
--- Generation Time: Feb 23, 2025 at 03:12 PM
-=======
--- Generation Time: Feb 23, 2025 at 12:52 PM
->>>>>>> 6ab159b3c6e7a8dc10faa682b78298955d615957:i6proj.sql
+-- Generation Time: Feb 24, 2025 at 08:18 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,27 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `i6proj2`
 --
-
-DELIMITER $$
---
--- Procedures
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_driver_name` (IN `vehicle_id` INT, IN `driver_id` INT)   BEGIN
-    DECLARE driver_fname VARCHAR(255);
-    DECLARE driver_lname VARCHAR(255);
-
-    -- Ensure only one row is selected
-    SELECT driver_fname, driver_lname INTO driver_fname, driver_lname
-    FROM driver
-    WHERE driver_id = driver_id
-    LIMIT 1;
-
-    UPDATE vehicle
-    SET driver_name = CONCAT(driver_fname, ' ', driver_lname)
-    WHERE vehicle_id = vehicle_id;
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -125,7 +100,8 @@ INSERT INTO `driver` (`driver_id`, `driver_fname`, `driver_lname`, `driver_addre
 (13, 'Earl', 'Cerbo', 'Maa', '09768656', 'Earl Cerbo'),
 (14, 'Geop', 'Olano', 'Toril', '0984576763', 'Geop Olano'),
 (15, 'Kane', 'Ga', 'Calinan', '09768656', 'Kane Ga'),
-(16, 'John', 'DDoe', 'Toril', '0984576763', 'John DDoe');
+(16, 'John', 'DDoe', 'Toril', '0984576763', 'John DDoe'),
+(17, 'Marie', 'Doe', 'Cabantian', '09123456789', 'Marie Doe');
 
 --
 -- Triggers `driver`
@@ -177,17 +153,6 @@ CREATE TABLE `ticket` (
   `total_fare` decimal(10,2) DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `ticket`
---
-
-INSERT INTO `ticket` (`ticket_id`, `route_id`, `route_name`, `fare`, `total_passengers`, `total_fare`) VALUES
-(50, 3, 'Los Amigos', 40.00, 5, 200.00),
-(51, 2, 'Tugbok', 38.00, 2, 76.00),
-(52, 6, 'Riverside', 45.00, 2, 90.00),
-(54, 4, 'Quarry', 40.00, 4, 160.00),
-(56, 5, 'Puting Bato', 45.00, 3, 135.00);
-
 -- --------------------------------------------------------
 
 --
@@ -211,13 +176,12 @@ CREATE TABLE `travel_pass` (
 --
 
 INSERT INTO `travel_pass` (`travel_pass_id`, `driver_id`, `vehicle_id`, `cashier_id`, `card_id`, `total_passengers`, `total_fare`, `travel_date`, `departure_time`) VALUES
-<<<<<<< HEAD:i6proj2.sql
-(26, 13, 11, 28, 4, 16, 679.00, '2025-02-23', '10:10:35');
-=======
-(13, 15, 3, 27, 1, 16, 681.00, '2025-02-22', '17:05:19'),
-(14, 14, 3, 27, 2, 17, 732.00, '2025-02-23', '10:59:54'),
-(15, 13, 10, 28, 4, 13, 514.00, '2025-02-23', '12:08:18');
->>>>>>> 6ab159b3c6e7a8dc10faa682b78298955d615957:i6proj.sql
+(26, 13, 11, 28, 4, 16, 679.00, '2025-02-23', '10:10:35'),
+(27, 15, 3, 28, 3, 16, 666.00, '2025-02-23', '16:19:08'),
+(28, 13, 10, 29, 3, 16, 686.00, '2025-02-23', '16:20:28'),
+(29, 14, 13, 28, 2, 16, 679.00, '2025-02-23', '16:21:59'),
+(31, 16, 11, 29, 3, 16, 691.00, '2025-02-23', '16:37:14'),
+(32, 14, 13, 29, 2, 16, 671.00, '2025-02-24', '04:11:06');
 
 -- --------------------------------------------------------
 
@@ -240,25 +204,6 @@ CREATE TABLE `travel_pass_view` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`user_id`, `username`, `password`) VALUES
-(1, 'cashier1', '123');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `vehicle`
 --
 
@@ -276,34 +221,33 @@ CREATE TABLE `vehicle` (
 -- Dumping data for table `vehicle`
 --
 
-<<<<<<< HEAD:i6proj2.sql
 INSERT INTO `vehicle` (`vehicle_id`, `driver_id`, `platenumber`, `vehicle_model`, `vehicle_color`, `transmission_type`, `driver`) VALUES
-(3, NULL, 'XSDH10', 's', 'White', 'Automatic', 'John DDoe'),
-(10, NULL, 'YY634', 's', 'White', '', 'Kane Ga'),
-(11, NULL, 'WBHD2', 's', 'White', '', 'John DDoe'),
-(12, NULL, '123', 'QQQ', 'BLACK', '', 'Earl Cerbo'),
-(13, NULL, 'PPP', 'MMM', 'RED', '', 'Geop Olano');
+(3, 15, 'XSDH10', 's', 'White', '', 'Kane Ga'),
+(10, 13, 'YY634', 's', 'White', '', 'Earl Cerbo'),
+(11, 16, 'WBHD2', 's', 'White', '', 'John DDoe'),
+(12, 17, '123', 'QQQ', 'BLACK', '', 'Marie Doe'),
+(13, 14, 'PPP', 'MMM', 'RED', '', 'Geop Olano');
 
 --
 -- Triggers `vehicle`
 --
 DELIMITER $$
 CREATE TRIGGER `before_vehicle_update` BEFORE UPDATE ON `vehicle` FOR EACH ROW BEGIN
-    DECLARE driver_id INT;
-    -- Fetch the driver_id based on the driver name
-    SELECT driver_id INTO driver_id FROM driver WHERE driver_name = NEW.driver;
-    -- Set the driver_id in the vehicle table
-    SET NEW.driver_id = driver_id;
+    DECLARE temp_driver_id INT;
+
+    -- Fetch driver_id based on the driver name
+    SELECT driver_id INTO temp_driver_id 
+    FROM driver 
+    WHERE driver_name = NEW.driver 
+    LIMIT 1;
+
+    -- Check if a valid driver was found
+    IF temp_driver_id IS NOT NULL THEN
+        SET NEW.driver_id = temp_driver_id;
+    END IF;
 END
 $$
 DELIMITER ;
-=======
-INSERT INTO `vehicle` (`vehicle_id`, `platenumber`, `vehicle_model`, `vehicle_color`, `transmission_type`, `driver`) VALUES
-(3, 'XSDH10', 's', 'White', '', 'Earl Cerbo'),
-(10, 'YY634', 's', 'White', '', 'Geop Olano'),
-(11, 'WBHD2', 's', 'White', '', 'John DDoe'),
-(12, 'LT23S', 'Mitsubishi ', 'White', '', 'Kane Ga');
->>>>>>> 6ab159b3c6e7a8dc10faa682b78298955d615957:i6proj.sql
 
 -- --------------------------------------------------------
 
@@ -360,13 +304,6 @@ ALTER TABLE `travel_pass`
   ADD KEY `card_id` (`card_id`);
 
 --
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `username` (`username`);
-
---
 -- Indexes for table `vehicle`
 --
 ALTER TABLE `vehicle`
@@ -393,7 +330,7 @@ ALTER TABLE `cashier`
 -- AUTO_INCREMENT for table `driver`
 --
 ALTER TABLE `driver`
-  MODIFY `driver_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `driver_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `route`
@@ -405,37 +342,19 @@ ALTER TABLE `route`
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-<<<<<<< HEAD:i6proj2.sql
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
-=======
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
->>>>>>> 6ab159b3c6e7a8dc10faa682b78298955d615957:i6proj.sql
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `travel_pass`
 --
 ALTER TABLE `travel_pass`
-<<<<<<< HEAD:i6proj2.sql
-  MODIFY `travel_pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-=======
-  MODIFY `travel_pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
->>>>>>> 6ab159b3c6e7a8dc10faa682b78298955d615957:i6proj.sql
+  MODIFY `travel_pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `vehicle`
 --
 ALTER TABLE `vehicle`
-<<<<<<< HEAD:i6proj2.sql
   MODIFY `vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-=======
-  MODIFY `vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
->>>>>>> 6ab159b3c6e7a8dc10faa682b78298955d615957:i6proj.sql
 
 --
 -- Constraints for dumped tables
