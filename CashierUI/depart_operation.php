@@ -17,10 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    if ($stmt) {
       $stmt->bind_param("iiiidiss", $driver_id, $vehicle_id, $cashier_id, $card_id, $total_passengers, $total_fare, $travel_date, $departure_time);
 
-      // Execute the statement and check for success
       if ($stmt->execute()) {
          // Clear the ticket table after successful departure
-         $deleteTickets = "DELETE FROM ticket";
+         $deleteTickets = "DELETE FROM temp_record";
          if ($conn->query($deleteTickets) === TRUE) {
             echo "<script>alert('Travel pass recorded successfully!'); window.location.href='cashierUI.php';</script>";
             exit();

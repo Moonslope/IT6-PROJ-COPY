@@ -26,10 +26,10 @@ require  "../global/head.php";
       </div>
 
       <div class="row">
-         <div class="card m-0" style="max-height: 450px; overflow-y: auto;">
+         <div class="card  px-4 m-0" style="max-height: 450px; overflow-y: auto;">
             <?php
             try {
-               $sql = "SELECT * FROM travel_pass_view";
+               $sql = "SELECT * FROM travel_pass_view ORDER BY travel_date DESC, departure_time DESC";
 
                $result = $conn->query($sql);
 
@@ -37,8 +37,8 @@ require  "../global/head.php";
                   while ($row = $result->fetch_assoc()) {
 
             ?>
-                     <div class="card shadow border border-2 w-100 m-0 p-0 mb-2">
-                        <div class="card-body">
+                     <div class="card shadow border border-2 w-100 m-0 p-0 mb-2 px-2">
+                        <div class="card-body mx-2">
                            <form method="POST" action="depart_operation.php">
                               <div class="row border border-top-0 border-start-0  border-end-0 border-2 mb-4">
                                  <div class="col">

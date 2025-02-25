@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2025 at 08:18 AM
+-- Generation Time: Feb 25, 2025 at 03:41 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `i6proj2`
+-- Database: `it6_caltransco_db`
 --
 
 -- --------------------------------------------------------
@@ -41,7 +41,8 @@ INSERT INTO `card` (`card_id`, `card_color`) VALUES
 (2, 'Red'),
 (3, 'Yellow'),
 (4, 'Blue'),
-(5, 'Pink');
+(5, 'Pink'),
+(6, 'Black');
 
 -- --------------------------------------------------------
 
@@ -141,14 +142,12 @@ INSERT INTO `route` (`route_id`, `route`, `fare`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ticket`
+-- Table structure for table `temp_record`
 --
 
-CREATE TABLE `ticket` (
+CREATE TABLE `temp_record` (
   `ticket_id` int(11) NOT NULL,
   `route_id` int(11) NOT NULL,
-  `route_name` varchar(100) NOT NULL,
-  `fare` decimal(10,2) NOT NULL,
   `total_passengers` int(11) DEFAULT 0,
   `total_fare` decimal(10,2) DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -168,7 +167,7 @@ CREATE TABLE `travel_pass` (
   `total_passengers` int(11) NOT NULL,
   `total_fare` decimal(10,2) NOT NULL,
   `travel_date` date DEFAULT curdate(),
-  `departure_time` time NOT NULL
+  `departure_time` time DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -181,7 +180,15 @@ INSERT INTO `travel_pass` (`travel_pass_id`, `driver_id`, `vehicle_id`, `cashier
 (28, 13, 10, 29, 3, 16, 686.00, '2025-02-23', '16:20:28'),
 (29, 14, 13, 28, 2, 16, 679.00, '2025-02-23', '16:21:59'),
 (31, 16, 11, 29, 3, 16, 691.00, '2025-02-23', '16:37:14'),
-(32, 14, 13, 29, 2, 16, 671.00, '2025-02-24', '04:11:06');
+(32, 14, 13, 29, 2, 16, 671.00, '2025-02-24', '04:11:06'),
+(33, 16, 11, 28, 6, 16, 698.00, '2025-02-24', '13:52:34'),
+(34, 16, 11, 29, 1, 16, 652.00, '2025-02-25', '06:59:30'),
+(35, 15, 3, 28, 3, 16, 686.00, '2025-02-25', '07:44:25'),
+(36, 17, 12, 27, 2, 16, 679.00, '2025-02-25', '13:19:02'),
+(37, 15, 3, 27, 6, 16, 672.00, '2025-02-25', '14:56:21'),
+(38, 13, 10, 29, 4, 16, 681.00, '2025-02-25', '15:31:07'),
+(42, 14, 13, 29, 4, 16, 681.00, '2025-02-25', '15:34:44'),
+(43, 17, 12, 29, 1, 16, 634.00, '2025-02-25', '15:36:02');
 
 -- --------------------------------------------------------
 
@@ -287,11 +294,11 @@ ALTER TABLE `route`
   ADD PRIMARY KEY (`route_id`);
 
 --
--- Indexes for table `ticket`
+-- Indexes for table `temp_record`
 --
-ALTER TABLE `ticket`
+ALTER TABLE `temp_record`
   ADD PRIMARY KEY (`ticket_id`),
-  ADD KEY `route_id` (`route_id`);
+  ADD UNIQUE KEY `route_id_2` (`route_id`);
 
 --
 -- Indexes for table `travel_pass`
@@ -318,7 +325,7 @@ ALTER TABLE `vehicle`
 -- AUTO_INCREMENT for table `card`
 --
 ALTER TABLE `card`
-  MODIFY `card_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `card_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `cashier`
@@ -336,19 +343,19 @@ ALTER TABLE `driver`
 -- AUTO_INCREMENT for table `route`
 --
 ALTER TABLE `route`
-  MODIFY `route_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `route_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `ticket`
+-- AUTO_INCREMENT for table `temp_record`
 --
-ALTER TABLE `ticket`
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+ALTER TABLE `temp_record`
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
 
 --
 -- AUTO_INCREMENT for table `travel_pass`
 --
 ALTER TABLE `travel_pass`
-  MODIFY `travel_pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `travel_pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `vehicle`
@@ -361,10 +368,10 @@ ALTER TABLE `vehicle`
 --
 
 --
--- Constraints for table `ticket`
+-- Constraints for table `temp_record`
 --
-ALTER TABLE `ticket`
-  ADD CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`route_id`) REFERENCES `route` (`route_id`) ON DELETE CASCADE;
+ALTER TABLE `temp_record`
+  ADD CONSTRAINT `temp_record_ibfk_1` FOREIGN KEY (`route_id`) REFERENCES `route` (`route_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `travel_pass`
