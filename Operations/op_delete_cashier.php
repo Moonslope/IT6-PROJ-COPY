@@ -11,11 +11,7 @@ try {
    $stmt->close();
    $conn->close();
 
-
-   echo "<script>
-            alert('Cashier record deleted successfully!');
-            window.location.href = '../Cashier/view_cashier.php'; 
-         </script>";
+   header("Location: ../Cashier/view_cashier.php?success=1");
    exit();
 } catch (\Exception $e) {
    $conn->close();
