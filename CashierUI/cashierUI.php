@@ -1,199 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+include "../Database/db_connect.php";
 $title = 'Cashier';
 require  "../global/head.php";
 ?>
 
 <body>
-   <div class="con-bg container-fluid h-100">
-      <div class="row border border-top-0 border-end-0 border-start-0 border-light border-2 pb-2">
+   <div class="con-bg container-fluid">
+      <div class="row border border-top-0 border-end-0 border-start-0 border-light border-2 pb-2 mb-3">
          <div class="col col-4 d-flex gap-2 ms-2 mt-2">
             <h1 class="fs-3 mt-2 text-white" style="text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);">CALTRANSCO</h1>
             <img src="../images/image.png" alt="" class="img-fluid " width="50" height="50">
          </div>
 
-         <div class="col d-flex gap-5 align-items-center">
-            <div>
-               <a class="btn btn-nav px-5 fw-semibold" href="#">New
-                  <img src="../images/new-document.png" alt="" width="15" height="15">
-               </a>
-            </div>
-
-            <div>
-               <a class="btn btn-nav px-5 fw-semibold" href="#">View
-                  <img src="../images/view.png" alt="" width="15" height="15">
-               </a>
-            </div>
-
-            <div>
-               <a class="btn btn-nav px-5 fw-semibold" href="../Login-Register/Login.php">Log out <img src="../images/logout.png" alt="" width="15" height="15"></a>
-            </div>
+         <div class="col d-flex gap-5 align-items-center justify-content-end me-5">
+            <a class="btn btn-c text-white" href="travel_pass_history.php">Travel Pass History <i class="bi bi-clock-history"></i></a>
+            <a class="btn btn-c text-white w-25" href="../Login-Register/Login.php">Log out <i class="bi bi-box-arrow-right"></i></a>
          </div>
       </div>
 
-      <div class="row">
-         <div class="col col-4 py-4 px-4">
-            <div class="card shadow-lg">
+      <div class="row ">
+         <div class="col col-3">
+            <div style="height: 675px;" class="card shadow-lg">
                <div class="card-body">
-                  <h1 class="card-title fs-4 text-center border border-start-0 border-end-0 border-top-0 border-2 pb-3">Ticket</h1>
-
-                  <div>
-                     <form method="POST">
-                        <div>
-                           <label class="fw-semibold" for="dd-destination">DESTINATION</label>
-                           <select id="dd-destination" name="dd-destination" onchange="this.form.submit()">
-                              <option value="">None</option>
-
-                              <option value="Mintal" <?php echo (isset($_POST['dd-destination']) && $_POST['dd-destination'] == "Mintal") ? "selected" : ""; ?>>Mintal</option>
-                              <option value="Tugbok" <?php echo (isset($_POST['dd-destination']) && $_POST['dd-destination'] == "Tugbok") ? "selected" : ""; ?>>Tugbok</option>
-                              <option value="Los Amigos" <?php echo (isset($_POST['dd-destination']) && $_POST['dd-destination'] == "Los Amigos") ? "selected" : ""; ?>>Los Amigos</option>
-                              <option value="Quarry" <?php echo (isset($_POST['dd-destination']) && $_POST['dd-destination'] == "Quarry") ? "selected" : ""; ?>>Quarry</option>
-                              <option value="Puting Bato" <?php echo (isset($_POST['dd-destination']) && $_POST['dd-destination'] == "Puting Bato") ? "selected" : ""; ?>>Puting Bato</option>
-                              <option value="Riverside" <?php echo (isset($_POST['dd-destination']) && $_POST['dd-destination'] == "Riverside") ? "selected" : ""; ?>>Riverside</option>
-                              <option value="Calinan" <?php echo (isset($_POST['dd-destination']) && $_POST['dd-destination'] == "Calinan") ? "selected" : ""; ?>>Calinan</option>
-                           </select>
-
-                           <input class="form-control form-control-sm text-center my-3" type="text" id="inputField" name="inputField" value="<?php echo isset($_POST['dd-destination']) ? $_POST['dd-destination'] : ''; ?>" readonly>
-                        </div>
-
-                        <div>
-                           <label for="dd-cardColor" class="fw-semibold">CARD COLOR</label>
-                           <select id="dd-cardColor" name="dd-cardColor" onchange="this.form.submit()">
-                              <option value="">None</option>
-
-                              <option value="Blue" <?php echo (isset($_POST['dd-cardColor']) && $_POST['dd-cardColor'] == "Blue") ? "selected" : ""; ?>>Blue</option>
-                              <option value="Red" <?php echo (isset($_POST['dd-cardColor']) && $_POST['dd-cardColor'] == "Red") ? "selected" : ""; ?>>Red</option>
-                              <option value="Pink" <?php echo (isset($_POST['dd-cardColor']) && $_POST['dd-cardColor'] == "Pink") ? "selected" : ""; ?>>Pink</option>
-                              <option value="Orange" <?php echo (isset($_POST['dd-cardColor']) && $_POST['dd-cardColor'] == "Orange") ? "selected" : ""; ?>>Orange</option>
-                              <option value="Black" <?php echo (isset($_POST['dd-cardColor']) && $_POST['dd-cardColor'] == "Black") ? "selected" : ""; ?>>Black</option>
-                              <option value="Violet" <?php echo (isset($_POST['dd-cardColor']) && $_POST['dd-cardColor'] == "Violet") ? "selected" : ""; ?>>Violet</option>
-                              <option value="Yellow" <?php echo (isset($_POST['dd-cardColor']) && $_POST['dd-cardColor'] == "Yellow") ? "selected" : ""; ?>>Yellow</option>
-                           </select>
-
-                           <input class="form-control form-control-sm text-center my-3" type="text" id="inputField" name="inputField" value="<?php echo isset($_POST['dd-cardColor']) ? $_POST['dd-cardColor'] : ''; ?>" readonly>
-                        </div>
-
-                        <div class="d-flex justify-content-end">
-                           <button class="btn btn-h fw-semibold w-25" type="submit">Okay</button>
-                        </div>
-
-                     </form>
+                  <div class="row  border border-start-0 border-end-0 border-top-0 border-2">
+                     <div class="col d-flex justify-content-center align-items-center gap-3 pb-3">
+                        <h1 class="card-title fs-3 pt-1">Ticket</h1>
+                        <i class="bi fs-1 bi-ticket-perforated-fill"></i>
+                     </div>
                   </div>
 
-                  <div>
-                     <h1 class="card-title fs-4 text-center border border-start-0 border-end-0 border-bottom-0 border-2 my-3 pt-2">Receipt</h1>
+                  <div class="row d-flex justify-content-center align-items-center">
+                     <div class="">
+                        <form method="POST" action="process_ticket.php">
+                           <div class="mt-4">
+                              <label class="fw-semibold mb-2" for="destination">DESTINATION</label>
+                              <select class="form-select mb-3" id="destination" name="destination">
+                                 <option value="">None</option>
+                                 <?php
+                                 try {
+                                    $sql = "SELECT * FROM route";
+                                    $result = $conn->query($sql);
 
-                     <div class="row mb-3">
-                        <div class="col">
-                           <p>Date:</p>
-                        </div>
-                        <div class="col">
-                           <p>Time:</p>
-                        </div>
+                                    while ($row = $result->fetch_assoc()) {
+                                       echo '<option value="' . $row['route'] . '">' . $row['route'] . '</option>';
+                                    }
+                                 } catch (\Exception $e) {
+                                    die($e);
+                                 }
+                                 ?>
+
+                              </select>
+                           </div>
+
+                           <div class="d-flex justify-content-end">
+                              <button class="btn btn-info fw-semibold w-100" type="submit" id="okayButton">Okay</button>
+                           </div>
+                        </form>
                      </div>
-
-                     <div class="row">
-                        <div class="col">
-                           <p>Destination:</p>
-                        </div>
-                        <div class="col">
-                           <p>Amount:</p>
-                        </div>
-                     </div>
-
-                     <div class="row border border-start-0 border-end-0 border-bottom-0 border-2">
-                        <div class="col mt-3">
-                           <p>Total:</p>
-                        </div>
-                     </div>
-
-                     <div class="d-flex justify-content-end mt-3">
-                        <button type="submit" class="btn btn-h fw-semibold w-25">Insert</button>
-                     </div>
-
                   </div>
+
                </div>
             </div>
          </div>
 
-         <div class="col col-8 py-4 pe-4">
+         <div class="col col-9 pb-3">
             <div class="card shadow-lg">
                <div class="card-body">
-                  <p class="card-title fw-semibold fs-5 text-center">Caltransco | Travel Pass(Davao)</p>
-                  <div class="container mt-3">
-                     <div class="row">
-                        <div class="col">
-                           <table class="table table-bordered table-hover text-center">
-                              <thead class="table-secondary">
-                                 <tr>
-                                    <th>DESTINATION</th>
-                                    <th>FARE</th>
-                                    <th>TOTAL PASSENGERS</th>
-                                    <th>TOTAL FARE</th>
-                                 </tr>
-                              </thead>
-                              <tbody>
-                                 <tr>
-                                    <td>Mintal</td>
-                                    <td>35</td>
-                                    <td></td>
-                                    <td></td>
-                                 </tr>
-                                 <tr>
-                                    <td>Tugbok</td>
-                                    <td>38</td>
-                                    <td></td>
-                                    <td></td>
-                                 </tr>
-                                 <tr>
-                                    <td>Los Amigos</td>
-                                    <td>40</td>
-                                    <td></td>
-                                    <td></td>
-                                 </tr>
-                                 <tr>
-                                    <td>Quarry</td>
-                                    <td>40</td>
-                                    <td></td>
-                                    <td></td>
-                                 </tr>
-                                 <tr>
-                                    <td>Puting Bato</td>
-                                    <td>45</td>
-                                    <td></td>
-                                    <td></td>
-                                 </tr>
-                                 <tr>
-                                    <td>Riverside</td>
-                                    <td>45</td>
-                                    <td></td>
-                                    <td></td>
-                                 </tr>
-                                 <tr>
-                                    <td>Calinan</td>
-                                    <td>50</td>
-                                    <td></td>
-                                    <td></td>
-                                 </tr>
-                              </tbody>
-                              <tfoot class="table-secondary fw-bold">
-                                 <tr>
-                                    <td colspan="2">TOTAL:</td>
-                                    <td></td>
-                                    <td></td>
-                                 </tr>
-                              </tfoot>
-                           </table>
+                  <div class="row border border-top-0 border-end-0 border-start-0 border-2 mb-4">
+                     <div class="col col-9">
+                        <div>
+                           <p class="fw-semibold fs-5 mb-0">Caltransco</p>
+                           <p class="fw-semibold fs-5 ">Travel Pass(Davao)</p>
+                        </div>
+                     </div>
 
-                           <div class="row">
-                              <div class="col">
-                                 <p>Cashier: </p>
-                              </div>
-                              <div class="col d-flex gap-3 justify-content-end">
-                                 <button class="btn btn-outline-info text-dark fw-semibold">On Hold</button>
-                                 <button class="btn btn-h fw-semibold">Depart</button>
-                              </div>
+                     <div class="col">
+                        <div class="text-end pt-4">
+                           <p><strong>Date: </strong> <?php echo date('M d, Y'); ?></p>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="row">
+                     <div class="col pb-3">
+                        <div class="card shadow-lg">
+                           <div class="card-body">
+                              <form method="POST" action="depart_operation.php">
+                                 <div class="row mb-4">
+                                    <div class="col d-flex gap-3 align-items-center">
+                                       <label class="fw-semibold">Driver:</label>
+                                       <input type="text" class="form-control form-control-sm" id="driver_name" readonly>
+                                       <input type="hidden" id="driver_id" name="driver_id" value="<?php echo isset($driver_id) ? $driver_id : ''; ?>"> <!-- Added hidden input for driver_id -->
+                                    </div>
+                                    <div class="col d-flex gap-3 align-items-center">
+                                       <label class="fw-semibold">Plate Number:</label>
+                                       <select class="form-select w-50 form-select-sm" name="vehicle_id" id="platenumber">
+                                          <option value="">None</option>
+                                          <?php
+                                          $sql = "SELECT vehicle_id, platenumber FROM vehicle";
+                                          $result = $conn->query($sql);
+                                          while ($row = $result->fetch_assoc()) {
+                                             echo '<option value="' . $row['vehicle_id'] . '">' . $row['platenumber'] . '</option>';
+                                          }
+                                          ?>
+                                       </select>
+                                    </div>
+
+                                    <div class="col d-flex gap-3 align-items-center">
+                                       <label class="fw-semibold">Card Color:</label>
+                                       <select class="form-select w-50 form-select-sm" name="card_id">
+                                          <option value="">None</option>
+                                          <?php
+                                          $sql = "SELECT card_id, card_color FROM card";
+                                          $result = $conn->query($sql);
+                                          while ($row = $result->fetch_assoc()) {
+                                             echo '<option value="' . $row['card_id'] . '">' . $row['card_color'] . '</option>';
+                                          }
+                                          ?>
+                                       </select>
+                                    </div>
+                                 </div>
+
+                                 <div class="row mt-2">
+                                    <div class="col">
+                                       <table class="table table-bordered text-center">
+                                          <thead class="table-secondary">
+                                             <tr>
+                                                <th>DESTINATION</th>
+                                                <th>FARE</th>
+                                                <th>TOTAL PASSENGERS</th>
+                                                <th>TOTAL FARE</th>
+                                             </tr>
+                                          </thead>
+                                          <tbody>
+                                             <?php
+                                             $total_passengers = 0;
+                                             $total_fare = 0;
+                                             $sql = "SELECT r.route, r.fare, COALESCE(t.total_passengers, 0) AS total_passengers, COALESCE(t.total_fare, 0) AS total_fare FROM route r LEFT JOIN temp_record t ON r.route_id = t.route_id";
+                                             $result = $conn->query($sql);
+                                             while ($row = $result->fetch_assoc()) {
+                                                $total_passengers += $row['total_passengers'];
+                                                $total_fare += $row['total_fare'];
+                                                echo "<tr><td>{$row['route']}</td><td>{$row['fare']}</td><td>{$row['total_passengers']}</td><td>{$row['total_fare']}</td></tr>";
+                                             }
+                                             ?>
+                                          </tbody>
+                                          <tfoot class="table-secondary fw-semibold">
+                                             <tr>
+                                                <td colspan="2">TOTAL:</td>
+                                                <td><?php echo $total_passengers; ?></td>
+                                                <td><?php echo number_format($total_fare, 2); ?></td>
+                                             </tr>
+                                          </tfoot>
+                                       </table>
+                                       <input type="hidden" name="total_passengers" value="<?php echo $total_passengers; ?>">
+                                       <input type="hidden" name="total_fare" value="<?php echo $total_fare; ?>">
+                                    </div>
+                                 </div>
+                                 <div class="row mt-3">
+                                    <div class="col d-flex gap-3 align-items-center">
+                                       <label class="fw-semibold">Cashier:</label>
+                                       <select class="form-select w-50 form-select-sm" name="cashier_id">
+                                          <option value="">None</option>
+                                          <?php
+                                          $sql = "SELECT cashier_id, cashier_name FROM cashier";
+                                          $result = $conn->query($sql);
+                                          while ($row = $result->fetch_assoc()) {
+                                             echo '<option value="' . $row['cashier_id'] . '">' . $row['cashier_name'] . '</option>';
+                                          }
+                                          ?>
+                                       </select>
+                                    </div>
+
+                                    <div class="col col-6 d-flex gap-3 justify-content-end">
+                                       <button type="submit" class="btn btn-info w-50 fw-semibold" id="departButton">Depart</button>
+                                    </div>
+                                 </div>
+                              </form>
                            </div>
                         </div>
                      </div>
@@ -203,6 +188,51 @@ require  "../global/head.php";
          </div>
       </div>
    </div>
+
+   <script>
+      // Function to validate the number of passengers before form submission
+      function validatePassengers() {
+         // Get the total number of passengers from the PHP variable
+         var totalPassengers = <?php echo $total_passengers; ?>;
+      }
+
+      // Disable the "Okay" button if total passengers are 16 or more
+      window.onload = function() {
+         // Get the total number of passengers from the PHP variable
+         var totalPassengers = <?php echo $total_passengers; ?>;
+
+         // Check if the total number of passengers is 16 or more
+         if (totalPassengers >= 16) {
+            // Disable the "Okay" button if the total number of passengers is 16 or more
+            document.getElementById('okayButton').disabled = true;
+         }
+
+         // Check if the total number of passengers is less than 16
+         if (totalPassengers < 16) {
+            // Enable the "Depart" button if the total number of passengers is less than 16
+            document.getElementById('departButton').disabled = true;
+         }
+      };
+
+      // Add event listener to the plate number dropdown
+      document.getElementById('platenumber').addEventListener('change', function() {
+         var vehicle_id = this.value;
+         if (vehicle_id) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'get_driver.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+               if (xhr.readyState == 4 && xhr.status == 200) {
+                  var response = JSON.parse(xhr.responseText);
+                  document.getElementById('driver_name').value = response.driver_name;
+                  document.getElementById('driver_id').value = response.driver_id; // Set driver_id value
+               }
+            };
+            xhr.send('vehicle_id=' + vehicle_id);
+         }
+      });
+   </script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>

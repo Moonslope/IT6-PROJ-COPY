@@ -2,7 +2,13 @@
 <html lang="en">
 
 <?php
-$title = "Add New Driver";
+include "../Database/db_connect.php";
+
+$id = $_GET['id'];
+$sql = "SELECT * FROM route WHERE route_id=" . $id;
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+$title = 'Route Lists | ' . $row['route'];
 require "../global/head.php";
 ?>
 
@@ -14,7 +20,6 @@ require "../global/head.php";
                <h1 class="fs-3 mt-2 text-white" style="text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);">CALTRANSCO</h1>
                <img src="../images/image.png" alt="" class="img-fluid " width="50" height="50">
             </a>
-
          </div>
       </div>
 
@@ -42,7 +47,7 @@ require "../global/head.php";
                   </div>
 
                   <div class="mx-3 mb-3">
-                     <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Card-color/view_card_color.php">Card Color</a>
+                     <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="">Card Color</a>
                   </div>
 
                   <div class="mx-3">
@@ -54,53 +59,39 @@ require "../global/head.php";
 
          <div class="col col-9">
             <div class="card shadow-lg">
-               <div style="height: 500px;" class="card-body">
-                  <div class="row mt-3 ms-3">
-                     <div class="col col-3">
-                        <img class="img-fluid border border-2 border-black rounded-pill" src="../images/driver.png" alt="" width="150" height="150">
-                     </div>
-
-                     <div class="col">
-                        <h1 class="mt-3">NEW DRIVER</h1>
+               <div class="card-body">
+                  <div class="row border border-top-0 border-start-0 border-end-0 border-2 pb-3 mb-5">
+                     <div class="col col-2 d-flex gap-4">
+                        <img class="img-fluid border border-2 border-black rounded-pill" src="../images/map.png" alt="" width="100" height="100">
+                        <p class="mt-3 fs-2 fw-semibold">CASHIER</p>
                      </div>
                   </div>
 
-                  <div class="row d-flex justify-content-center align-items-center mt-4">
+                  <div class="row d-flex justify-content-center align-items-center mt-4 pb-3">
                      <div class="col col-10">
 
                         <div class="card shadow-lg bg-light ">
                            <div class="card-body">
-                              <form action="../Operations/op_add_driver.php" method="POST">
-                                 <div class="row">
+                              <form action="../Operations//op_edit_route.php" method="POST">
+                                 <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                 <div class="row mb-4">
                                     <div class="col">
-                                       <label for="driver_fname" class="fw-semibold mb-3">First Name</label>
-                                       <input type="text" id="driver_fname" name="driver_fname" class="form-control border-dark" required>
+                                       <label for="route" class="fw-semibold mb-3">Route</label>
+                                       <input type="text" id="route" name="route" value="<?php echo $row['route'] ?>" class="form-control border-dark" required>
                                     </div>
 
                                     <div class="col">
-                                       <label for="driver_lname" class="fw-semibold mb-3">Last Name</label>
-                                       <input type="text" id="driver_lname" name="driver_lname" class="form-control border-dark" required>
-                                    </div>
-                                 </div>
-
-                                 <div class="row mt-2">
-                                    <div class="col">
-                                       <label for="driver_address" class="fw-semibold mb-3">Address</label>
-                                       <input type="text" id="driver_address" name="driver_address" class="form-control border-dark" required>
-                                    </div>
-
-                                    <div class="col">
-                                       <label for="driver_contactNum" class="fw-semibold mb-3">Contact Number</label>
-                                       <input type="text" id="driver_contactNum" name="driver_contactNum" class="form-control border-dark" required>
+                                       <label for="fare" class="fw-semibold mb-3">Fare</label>
+                                       <input type="text" id="fare" name="fare" value="<?php echo $row['fare'] ?>" class="form-control border-dark" required>
                                     </div>
                                  </div>
 
                                  <div class="row mt-4">
                                     <div class="col">
-                                       <a href="../AdminUI/adminDashboard.php" class="btn btn-outline-info w-100 text-dark fw-semibold">CANCEL</a>
+                                       <a href="view_route.php" class="btn btn-outline-info w-100 text-dark fw-semibold">Cancel</a>
                                     </div>
                                     <div class="col">
-                                       <button type="submit" class="btn btn-info w-100 border border-dark fw-semibold">SAVE</button>
+                                       <button type="submit" class="btn btn-info w-100 border border-dark fw-semibold">Save Changes</button>
                                     </div>
                                  </div>
                               </form>

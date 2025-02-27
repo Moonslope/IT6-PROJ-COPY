@@ -4,7 +4,7 @@
 <?php
 include "../Database/db_connect.php";
 
-$title = "View Cashier Lists";
+$title = "View Vehicle Lists";
 require "../global/head.php";
 ?>
 
@@ -24,19 +24,30 @@ require "../global/head.php";
                 <div class="card shadow-lg">
                     <div style="height: 500px;" class="card_css card-body">
                         <div class="mx-3 mb-3">
-                            <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Cashier/view_cashier.php">Cashier</a>
+                            <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../AdminUI/adminDashboard.php"><i class="bi bi-house me-2"></i>Dashboard</a>
+                        </div>
+                        <div class="mx-3 mb-3">
+                            <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Cashier/view_cashier.php">Cashier</a>
                         </div>
 
                         <div class="mx-3 mb-3">
-                            <a class="btn btn-h w-100 fw-semibold mb-2 border border-1 border-dark" href="../Driver/view_driver.php">Driver</a>
+                            <a class="btn btn-info w-100 fw-semibold mb-2 border border-1 border-dark" href="../Driver/view_driver.php">Driver</a>
                         </div>
 
                         <div class="mx-3 mb-3">
-                            <a class="btn btn-h w-100 fw-semibold  mb-2 border border-1 border-dark" href="#">Vehicle</a>
+                            <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="#">Vehicle</a>
+                        </div>
+
+                        <div class="mx-3 mb-3">
+                            <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Route/view_route.php">Route</a>
+                        </div>
+
+                        <div class="mx-3 mb-3">
+                            <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Card-color/view_card_color.php">Card Color</a>
                         </div>
 
                         <div class="mx-3">
-                            <a href="../Login-Register/Login.php" class="btn btn-h w-100 border border-1 border-dark fw-semibold">Log Out</a>
+                            <a href="../Login-Register/Login.php" class="btn btn-info w-100 border border-1 border-dark fw-semibold"><i class="bi bi-box-arrow-left me-2"></i>Log Out</a>
                         </div>
                     </div>
                 </div>
@@ -55,12 +66,11 @@ require "../global/head.php";
                                     <input type="text" name="query" class="form-control" placeholder="Search here" value="<?php echo isset($_GET['query']) ? $_GET['query'] : ''; ?>">
                                     <button type="submit" class="btn btn-outline-dark"><i class="bi bi-search"></i></button>
                                 </form>
-
                             </div>
 
                             <div class="col col-3 text-end">
                                 <a class="btn btn-success border border-1 border-dark fw-semibold" href="add_vehicle.php">ADD
-                                    <i class="bi fs-5 bi-person-add"></i>
+                                    <i class="bi bi-plus-circle-fill fs-5"></i>
                                 </a>
                             </div>
                         </div>
@@ -74,7 +84,11 @@ require "../global/head.php";
                                 if (isset($_GET['query']) && !empty($_GET['query'])) {
                                     $search = $conn->real_escape_string($_GET['query']);
                                     $sql .= " WHERE 
-                                       platenumber LIKE '%$search%'";
+                                       platenumber, LIKE '%$search%' OR
+                                       driver, LIKE '%$search%' OR
+                                       vehicle_model, LIKE '%$search%' OR
+                                       vehicle_color, LIKE '%$search%' OR
+                                       transmission_type, LIKE '%$search%' OR";
                                 }
 
                                 $result = $conn->query($sql);
@@ -90,7 +104,10 @@ require "../global/head.php";
                                                     </div>
                                                     <div>
                                                         <span><strong>Plate Number : </strong><?php echo $row['platenumber']; ?></span><br>
-                                                        <span><strong>Driver: </strong></span>
+                                                        <span><strong>Driver: </strong><?php echo $row['driver']; ?></span><br>
+                                                        <span><strong>Vehicle Model: </strong><?php echo $row['vehicle_model']; ?></span><br>
+                                                        <span><strong>Transmission Type: </strong><?php echo $row['transmission_type']; ?></span><br>
+                                                        <span><strong>Vehicle Color: </strong><?php echo $row['vehicle_color']; ?></span><br>
                                                     </div>
                                                 </div>
                                                 <div class="group-btn">

@@ -4,7 +4,7 @@
 <?php
 include "../Database/db_connect.php";
 
-$title = "View Cashier Lists";
+$title = "View Route Lists";
 require "../global/head.php";
 ?>
 
@@ -58,11 +58,11 @@ require "../global/head.php";
                <div style="height: 500px;" class="card-body pt-1">
                   <div class="row rounded-3 border border-1 border-gray shadow  d-flex align-items-center mx-0 p-3 mb-3">
                      <div class="col col-3 d-flex align-items-center">
-                        <h1 class="fs-4 pt-2">CASHIER | LISTS</h1>
+                        <h1 class="fs-4 pt-2">ROUTE | LISTS</h1>
                      </div>
 
                      <div class="col col-6 d-flex gap-2  ps-5">
-                        <form method="GET" action="view_cashier.php" class="d-flex gap-2 ps-5">
+                        <form method="GET" action="view_route.php" class="d-flex gap-2 ps-5">
                            <input type="text" name="query" class="form-control" placeholder="Search here" value="<?php echo isset($_GET['query']) ? $_GET['query'] : ''; ?>">
                            <button type="submit" class="btn btn-outline-dark"><i class="bi bi-search"></i></button>
                         </form>
@@ -70,8 +70,8 @@ require "../global/head.php";
                      </div>
 
                      <div class="col col-3 text-end">
-                        <a class="btn btn-success border border-1 border-dark fw-semibold" href="add_cashier.php">ADD
-                           <i class="bi fs-5 bi-person-add"></i>
+                        <a class="btn btn-success border border-1 border-dark fw-semibold" href="add_route.php">ADD
+                           <i class="bi bi-plus-circle-fill fs-5"></i>
                         </a>
                      </div>
                   </div>
@@ -80,15 +80,12 @@ require "../global/head.php";
 
                      <?php
                      try {
-                        $sql = "SELECT * FROM cashier";
+                        $sql = "SELECT * FROM route";
 
                         if (isset($_GET['query']) && !empty($_GET['query'])) {
                            $search = $conn->real_escape_string($_GET['query']);
                            $sql .= " WHERE 
-                                       cashier_fname LIKE '%$search%' OR 
-                                       cashier_lname LIKE '%$search%' OR 
-                                       cashier_address LIKE '%$search%' OR 
-                                       cashier_contactNum LIKE '%$search%'";
+                                       route LIKE '%$search%'";
                         }
 
                         $result = $conn->query($sql);
@@ -100,17 +97,16 @@ require "../global/head.php";
                                  <li class="list-group-item d-flex align-items-center justify-content-between border border-2">
                                     <div class="d-flex align-items-center">
                                        <div>
-                                          <img src="../images/cashier.png" alt="" class="img-fluid rounded-pill border border-2 border-dark me-3" width="50" height="50">
+                                          <img src="../images/map.png" alt="" class="img-fluid rounded-pill border border-2 border-dark me-3" width="50" height="50">
                                        </div>
                                        <div>
-                                          <span><strong>Name : </strong><?php echo $row['cashier_fname'] . ' ' . $row['cashier_lname']; ?></span><br>
-                                          <span><strong>Address : </strong><?php echo $row['cashier_address']; ?></span><br>
-                                          <span><strong>Contact Number : </strong><?php echo $row['cashier_contactNum']; ?></span>
+                                          <span><strong>Route : </strong><?php echo $row['route']; ?></span><br>
+                                          <span><strong>Fare : </strong><?php echo $row['fare']; ?></span><br>
                                        </div>
                                     </div>
                                     <div class="group-btn">
-                                       <a href="../Cashier/edit_cashier.php?id=<?php echo $row['cashier_id']; ?>" class="btn"><i class="btn btn-outline-success bi bi-pencil-square"></i></a>
-                                       <a href="../Operations/op_delete_cashier.php?id=<?php echo $row['cashier_id']; ?>" class="btn"><i class="btn btn-outline-danger bi bi-trash"></i></a>
+                                       <a href="../Route/edit_route.php?id=<?php echo $row['route_id']; ?>" class="btn"><i class="btn btn-outline-success bi bi-pencil-square"></i></a>
+                                       <a href="../Operations/op_delete_route.php?id=<?php echo $row['route_id']; ?>" class="btn"><i class="btn btn-outline-danger bi bi-trash"></i></a>
                                     </div>
                                  </li>
                               </ul>
@@ -132,39 +128,7 @@ require "../global/head.php";
       </div>
    </div>
    </div>
-
-   <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-         <div class="modal-content">
-            <div class="modal-header bg-info text-white">
-               <h5 class="modal-title" id="successModalLabel">Success</h5>
-               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-               Cashier deleted successfully!
-            </div>
-            
-            <div class="modal-footer">
-               <button type="button" class="btn btn-info" data-bs-dismiss="modal">OK</button>
-            </div>
-         </div>
-      </div>
-   </div>
-
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-   <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-      <script>
-         window.addEventListener('load', function() {
-            var successModal = new bootstrap.Modal(document.getElementById('successModal'));
-            successModal.show();
-
-            // Redirect after modal closes
-            document.getElementById('successModal').addEventListener('hidden.bs.modal', function() {
-               window.location.href = '../Cashier/view_cashier.php';
-            });
-         });
-      </script>
-   <?php endif; ?>
 </body>
 
 </html>

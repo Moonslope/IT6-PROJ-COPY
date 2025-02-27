@@ -4,7 +4,7 @@
 <?php
 include "../Database/db_connect.php";
 
-$title = "View Driver Lists";
+$title = "View Card Lists";
 require "../global/head.php";
 ?>
 
@@ -58,12 +58,11 @@ require "../global/head.php";
                     <div style="height: 500px;" class="card-body pt-1">
                         <div class="row rounded-3 border border-1 border-gray shadow  d-flex align-items-center mx-0 p-3 mb-3">
                             <div class="col col-3 d-flex align-items-center">
-                                <h1 class="fs-4 pt-2">DRIVER | LISTS</h1>
-
+                                <h1 class="fs-4 pt-2">CARD COLOR | LISTS</h1>
                             </div>
 
                             <div class="col col-6 d-flex gap-2  ps-5">
-                                <form method="GET" action="view_driver.php" class="d-flex gap-2 ps-5">
+                                <form method="GET" action="view_card_color.php" class="d-flex gap-2 ps-5">
                                     <input type="text" name="query" class="form-control" placeholder="Search here" value="<?php echo isset($_GET['query']) ? $_GET['query'] : ''; ?>">
                                     <button type="submit" class="btn btn-outline-dark"><i class="bi bi-search"></i></button>
                                 </form>
@@ -71,26 +70,22 @@ require "../global/head.php";
                             </div>
 
                             <div class="col col-3 text-end">
-                                <a class="btn btn-success border border-1 border-dark fw-semibold" href="add_driver.php">ADD
+                                <a class="btn btn-success border border-1 border-dark fw-semibold" href="add_card_color.php">ADD
                                     <i class="bi fs-5 bi-person-add"></i>
                                 </a>
-
                             </div>
                         </div>
 
-                        <div style="max-height: 400px; overflow-y: auto;">
+                        <div style="max-height: 370px; overflow-y: auto;">
 
                             <?php
                             try {
-                                $sql = "SELECT * FROM driver";
+                                $sql = "SELECT * FROM Card";
 
                                 if (isset($_GET['query']) && !empty($_GET['query'])) {
                                     $search = $conn->real_escape_string($_GET['query']);
                                     $sql .= " WHERE 
-                                       driver_fname LIKE '%$search%' OR 
-                                       driver_lname LIKE '%$search%' OR 
-                                       driver_address LIKE '%$search%' OR 
-                                       driver_contactNum LIKE '%$search%'";
+                                       card_color LIKE '%$search%' ";
                                 }
 
                                 $result = $conn->query($sql);
@@ -102,24 +97,23 @@ require "../global/head.php";
                                             <li class="list-group-item d-flex align-items-center justify-content-between border border-2">
                                                 <div class="d-flex align-items-center">
                                                     <div>
-                                                        <img src="../images/driver.png" alt="" class="img-fluid rounded-pill border border-2 border-dark me-3" width="50" height="50">
+                                                        <img src="../images/card.png" alt="" class="img-fluid rounded-pill border border-2 border-dark me-3" width="50" height="50">
                                                     </div>
                                                     <div>
-                                                        <span><strong>Name : </strong><?php echo $row['driver_fname'] . ' ' . $row['driver_lname']; ?></span><br>
-                                                        <span><strong>Address : </strong><?php echo $row['driver_address']; ?></span><br>
-                                                        <span><strong>Contact Number : </strong><?php echo $row['driver_contactNum']; ?></span>
+                                                        <span><strong>Color : </strong><?php echo $row['card_color']; ?></span><br>
+
                                                     </div>
                                                 </div>
-                                                <div class="group-btn">
-                                                    <a href="../Driver/edit_driver.php?id=<?php echo $row['driver_id']; ?>" class="btn"><i class="btn btn-outline-success bi bi-pencil-square"></i></a>
-                                                    <a href="../Operations/op_delete_driver.php?id=<?php echo $row['driver_id']; ?>" class="btn"><i class="btn btn-outline-danger bi bi-trash"></i></a>
-                                                </div>
+
+
+                                                <a href="../Operations/op_delete_card_color.php?id=<?php echo $row['card_id']; ?>" class="btn"><i class="btn btn-outline-danger bi bi-trash"></i></a>
+
                                             </li>
                                         </ul>
                             <?php
                                     }
                                 } else {
-                                    echo '<div class="text-center mt-3"><p class="text-muted fs-5">No drivers found.</p></div>';
+                                    echo '<div class="text-center mt-3"><p class="text-muted fs-5">No cards found.</p></div>';
                                 }
 
                                 $conn->close();
@@ -127,13 +121,10 @@ require "../global/head.php";
                                 die($e);
                             }
                             ?>
-
-
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     </div>
