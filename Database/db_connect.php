@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "it6_caltransco_db";
+$database = "testl300";
 
 try {
    $conn = new mysqli($servername, $username, $password, $database);

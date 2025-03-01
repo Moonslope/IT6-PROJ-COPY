@@ -1,41 +1,32 @@
 <?php
 include "../Database/db_connect.php";
 
-// Check if the form data is set
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-   $driver_id = $_POST['driver_id'];
-   $vehicle_id = $_POST['vehicle_id'];
-   $cashier_id = $_POST['cashier_id'];
-   $card_id = $_POST['card_id'];
-   $total_passengers = $_POST['total_passengers'];
-   $total_fare = $_POST['total_fare'];
-   $travel_date = date('Y-m-d'); // Current date
-   $departure_time = date('H:i:s'); // Current time
+   // Get the latest travel pass ID
+   $query = "SELECT travel_pass_id FROM travel_pass ORDER BY travel_date DESC LIMIT 1";
+   $result = $conn->query($query);
 
-   $stmt = $conn->prepare("INSERT INTO travel_pass (driver_id, vehicle_id, cashier_id, card_id, total_passengers, total_fare, travel_date, departure_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-
-   if ($stmt) {
-      $stmt->bind_param("iiiidiss", $driver_id, $vehicle_id, $cashier_id, $card_id, $total_passengers, $total_fare, $travel_date, $departure_time);
-
-      if ($stmt->execute()) {
-         // Clear the ticket table after successful departure
-         $deleteTickets = "DELETE FROM temp_record";
-         if ($conn->query($deleteTickets) === TRUE) {
-            echo "<script>alert('Travel pass recorded successfully!'); window.location.href='cashierUI.php';</script>";
-            exit();
-         } else {
-            echo "Error clearing tickets: " . $conn->error;
-         }
-      } else {
-         echo "Error inserting data: " . $stmt->error;
-      }
-
-      $stmt->close();
+   if ($row = $result->fetch_assoc()) {
+      $travel_pass_id = $row['travel_pass_id'];
    } else {
-      echo "Failed to prepare statement: " . $conn->error;
+      die("Error: No active travel pass found.");
    }
 
-   $conn->close();
+   // Get the current time
+   $departure_time = date("Y-m-d H:i:s");
+
+   // Update the travel_pass table with the departure time
+   $query = "UPDATE travel_pass SET departure_time = ? WHERE travel_pass_id = ?";
+   $stmt = $conn->prepare($query);
+   $stmt->bind_param("si", $departure_time, $travel_pass_id);
+
+   if ($stmt->execute()) {
+      // Redirect with a success flag
+      header("Location: travel_pass_history.php?success=1");
+      exit();
+   } else {
+      die("Error: Unable to update departure time. " . $stmt->error);
+   }
 } else {
-   echo "Invalid request method.";
+   die("Invalid request.");
 }
