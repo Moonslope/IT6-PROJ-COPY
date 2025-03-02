@@ -2,19 +2,17 @@
 include "../Database/db_connect.php";
 
 $id = $_POST['id'];
-$route = $_POST['route'];
-$fare = $_POST['fare'];
+$route_name = $_POST['route_name'];
+$origin = $_POST['origin'];
+$destination = $_POST['destination'];
 
-$sql = "UPDATE route SET route=?, fare=? WHERE route_id=?";
+$sql = "UPDATE routes SET route_name=?, route_start=?, route_end=? WHERE route_id=?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("sss", $route, $fare, $id);
+$stmt->bind_param("ssss", $route_name, $origin, $destination, $id);
 
 $stmt->execute();
 $stmt->close();
 $conn->close();
 
-echo "<script>
-            alert('Route record updated successfully!');
-            window.location.href = '../../Route/view_route.php';  // Correct path
-         </script>";
+header("Location: ../Route/view_route.php?");
 exit();

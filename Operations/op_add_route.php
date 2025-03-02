@@ -5,22 +5,20 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 if ($method == 'POST') {
    try {
-      $route = $_POST['route'];
-      $fare = $_POST['fare'];
+      $route_name = $_POST['route_name'];
+      $origin = $_POST['origin'];
+      $destination = $_POST['destination'];
 
-      $sql = "INSERT INTO route(route, fare) VALUES (?, ?)";
+      $sql = "INSERT INTO routes(route_name, route_start, route_end) VALUES (?, ?, ?)";
 
       $stmt = $conn->prepare($sql);
-      $stmt->bind_param("ss", $route, $fare);
+      $stmt->bind_param("sss", $route_name, $origin, $destination);
 
       $stmt->execute();
       $stmt->close();
       $conn->close();
 
-      echo "<script>
-      alert('Route added successfully!');
-      window.location.href = '../Route/view_route.php';
-   </script>";
+      header("Location: ../Route/add_route.php?success=1");
    } catch (\Exception $e) {
 
       $conn->close();

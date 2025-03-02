@@ -42,6 +42,10 @@ require "../global/head.php";
                         </div>
 
                         <div class="mx-3 mb-3">
+                            <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Route_Point/view_route_point.php">Route Point</a>
+                        </div>
+
+                        <div class="mx-3 mb-3">
                             <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Card-color/view_card_color.php">Card Color</a>
                         </div>
 
@@ -101,7 +105,7 @@ require "../global/head.php";
 
                                             <div class="row mt-4">
                                                 <div class="col">
-                                                    <a href="../AdminUI/adminDashboard.php" class="btn btn-outline-info w-100 text-dark fw-semibold">CANCEL</a>
+                                                    <a href="view_vehicle.php" class="btn btn-outline-info w-100 text-dark fw-semibold">CANCEL</a>
                                                 </div>
                                                 <div class="col">
                                                     <button type="submit" class="btn btn-info w-100 border border-dark fw-semibold">SAVE</button>

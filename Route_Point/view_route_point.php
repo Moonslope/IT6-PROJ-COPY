@@ -4,7 +4,7 @@
 <?php
 include "../Database/db_connect.php";
 
-$title = "View Route Lists";
+$title = "View Route Point Lists";
 require "../global/head.php";
 ?>
 
@@ -61,8 +61,8 @@ require "../global/head.php";
             <div class="card shadow">
                <div style="height: 500px;" class="card-body pt-1">
                   <div class="row rounded-3 border border-1 border-gray shadow  d-flex align-items-center mx-0 p-3 mb-3">
-                     <div class="col col-3 d-flex align-items-center">
-                        <h1 class="fs-4 pt-2">ROUTE | LISTS</h1>
+                     <div class="col col-4 d-flex align-items-center">
+                        <h1 class="fs-4 pt-2">ROUTE POINT | LISTS</h1>
                      </div>
 
                      <div class="col col-6 d-flex gap-2  ps-5">
@@ -70,21 +70,23 @@ require "../global/head.php";
                            <input type="text" name="query" class="form-control" placeholder="Search here" value="<?php echo isset($_GET['query']) ? $_GET['query'] : ''; ?>">
                            <button type="submit" class="btn btn-outline-dark"><i class="bi bi-search"></i></button>
                         </form>
-
                      </div>
 
-                     <div class="col col-3 text-end">
-                        <a class="btn btn-success border border-1 border-dark fw-semibold" href="add_route.php">ADD
+                     <div class="col col-2 text-end">
+                        <a class="btn btn-success border border-1 border-dark fw-semibold" href="add_route_point.php">ADD
                            <i class="bi bi-plus-circle-fill fs-5"></i>
                         </a>
                      </div>
                   </div>
 
-                  <div style="max-height: 400px; overflow-y: auto;">
+                  <div style="max-height: 360px; overflow-y: auto;">
 
                      <?php
                      try {
-                        $sql = "SELECT * FROM routes";
+                        $sql = "SELECT destinations.*, routes.route_name 
+                        FROM destinations 
+                        JOIN routes ON destinations.route_id = routes.route_id";
+
 
                         if (isset($_GET['query']) && !empty($_GET['query'])) {
                            $search = $conn->real_escape_string($_GET['query']);
@@ -104,14 +106,14 @@ require "../global/head.php";
                                           <img src="../images/map.png" alt="" class="img-fluid rounded-pill border border-2 border-dark me-3" width="50" height="50">
                                        </div>
                                        <div>
-                                          <p class="mb-1"><span><strong>Route Name: </strong><?php echo $row['route_name']; ?></span><br></p>
-                                          <p class="mb-1"><span><strong>Origin : </strong><?php echo $row['route_start']; ?></span><br></p>
-                                          <p class="mb-1"><span><strong>Destination : </strong><?php echo $row['route_end']; ?></span><br></p>
+                                          <p class="mb-1"><span><strong>Route Point Name: </strong><?php echo $row['destination_name']; ?></span><br></p>
+                                          <p class="mb-1"><span><strong>Fare : </strong><?php echo $row['fare']; ?></span><br></p>
+                                          <p class="mb-1"><span><strong>Route : </strong><?php echo $row['route_name']; ?></span><br></p>
                                        </div>
                                     </div>
                                     <div class="group-btn">
-                                       <a href="../Route/edit_route.php?id=<?php echo $row['route_id']; ?>" class="btn"><i class="btn btn-outline-success bi bi-pencil-square"></i></a>
-                                       <a href="../Operations/op_delete_route.php?id=<?php echo $row['route_id']; ?>" class="btn"><i class="btn btn-outline-danger bi bi-trash"></i></a>
+                                       <a href="edit_route_point.php?id=<?php echo $row['destination_id']; ?>" class="btn"><i class="btn btn-outline-success bi bi-pencil-square"></i></a>
+                                       <a href="op_delete_route_point.php?id=<?php echo $row['destination_id']; ?>" class="btn"><i class="btn btn-outline-danger bi bi-trash"></i></a>
                                     </div>
                                  </li>
                               </ul>
@@ -133,8 +135,8 @@ require "../global/head.php";
       </div>
    </div>
    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+   <!-- Modal -->
+   <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
          <div class="modal-content">
             <div class="modal-header bg-danger text-white">
@@ -142,7 +144,7 @@ require "../global/head.php";
                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-               Route has been deleted successfully!
+               Route Point has been deleted successfully!
             </div>
             <div class="modal-footer">
                <button type="button" class="btn btn-info" data-bs-dismiss="modal">OK</button>
@@ -154,7 +156,7 @@ require "../global/head.php";
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
    <!-- Trigger Success Modal if Success Parameter Exists -->
-   <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+   <?php if (isset($_GET['success']) && $_GET['success'] == 2): ?>
       <script>
          window.addEventListener('load', function() {
             var successModal = new bootstrap.Modal(document.getElementById('successModal'));
@@ -162,7 +164,7 @@ require "../global/head.php";
 
             // Redirect after modal closes
             document.getElementById('successModal').addEventListener('hidden.bs.modal', function() {
-               window.location.href = '../Route/view_route.php';
+               window.location.href = 'view_route_point.php';
             });
          });
       </script>

@@ -5,14 +5,15 @@
 include "../Database/db_connect.php";
 
 $id = $_GET['id'];
-$sql = "SELECT * FROM route WHERE route_id=" . $id;
+$sql = "SELECT * FROM routes WHERE route_id=" . $id;
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
-$title = 'Route Lists | ' . $row['route'];
+$title = 'Route Lists | ' . $row['route_name'];
 require "../global/head.php";
 ?>
 
 <body>
+   
    <div class="con-bg container-fluid vh-100">
       <div class="row border border-start-0 border-end-0 border-top-0 border-2 border-dark pb-2">
          <div class="col d-flex gap-2 ms-2 mt-2">
@@ -47,6 +48,10 @@ require "../global/head.php";
                   </div>
 
                   <div class="mx-3 mb-3">
+                     <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Route_Point/view_route_point.php">Route Point</a>
+                  </div>
+
+                  <div class="mx-3 mb-3">
                      <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="">Card Color</a>
                   </div>
 
@@ -61,9 +66,9 @@ require "../global/head.php";
             <div class="card shadow-lg">
                <div class="card-body">
                   <div class="row border border-top-0 border-start-0 border-end-0 border-2 pb-3 mb-5">
-                     <div class="col col-2 d-flex gap-4">
+                     <div class="col col-7 d-flex gap-4">
                         <img class="img-fluid border border-2 border-black rounded-pill" src="../images/map.png" alt="" width="100" height="100">
-                        <p class="mt-3 fs-2 fw-semibold">CASHIER</p>
+                        <p class="mt-3 fs-2 fw-semibold">Update Route Details</p>
                      </div>
                   </div>
 
@@ -72,17 +77,24 @@ require "../global/head.php";
 
                         <div class="card shadow-lg bg-light ">
                            <div class="card-body">
-                              <form action="../Operations//op_edit_route.php" method="POST">
+                              <form action="../Operations/op_edit_route.php" method="POST">
                                  <input type="hidden" name="id" value="<?php echo $id; ?>">
                                  <div class="row mb-4">
                                     <div class="col">
-                                       <label for="route" class="fw-semibold mb-3">Route</label>
-                                       <input type="text" id="route" name="route" value="<?php echo $row['route'] ?>" class="form-control border-dark" required>
+                                       <label for="route_name" class="fw-semibold mb-3">Route Name</label>
+                                       <input type="text" id="route_name" name="route_name" value="<?php echo $row['route_name'] ?>" class="form-control border-dark" required>
                                     </div>
+                                 </div>
+
+                                 <div class="row">
+                                    <div class="col">
+                                       <label for="origin" class="fw-semibold mb-3">Origin</label>
+                                       <input type="text" id="origin" name="origin" value="<?php echo $row['route_start'] ?>" class="form-control border-dark" required>
+                                    </div> 
 
                                     <div class="col">
-                                       <label for="fare" class="fw-semibold mb-3">Fare</label>
-                                       <input type="text" id="fare" name="fare" value="<?php echo $row['fare'] ?>" class="form-control border-dark" required>
+                                       <label for="destination" class="fw-semibold mb-3">Destination</label>
+                                       <input type="text" id="destination" name="destination" value="<?php echo $row['route_end'] ?>" class="form-control border-dark" required>
                                     </div>
                                  </div>
 
@@ -106,7 +118,7 @@ require "../global/head.php";
       </div>
    </div>
    </div>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
