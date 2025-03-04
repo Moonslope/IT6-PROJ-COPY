@@ -8,7 +8,7 @@ if ($method == 'POST') {
         $card_color = trim($_POST['card_color']); // Trim spaces
 
         // Check if the color already exists
-        $checkSql = "SELECT COUNT(*) FROM card WHERE card_color = ?";
+        $checkSql = "SELECT COUNT(*) FROM card_colors WHERE card_color_name = ?";
         $checkStmt = $conn->prepare($checkSql);
         $checkStmt->bind_param("s", $card_color);
         $checkStmt->execute();
@@ -25,7 +25,7 @@ if ($method == 'POST') {
         }
 
         // Insert new card color
-        $sql = "INSERT INTO card(card_color) VALUES (?)";
+        $sql = "INSERT INTO card_colors(card_color_name) VALUES (?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $card_color);
 

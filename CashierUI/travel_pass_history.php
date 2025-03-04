@@ -23,13 +23,13 @@ require "../global/head.php";
                      <!-- Card Color -->
                      <div class="mb-3">
                         <label class="fw-semibold">Card Color:</label>
-                        <select class="form-select" name="card_id">
+                        <select class="form-select" name="card_color_id">
                            <option value="">None</option>
                            <?php
-                           $sql = "SELECT card_id, card_color FROM card";
+                           $sql = "SELECT card_color_id, card_color_name FROM card_colors";
                            $result = $conn->query($sql);
                            while ($row = $result->fetch_assoc()) {
-                              echo '<option value="' . $row['card_id'] . '">' . $row['card_color'] . '</option>';
+                              echo '<option value="' . $row['card_color_id'] . '">' . $row['card_color_name'] . '</option>';
                            }
                            ?>
                         </select>
@@ -56,7 +56,7 @@ require "../global/head.php";
                         <select class="form-select" name="driver_id">
                            <option value="">None</option>
                            <?php
-                           $sql = "SELECT driver_id, driver_name FROM driver";
+                           $sql = "SELECT driver_id, driver_name FROM drivers";
                            $result = $conn->query($sql);
                            while ($row = $result->fetch_assoc()) {
                               echo '<option value="' . $row['driver_id'] . '">' . $row['driver_name'] . '</option>';
@@ -71,7 +71,7 @@ require "../global/head.php";
                         <select class="form-select" name="vehicle_id">
                            <option value="">None</option>
                            <?php
-                           $sql = "SELECT vehicle_id, platenumber FROM vehicle";
+                           $sql = "SELECT vehicle_id, platenumber FROM vehicles";
                            $result = $conn->query($sql);
                            while ($row = $result->fetch_assoc()) {
                               echo '<option value="' . $row['vehicle_id'] . '">' . $row['platenumber'] . '</option>';
@@ -86,7 +86,7 @@ require "../global/head.php";
                         <select class="form-select" name="cashier_id">
                            <option value="">None</option>
                            <?php
-                           $sql = "SELECT cashier_id, cashier_name FROM cashier";
+                           $sql = "SELECT cashier_id, cashier_name FROM cashiers";
                            $result = $conn->query($sql);
                            while ($row = $result->fetch_assoc()) {
                               echo '<option value="' . $row['cashier_id'] . '">' . $row['cashier_name'] . '</option>';
@@ -154,104 +154,7 @@ require "../global/head.php";
       <div class="row pt-2 bg-white border border-dark border-2">
          <p class="text-center fs-2">Travel Pass History</p>
       </div>
-
-      <div class="row">
-         <div class="col-12" style="max-height: 500px; overflow-y: auto;">
-            <?php
-            include "../Database/db_connect.php"; // Include database connection
-
-            try {
-               // Fetch travel pass details from the view
-               $sql = "SELECT * FROM travel_pass_summary ORDER BY travel_date DESC, departure_time DESC, destination_name";
-               $result = $conn->query($sql);
-
-               if ($result->num_rows > 0) {
-                  $previous_travel_pass_id = null;
-                  $firstRow = true;
-                  $total_passengers = 0;
-                  $total_fare = 0;
-
-                  while ($row = $result->fetch_assoc()) {
-                     // If it's a new travel pass, close the previous card first
-                     if ($previous_travel_pass_id !== $row['travel_pass_id']) {
-                        if (!$firstRow) {
-                           // Display total passengers & total fare row before closing the table
-                           echo "<tr class='table-secondary fw-bold'>
-                                    <td class='text-end' colspan='1'>TOTAL:</td>
-                                    <td>{$total_passengers}</td>
-                                    <td>" . number_format($total_fare, 2) . "</td>
-                                 </tr>
-                              </tbody>
-                              </table>
-                           </div>
-                        </div>
-                     </div>
-                  </div>";
-
-                           // Reset totals for the new travel pass
-                           $total_passengers = 0;
-                           $total_fare = 0;
-                        }
-
-                        // Start a new travel pass card
-                        echo "<div class='row mb-3'>
-                                <div class='col-12'>
-                                    <div class='card shadow border border-2 w-100 m-0 mb-2 mt-2 p-0'>
-                                        <div class='card-body mx-2'>
-                                            <form method='POST' action='depart_operation.php'>
-                                                <div class='row border border-top-0 border-start-0 border-end-0 border-2 mb-4'>
-                                                    <div class='col'>
-                                                        <p class='fw-semibold fs-5 mb-0'>Caltransco</p>
-                                                        <p class='fw-semibold fs-5'>Travel Pass (Davao)</p>
-                                                    </div>
-                                                    <div class='col col-3'>
-                                                        <span><b>Date: </b>" . $row['travel_date'] . "</span><br>
-                                                        <span><b>Departure Time: </b>" . $row['departure_time'] . "</span><br>
-                                                    </div>
-                                                </div>
-                                                <div class='row'>
-                                                    <div class='col col-3 d-flex align-items-center'>
-                                                      <div>
-                                                         <span><b>Driver: </b>" . $row['driver_name'] . "</span><br>
-                                                            <span><b>Plate Number: </b>" . $row['platenumber'] . "</span><br>
-                                                            <span><b>Card Color: </b>" . $row['card_color'] . "</span><br>
-                                                            <span><b>Cashier: </b>" . $row['cashier_name'] . "</span>
-                                                         </div>
-                                                      </div>
-                                                    <div class='col'>
-                                                        <table class='table table-bordered text-center'>
-                                                            <thead class='table-secondary'>
-                                                                <tr>
-                                                                    <th>Destination</th>
-                                                                    <th>Total Passengers</th>
-                                                                    <th>Total Fare</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>";
-
-                        $firstRow = false; // First row flag turned off after first pass
-                     }
-
-                     echo "
-                                    <tr>
-                                        <td>" . $row['destination_name'] . "</td>
-                                        <td>" . $row['total_passengers'] . "</td>
-                                        <td>" . number_format($row['total_fare'], 2) . "</td>
-                                    </tr>";
-
-                     $total_passengers += $row['total_passengers'];
-                     $total_fare += $row['total_fare'];
-
-                     $previous_travel_pass_id = $row['travel_pass_id'];
-                  }
-               }
-            } catch (\Exception $e) {
-               die($e);
-            }
-            ?>
-         </div>
-      </div>
-
+      <!-- para sa view ni -->
    </div>
    </div>
 

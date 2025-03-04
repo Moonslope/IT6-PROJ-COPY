@@ -83,9 +83,9 @@ require "../global/head.php";
 
                      <?php
                      try {
-                        $sql = "SELECT destinations.*, routes.route_name 
-                        FROM destinations 
-                        JOIN routes ON destinations.route_id = routes.route_id";
+                        $sql = "SELECT route_points.*, routes.route_name 
+                        FROM route_points 
+                        JOIN routes ON route_points.route_id = routes.route_id";
 
 
                         if (isset($_GET['query']) && !empty($_GET['query'])) {
@@ -106,14 +106,14 @@ require "../global/head.php";
                                           <img src="../images/map.png" alt="" class="img-fluid rounded-pill border border-2 border-dark me-3" width="50" height="50">
                                        </div>
                                        <div>
-                                          <p class="mb-1"><span><strong>Route Point Name: </strong><?php echo $row['destination_name']; ?></span><br></p>
+                                          <p class="mb-1"><span><strong>Route Point Name: </strong><?php echo $row['route_point_name']; ?></span><br></p>
                                           <p class="mb-1"><span><strong>Fare : </strong><?php echo $row['fare']; ?></span><br></p>
                                           <p class="mb-1"><span><strong>Route : </strong><?php echo $row['route_name']; ?></span><br></p>
                                        </div>
                                     </div>
                                     <div class="group-btn">
-                                       <a href="edit_route_point.php?id=<?php echo $row['destination_id']; ?>" class="btn"><i class="btn btn-outline-success bi bi-pencil-square"></i></a>
-                                       <a href="op_delete_route_point.php?id=<?php echo $row['destination_id']; ?>" class="btn"><i class="btn btn-outline-danger bi bi-trash"></i></a>
+                                       <a href="edit_route_point.php?id=<?php echo $row['route_point_id']; ?>" class="btn"><i class="btn btn-outline-success bi bi-pencil-square"></i></a>
+                                       <a href="op_delete_route_point.php?id=<?php echo $row['route_point_id']; ?>" class="btn"><i class="btn btn-outline-danger bi bi-trash"></i></a>
                                     </div>
                                  </li>
                               </ul>

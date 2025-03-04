@@ -5,7 +5,7 @@
 include "../Database/db_connect.php";
 
 $id = $_GET['id'];
-$sql = "SELECT * FROM cashier WHERE cashier_id=" . $id;
+$sql = "SELECT * FROM cashiers WHERE cashier_id=" . $id;
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 $title = 'Cashier Lists | ' . $row['cashier_fname'] . ' ' . $row['cashier_lname'];
@@ -45,7 +45,7 @@ require "../global/head.php";
                   <div class="mx-3 mb-3">
                      <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Route/view_route.php">Route</a>
                   </div>
-                  
+
                   <div class="mx-3 mb-3">
                      <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Route_Point/view_route_point.php">Route Point</a>
                   </div>

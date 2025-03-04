@@ -83,7 +83,7 @@ require "../global/head.php";
 
                             <?php
                             try {
-                                $sql = "SELECT * FROM vehicle";
+                                $sql = "SELECT * FROM vehicles";
 
                                 if (isset($_GET['query']) && !empty($_GET['query'])) {
                                     $search = $conn->real_escape_string($_GET['query']);

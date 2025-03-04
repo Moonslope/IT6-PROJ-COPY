@@ -5,7 +5,7 @@
 include "../Database/db_connect.php";
 
 $id = $_GET['id'];
-$sql = "SELECT * FROM vehicle WHERE vehicle_id=" . $id;
+$sql = "SELECT * FROM vehicles WHERE vehicle_id=" . $id;
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 $title = 'Vehicle Lists | ' . $row['platenumber'];
@@ -92,7 +92,7 @@ require "../global/head.php";
                                                         <option value="">None</option>
                                                         <?php
                                                         try {
-                                                            $sqll = "SELECT * FROM driver";
+                                                            $sqll = "SELECT * FROM drivers";
                                                             $resultt = $conn->query($sqll);
 
                                                             while ($roww = $resultt->fetch_assoc()) {
@@ -105,7 +105,6 @@ require "../global/head.php";
                                                         ?>
                                                     </select>
                                                 </div>
-
                                             </div>
 
                                             <div class="row mt-4 mb-5">

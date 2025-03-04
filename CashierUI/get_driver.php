@@ -3,7 +3,7 @@ include "../Database/db_connect.php";
 
 if (isset($_POST['vehicle_id'])) {
     $vehicle_id = $_POST['vehicle_id'];
-    $sql = "SELECT d.driver_id, d.driver_name FROM vehicle v JOIN driver d ON v.driver_id = d.driver_id WHERE v.vehicle_id = ?";
+    $sql = "SELECT d.driver_id, d.driver_name FROM vehicles v JOIN drivers d ON v.driver_id = d.driver_id WHERE v.vehicle_id = ?";
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
         die("Error preparing statement: " . $conn->error);

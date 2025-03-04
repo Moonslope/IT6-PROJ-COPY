@@ -6,14 +6,14 @@ include "../Database/db_connect.php";
 
 $id = $_GET['id'];
 
-$sql = "SELECT * FROM destinations WHERE destination_id = ?";
+$sql = "SELECT * FROM route_points WHERE route_point_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 
-$title = 'Route Point Lists | ' . $row['destination_name'];
+$title = 'Route Point Lists | ' . $row['route_point_name'];
 require "../global/head.php";
 
 
@@ -102,8 +102,8 @@ $routeResult = $conn->query($routeQuery);
                                     </div>
 
                                     <div class="col">
-                                       <label for="destination_name" class="fw-semibold mb-3">Route Point Name</label>
-                                       <input type="text" id="destination_name" name="destination_name" value="<?php echo $row['destination_name']; ?>" class="form-control border-dark" required>
+                                       <label for="route_point_name" class="fw-semibold mb-3">Route Point Name</label>
+                                       <input type="text" id="route_point_name" name="route_point_name" value="<?php echo $row['route_point_name']; ?>" class="form-control border-dark" required>
                                     </div>
                                  </div>
 

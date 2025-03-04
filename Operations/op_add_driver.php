@@ -10,7 +10,7 @@ if ($method == 'POST') {
       $driver_address = $_POST['driver_address'];
       $driver_contactNum = $_POST['driver_contactNum'];
 
-      $sql = "INSERT INTO driver(driver_fname, driver_lname, driver_address, driver_contactNum) VALUES (?, ?, ?, ?)";
+      $sql = "INSERT INTO drivers(driver_fname, driver_lname, driver_address, driver_contactNum) VALUES (?, ?, ?, ?)";
 
       $stmt = $conn->prepare($sql);
       $stmt->bind_param("ssss", $driver_fname, $driver_lname, $driver_address, $driver_contactNum);

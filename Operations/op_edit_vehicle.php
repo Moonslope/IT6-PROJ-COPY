@@ -12,7 +12,7 @@ $vehicle_color = $_POST['vehicle_color'];
 $id = intval($id);
 
 // Check if the driver is already assigned to another vehicle
-$sql_check = "SELECT * FROM vehicle WHERE driver_id = (SELECT driver_id FROM driver WHERE driver_name = ?) AND vehicle_id != ?";
+$sql_check = "SELECT * FROM vehicles WHERE driver_id = (SELECT driver_id FROM drivers WHERE driver_name = ?) AND vehicle_id != ?";
 $stmt_check = $conn->prepare($sql_check);
 $stmt_check->bind_param("si", $driver, $id);
 $stmt_check->execute();
@@ -24,7 +24,7 @@ if ($result_check->num_rows > 0) {
             window.location.href = '../../Vehicle/edit_vehicle.php?id=$id';
           </script>";
 } else {
-   $sql = "UPDATE vehicle SET platenumber = ?, driver = ?, vehicle_model = ?, transmission_type = ?, vehicle_color = ? WHERE vehicle_id = ?";
+   $sql = "UPDATE vehicles SET platenumber = ?, driver = ?, vehicle_model = ?, transmission_type = ?, vehicle_color = ? WHERE vehicle_id = ?";
    $stmt = $conn->prepare($sql);
 
    if ($stmt) {

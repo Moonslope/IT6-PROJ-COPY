@@ -14,7 +14,6 @@ require "../global/head.php";
                     <h1 class="fs-3 mt-2 text-white" style="text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);">CALTRANSCO</h1>
                     <img src="../images/image.png" alt="" class="img-fluid " width="50" height="50">
                 </a>
-
             </div>
         </div>
 

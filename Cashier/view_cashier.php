@@ -84,7 +84,7 @@ require "../global/head.php";
 
                      <?php
                      try {
-                        $sql = "SELECT * FROM cashier";
+                        $sql = "SELECT * FROM cashiers";
 
                         if (isset($_GET['query']) && !empty($_GET['query'])) {
                            $search = $conn->real_escape_string($_GET['query']);
@@ -147,7 +147,7 @@ require "../global/head.php";
             <div class="modal-body">
                Cashier deleted successfully!
             </div>
-            
+
             <div class="modal-footer">
                <button type="button" class="btn btn-info" data-bs-dismiss="modal">OK</button>
             </div>

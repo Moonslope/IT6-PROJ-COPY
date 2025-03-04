@@ -86,7 +86,7 @@ require "../global/head.php";
 
                             <?php
                             try {
-                                $sql = "SELECT * FROM driver";
+                                $sql = "SELECT * FROM drivers";
 
                                 if (isset($_GET['query']) && !empty($_GET['query'])) {
                                     $search = $conn->real_escape_string($_GET['query']);

@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "3dots_db";
+$database = "copy_3dots";
 
 try {
    $conn = new mysqli($servername, $username, $password, $database);

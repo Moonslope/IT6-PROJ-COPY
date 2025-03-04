@@ -9,7 +9,7 @@ if ($method == 'POST') {
       $route_point_name = $_POST['route_point_name'];
       $fare = $_POST['fare'];
 
-      $sql = "INSERT INTO destinations (destination_name, fare ,route_id) VALUES (?, ?, ?)";
+      $sql = "INSERT INTO route_points (route_point_name, fare ,route_id) VALUES (?, ?, ?)";
 
       $stmt = $conn->prepare($sql);
       $stmt->bind_param("ssi", $route_point_name, $fare, $route_id);

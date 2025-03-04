@@ -11,7 +11,7 @@ if ($method == 'POST') {
         $vehicle_color = $_POST['vehicle_color'];
 
 
-        $sql = "INSERT INTO vehicle(platenumber,vehicle_model,transmission_type,vehicle_color) VALUES (?,?,?,?)";
+        $sql = "INSERT INTO vehicles(platenumber,vehicle_model,transmission_type,vehicle_color) VALUES (?,?,?,?)";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ssss", $platenumber, $vehicle_model, $transmission_type, $vehicle_color);

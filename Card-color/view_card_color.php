@@ -84,7 +84,7 @@ require "../global/head.php";
 
                             <?php
                             try {
-                                $sql = "SELECT * FROM Card";
+                                $sql = "SELECT * FROM card_colors";
 
                                 if (isset($_GET['query']) && !empty($_GET['query'])) {
                                     $search = $conn->real_escape_string($_GET['query']);
@@ -104,13 +104,13 @@ require "../global/head.php";
                                                         <img src="../images/card.png" alt="" class="img-fluid rounded-pill border border-2 border-dark me-3" width="50" height="50">
                                                     </div>
                                                     <div>
-                                                        <span><strong>Color : </strong><?php echo $row['card_color']; ?></span><br>
+                                                        <span><strong>Color : </strong><?php echo $row['card_color_name']; ?></span><br>
 
                                                     </div>
                                                 </div>
 
 
-                                                <a href="../Operations/op_delete_card_color.php?id=<?php echo $row['card_id']; ?>" class="btn"><i class="btn btn-outline-danger bi bi-trash"></i></a>
+                                                <a href="../Operations/op_delete_card_color.php?id=<?php echo $row['card_color_id']; ?>" class="btn"><i class="btn btn-outline-danger bi bi-trash"></i></a>
 
                                             </li>
                                         </ul>

@@ -19,16 +19,16 @@ if ($travel_pass_id) {
    $query = "SELECT 
                 tp.travel_pass_id,
                 d.driver_name, 
-                c.card_color,
+                c.card_color_name,
                 r.route_name,
                 v.platenumber,
                 u.cashier_name 
               FROM travel_pass tp
-              JOIN driver d ON tp.driver_id = d.driver_id
-              JOIN card c ON tp.card_id = c.card_id
+              JOIN drivers d ON tp.driver_id = d.driver_id
+              JOIN card_colors c ON tp.card_color_id = c.card_color_id
               JOIN routes r ON tp.route_id = r.route_id
-              JOIN vehicle v ON tp.vehicle_id = v.vehicle_id
-              JOIN cashier u ON tp.cashier_id = u.cashier_id
+              JOIN vehicles v ON tp.vehicle_id = v.vehicle_id
+              JOIN cashiers u ON tp.cashier_id = u.cashier_id
               WHERE tp.travel_pass_id = ?";
 
    $stmt = $conn->prepare($query);
@@ -65,37 +65,59 @@ require  "../global/head.php";
          <div class="col col-3">
             <div style="height: 675px;" class="card shadow-lg">
                <div class="card-body">
-                  <div class="row border border-start-0 border-end-0 border-top-0 border-2">
+                  <div class="row border border-start-0 border-end-0 border-top-0 border-2 mb-4">
                      <div class="col d-flex justify-content-center align-items-center gap-3 pb-3">
                         <h1 class="card-title fs-3 pt-1">Ticket</h1>
                         <i class="bi fs-1 bi-ticket-perforated-fill"></i>
                      </div>
                   </div>
 
+                  <div class="row">
+                     <!-- Route -->
+                     <div class="col d-flex gap-3 mb-2">
+                        <label class="fw-semibold">Route:</label>
+                        <p><?php echo $travel_pass['route_name'] ?></p>
+                     </div>
+                     <!-- Route -->
+
+                     <!-- Card Color -->
+                     <div class="col d-flex gap-3 ">
+                        <label class="fw-semibold">Card Color:</label>
+                        <p><?php echo $travel_pass['card_color_name'] ?></p>
+                     </div>
+                     <!-- Card Color -->
+                  </div>
+
                   <div class="row d-flex justify-content-center align-items-center">
-                     <div class="col">
-                        <form method="POST" action="op_destination.php">
+                     <form method="POST" action="op_route_point.php?travel_pass_id=<?php echo $_GET['travel_pass_id']; ?>">
+                        <div class="col">
                            <div class="mt-4">
-                              <label class="fw-semibold mb-2" for="destination">Destination</label>
-                              <select class="form-select mb-3" id="destination" name="destination">
+                              <label class="fw-semibold mb-2" for="route_point">Route Point</label>
+                              <select class="form-select mb-3" id="route_point" name="route_point">
                                  <option value="">None</option>
                               </select>
                            </div>
 
+                           <div>
+                              <label for="passenger_count" class="fw-semibold">Passenger</label>
+                              <input type="number" id="passenger_count" name="passenger_count" class="form-control mb-3" required>
+                           </div>
+
                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                            <script>
-                              $(document).ready(function() {
+                              function loadRoutePoints() {
                                  let travelPassId = new URLSearchParams(window.location.search).get('travel_pass_id'); // Get travel_pass_id from URL
 
                                  if (travelPassId) {
                                     $.ajax({
-                                       url: "get_destinations.php",
+                                       url: "get_route_points.php",
                                        method: "GET",
                                        data: {
                                           travel_pass_id: travelPassId
                                        },
+                                       cache: false,
                                        success: function(response) {
-                                          $("#destination").html(response); // Populate dropdown
+                                          $("#route_point").html(response); // Populate dropdown
                                        },
                                        error: function(xhr, status, error) {
                                           console.error("AJAX Error:", error);
@@ -104,15 +126,22 @@ require  "../global/head.php";
                                  } else {
                                     console.error("Error: No travel_pass_id received.");
                                  }
+                              }
+
+                              $(document).ready(function() {
+                                 loadRoutePoints(); // Load dropdown on page load
                               });
                            </script>
 
                            <div class="d-flex justify-content-end">
                               <button class="btn btn-info fw-semibold w-100" type="submit" id="okayButton">Insert</button>
                            </div>
-                        </form>
-                     </div>
+                        </div>
+                     </form>
                   </div>
+
+
+
                </div>
             </div>
          </div>
@@ -143,19 +172,6 @@ require  "../global/head.php";
                            <div class="card-body">
                               <form method="POST" action="depart_operation.php">
                                  <div class="row mb-4">
-                                    <!-- Card Color -->
-                                    <div class="col d-flex gap-3 ">
-                                       <label class="fw-semibold">Card Color:</label>
-                                       <p><?php echo $travel_pass['card_color'] ?></p>
-                                    </div>
-                                    <!-- Card Color -->
-
-                                    <!-- Route -->
-                                    <div class="col d-flex gap-3 ">
-                                       <label class="fw-semibold">Route:</label>
-                                       <p><?php echo $travel_pass['route_name'] ?></p>
-                                    </div>
-                                    <!-- Route -->
 
                                     <!-- Driver -->
                                     <div class="col d-flex gap-3 ">
@@ -184,7 +200,7 @@ require  "../global/head.php";
                                        <table class="table table-bordered text-center">
                                           <thead class="table-secondary">
                                              <tr>
-                                                <th>Destination</th>
+                                                <th>Route Points</th>
                                                 <th>FARE</th>
                                                 <th>PASSENGERS</th>
                                                 <th>TOTAL FARE</th>
@@ -192,7 +208,7 @@ require  "../global/head.php";
                                           </thead>
                                           <tbody>
                                              <?php
-                                             // Initialize total counters
+
                                              $total_passengers = 0;
                                              $total_fare = 0;
 
@@ -211,33 +227,38 @@ require  "../global/head.php";
 
                                              // Ensure the travel pass exists
                                              if ($travel_pass_id) {
-                                                // Query to get destination data for this travel pass
+                                                // Query to get route point data for this travel pass
                                                 $sql = "SELECT 
-                                                            d.destination_name,  
-                                                            d.fare, 
-                                                            COALESCE(SUM(s.passenger_count), 0) AS total_passengers, 
-                                                            COALESCE(SUM(s.fare), 0) AS total_fare
-                                                      FROM destinations d
-                                                      LEFT JOIN passenger_destination s ON d.destination_id = s.destination_id
-                                                      WHERE s.travel_pass_id = ?
-                                                      GROUP BY d.destination_name, d.fare";
+                                                            rp.route_point_name,  
+                                                            rrp.fare, 
+                                                            SUM(rrp.passenger_count) AS total_passengers
+                                                      FROM route_points rp
+                                                      JOIN route_route_points rrp ON rp.route_point_id = rrp.route_point_id
+                                                      WHERE rrp.travel_pass_id = ?
+                                                      GROUP BY rp.route_point_name, rrp.fare";
 
                                                 $stmt = $conn->prepare($sql);
                                                 $stmt->bind_param("i", $travel_pass_id);
                                                 $stmt->execute();
                                                 $result = $stmt->get_result();
 
-                                                // Loop through the results and calculate total passengers and fare
+                                                // Loop through the results and display
                                                 while ($row = $result->fetch_assoc()) {
-                                                   $total_passengers += $row['total_passengers'];
-                                                   $total_fare += $row['total_fare'];
+                                                   $route_point_name = $row['route_point_name'];
+                                                   $fare = $row['fare'];
+                                                   $passenger_count = $row['total_passengers'];
+                                                   $total_fare_per_route = $fare * $passenger_count;
+
+                                                   // Update total counts
+                                                   $total_passengers += $passenger_count;
+                                                   $total_fare += $total_fare_per_route;
 
                                                    echo "<tr>
-                                                      <td>{$row['destination_name']}</td>
-                                                      <td>{$row['fare']}</td>
-                                                      <td>{$row['total_passengers']}</td>
-                                                      <td>{$row['total_fare']}</td>
-                                                   </tr>";
+                                                               <td>{$route_point_name}</td>
+                                                               <td>{$fare}</td>
+                                                               <td>{$passenger_count}</td>
+                                                               <td>{$total_fare_per_route}</td>
+                                                         </tr>";
                                                 }
                                              }
 
@@ -250,6 +271,7 @@ require  "../global/head.php";
                                              ?>
                                           </tbody>
                                        </table>
+
                                     </div>
                                  </div>
 
@@ -283,13 +305,13 @@ require  "../global/head.php";
                   <!-- Card Color -->
                   <div class="mb-3">
                      <label class="fw-semibold">Card Color:</label>
-                     <select class="form-select" name="card_id">
+                     <select class="form-select" name="card_color_id">
                         <option value="">None</option>
                         <?php
-                        $sql = "SELECT card_id, card_color FROM card";
+                        $sql = "SELECT card_color_id, card_color_name FROM card_colors";
                         $result = $conn->query($sql);
                         while ($row = $result->fetch_assoc()) {
-                           echo '<option value="' . $row['card_id'] . '">' . $row['card_color'] . '</option>';
+                           echo '<option value="' . $row['card_color_id'] . '">' . $row['card_color_name'] . '</option>';
                         }
                         ?>
                      </select>
@@ -316,7 +338,7 @@ require  "../global/head.php";
                      <select class="form-select" name="driver_id">
                         <option value="">None</option>
                         <?php
-                        $sql = "SELECT driver_id, driver_name FROM driver";
+                        $sql = "SELECT driver_id, driver_name FROM drivers";
                         $result = $conn->query($sql);
                         while ($row = $result->fetch_assoc()) {
                            echo '<option value="' . $row['driver_id'] . '">' . $row['driver_name'] . '</option>';
@@ -331,7 +353,7 @@ require  "../global/head.php";
                      <select class="form-select" name="vehicle_id">
                         <option value="">None</option>
                         <?php
-                        $sql = "SELECT vehicle_id, platenumber FROM vehicle";
+                        $sql = "SELECT vehicle_id, platenumber FROM vehicles";
                         $result = $conn->query($sql);
                         while ($row = $result->fetch_assoc()) {
                            echo '<option value="' . $row['vehicle_id'] . '">' . $row['platenumber'] . '</option>';
@@ -346,7 +368,7 @@ require  "../global/head.php";
                      <select class="form-select" name="cashier_id">
                         <option value="">None</option>
                         <?php
-                        $sql = "SELECT cashier_id, cashier_name FROM cashier";
+                        $sql = "SELECT cashier_id, cashier_name FROM cashiers";
                         $result = $conn->query($sql);
                         while ($row = $result->fetch_assoc()) {
                            echo '<option value="' . $row['cashier_id'] . '">' . $row['cashier_name'] . '</option>';

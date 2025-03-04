@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $stmt->bind_param("si", $departure_time, $travel_pass_id);
 
    if ($stmt->execute()) {
-      // Redirect with a success flag
+
       header("Location: travel_pass_history.php?success=1");
       exit();
    } else {

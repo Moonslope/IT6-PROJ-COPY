@@ -4,15 +4,15 @@
 <?php
 include "../Database/db_connect.php";
 
-$sql = "SELECT COUNT(*) AS total_cashiers FROM cashier";
+$sql = "SELECT COUNT(*) AS total_cashiers FROM cashiers";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 
-$sqll = "SELECT COUNT(*) AS total_driver FROM driver";
+$sqll = "SELECT COUNT(*) AS total_driver FROM drivers";
 $resultt = $conn->query($sqll);
 $roww = $resultt->fetch_assoc();
 
-$sqlll = "SELECT COUNT(*) AS total_vehicle FROM vehicle";
+$sqlll = "SELECT COUNT(*) AS total_vehicle FROM vehicles";
 $resulttt = $conn->query($sqlll);
 $rowww = $resulttt->fetch_assoc();
 
