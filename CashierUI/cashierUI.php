@@ -43,27 +43,27 @@ require  "../global/head.php";
 ?>
 
 <body>
-   <div class="con-bg container-fluid">
+   <div class="con-bg container-fluid vh-100">
 
-      <div class="row ">
-         <!-- Row for logo and buttons -->
-         <div class="row border border-top-0 border-end-0 border-start-0 border-light border-2 pb-2 mb-3">
-            <div class="col col-4 d-flex gap-2 ms-2 mt-2">
-               <h1 class="fs-3 mt-2 text-white" style="text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);">CALTRANSCO</h1>
-               <img src="../images/image.png" alt="" class="img-fluid " width="50" height="50">
-            </div>
-
-            <div class="col d-flex gap-5 align-items-center justify-content-end me-5">
-               <button class="btn btn-c text-white" data-bs-toggle="modal" data-bs-target="#travelPassModal">New Travel Pass</button>
-               <a class="btn btn-c text-white" href="travel_pass_history.php">Travel Pass History <i class="bi bi-clock-history"></i></a>
-               <a class="btn btn-c text-white w-25" href="../Login-Register/Login.php">Log out <i class="bi bi-box-arrow-right"></i></a>
-            </div>
+      <!-- Row for logo and buttons -->
+      <div class="row border border-top-0 border-end-0 border-start-0 border-light border-2 pb-2 mb-3">
+         <div class="col col-5 d-flex gap-2 ms-2 mt-2">
+            <h1 class="fs-3 mt-2 text-white" style="text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);">CALTRANSCO</h1>
+            <img src="../images/image.png" alt="" class="img-fluid " width="50" height="50">
          </div>
-         <!-- Row for logo and buttons -->
 
+         <div class="col d-flex gap-5 align-items-center justify-content-end me-5">
+            <button class="btn btn-c text-white" data-bs-toggle="modal" data-bs-target="#travelPassModal">New Travel Pass <i class="bi bi-plus-circle-fill ms-2"></i></button>
+            <a class="btn btn-c text-white" href="travel_pass_history.php">Travel Pass History <i class="bi bi-clock-history ms-2"></i></a>
+            <a class="btn btn-c text-white w-25" href="../Login-Register/Login.php">Log out <i class="bi bi-box-arrow-right ms-2"></i></a>
+         </div>
+      </div>
+      <!-- Row for logo and buttons -->
+
+      <div class="row">
          <!-- For the destination -->
-         <div class="col col-3">
-            <div style="height: 675px;" class="card shadow-lg">
+         <div class="col col-3 ">
+            <div class="card shadow-lg">
                <div class="card-body">
                   <div class="row border border-start-0 border-end-0 border-top-0 border-2 mb-4">
                      <div class="col d-flex justify-content-center align-items-center gap-3 pb-3">
@@ -88,7 +88,7 @@ require  "../global/head.php";
                      <!-- Card Color -->
                   </div>
 
-                  <div class="row d-flex justify-content-center align-items-center">
+                  <div class="row d-flex justify-content-center align-items-center border border-bottom-0 border-start-0 border-end-0 border-2">
                      <form method="POST" action="op_route_point.php?travel_pass_id=<?php echo $_GET['travel_pass_id']; ?>">
                         <div class="col">
                            <div class="mt-4">
@@ -133,8 +133,8 @@ require  "../global/head.php";
                               });
                            </script>
 
-                           <div class="d-flex justify-content-end">
-                              <button class="btn btn-info fw-semibold w-100" type="submit" id="okayButton">Insert</button>
+                           <div class="d-flex justify-content-end mt-5">
+                              <button class="btn btn-info fw-semibold w-100" type="submit" id="okayButton">Insert <i class="bi bi-arrow-right ms-3"></i></button>
                            </div>
                         </div>
                      </form>
@@ -173,13 +173,6 @@ require  "../global/head.php";
                               <form method="POST" action="depart_operation.php">
                                  <div class="row mb-4">
 
-                                    <!-- Driver -->
-                                    <div class="col d-flex gap-3 ">
-                                       <label class="fw-semibold">Driver:</label>
-                                       <p><?php echo $travel_pass['driver_name'] ?></p>
-                                    </div>
-                                    <!-- Driver -->
-
                                     <!-- Plate Number -->
                                     <div class="col d-flex gap-3 ">
                                        <label class="fw-semibold">Plate Number:</label>
@@ -187,8 +180,15 @@ require  "../global/head.php";
                                     </div>
                                     <!-- Plate Number -->
 
+                                    <!-- Driver -->
+                                    <div class="col d-flex gap-3 ">
+                                       <label class="fw-semibold">Driver:</label>
+                                       <p><?php echo $travel_pass['driver_name'] ?></p>
+                                    </div>
+                                    <!-- Driver -->
+
                                     <!-- Cashier -->
-                                    <div class="col d-flex gap-3 align-items-center">
+                                    <div class="col d-flex gap-3">
                                        <label class="fw-semibold">Cashier:</label>
                                        <p><?php echo $travel_pass['cashier_name'] ?></p>
                                     </div>
@@ -276,8 +276,8 @@ require  "../global/head.php";
                                  </div>
 
                                  <div class="row mt-3">
-                                    <div class="col col-6 d-flex gap-3 justify-content-end">
-                                       <button type="submit" class="btn btn-info w-50 fw-semibold" id="departButton">SAVE</button>
+                                    <div class="col d-flex gap-3 justify-content-end">
+                                       <button type="submit" class="btn btn-info w-25 fw-semibold" id="departButton">SAVE <i class="bi bi-box-arrow-down ms-2"></i></i></button>
                                     </div>
                                  </div>
                               </form>
@@ -289,104 +289,104 @@ require  "../global/head.php";
             </div>
          </div>
          <!-- For table -->
+
       </div>
-   </div>
 
-   <!-- Modal for create travel pass-->
-   <div class="modal fade" id="travelPassModal" tabindex="-1" aria-labelledby="travelPassModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-         <div class="modal-content">
-            <div class="modal-header">
-               <h5 class="modal-title" id="travelPassModalLabel">Create Travel Pass</h5>
-               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-               <form method="POST" action="./op_create_travel_pass.php">
-                  <!-- Card Color -->
-                  <div class="mb-3">
-                     <label class="fw-semibold">Card Color:</label>
-                     <select class="form-select" name="card_color_id">
-                        <option value="">None</option>
-                        <?php
-                        $sql = "SELECT card_color_id, card_color_name FROM card_colors";
-                        $result = $conn->query($sql);
-                        while ($row = $result->fetch_assoc()) {
-                           echo '<option value="' . $row['card_color_id'] . '">' . $row['card_color_name'] . '</option>';
-                        }
-                        ?>
-                     </select>
-                  </div>
+      <!-- Modal for create travel pass-->
+      <div class="modal fade" id="travelPassModal" tabindex="-1" aria-labelledby="travelPassModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="travelPassModalLabel">Create Travel Pass</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <form method="POST" action="./op_create_travel_pass.php">
+                     <!-- Card Color -->
+                     <div class="mb-3">
+                        <label class="fw-semibold">Card Color:</label>
+                        <select class="form-select" name="card_color_id">
+                           <option value="">None</option>
+                           <?php
+                           $sql = "SELECT card_color_id, card_color_name FROM card_colors";
+                           $result = $conn->query($sql);
+                           while ($row = $result->fetch_assoc()) {
+                              echo '<option value="' . $row['card_color_id'] . '">' . $row['card_color_name'] . '</option>';
+                           }
+                           ?>
+                        </select>
+                     </div>
 
-                  <!-- Route -->
-                  <div class="mb-3">
-                     <label class="fw-semibold">Route:</label>
-                     <select class="form-select" name="route_id">
-                        <option value="">None</option>
-                        <?php
-                        $sql = "SELECT route_id, route_name FROM routes";
-                        $result = $conn->query($sql);
-                        while ($row = $result->fetch_assoc()) {
-                           echo '<option value="' . $row['route_id'] . '">' . $row['route_name'] . '</option>';
-                        }
-                        ?>
-                     </select>
-                  </div>
+                     <!-- Route -->
+                     <div class="mb-3">
+                        <label class="fw-semibold">Route:</label>
+                        <select class="form-select" name="route_id">
+                           <option value="">None</option>
+                           <?php
+                           $sql = "SELECT route_id, route_name FROM routes";
+                           $result = $conn->query($sql);
+                           while ($row = $result->fetch_assoc()) {
+                              echo '<option value="' . $row['route_id'] . '">' . $row['route_name'] . '</option>';
+                           }
+                           ?>
+                        </select>
+                     </div>
 
-                  <!-- Driver -->
-                  <div class="mb-3">
-                     <label class="fw-semibold">Driver:</label>
-                     <select class="form-select" name="driver_id">
-                        <option value="">None</option>
-                        <?php
-                        $sql = "SELECT driver_id, driver_name FROM drivers";
-                        $result = $conn->query($sql);
-                        while ($row = $result->fetch_assoc()) {
-                           echo '<option value="' . $row['driver_id'] . '">' . $row['driver_name'] . '</option>';
-                        }
-                        ?>
-                     </select>
-                  </div>
+                     <!-- Driver -->
+                     <div class="mb-3">
+                        <label class="fw-semibold">Driver:</label>
+                        <select class="form-select" name="driver_id">
+                           <option value="">None</option>
+                           <?php
+                           $sql = "SELECT driver_id, driver_name FROM drivers";
+                           $result = $conn->query($sql);
+                           while ($row = $result->fetch_assoc()) {
+                              echo '<option value="' . $row['driver_id'] . '">' . $row['driver_name'] . '</option>';
+                           }
+                           ?>
+                        </select>
+                     </div>
 
-                  <!-- Plate Number -->
-                  <div class="mb-3">
-                     <label class="fw-semibold">Plate Number:</label>
-                     <select class="form-select" name="vehicle_id">
-                        <option value="">None</option>
-                        <?php
-                        $sql = "SELECT vehicle_id, platenumber FROM vehicles";
-                        $result = $conn->query($sql);
-                        while ($row = $result->fetch_assoc()) {
-                           echo '<option value="' . $row['vehicle_id'] . '">' . $row['platenumber'] . '</option>';
-                        }
-                        ?>
-                     </select>
-                  </div>
+                     <!-- Plate Number -->
+                     <div class="mb-3">
+                        <label class="fw-semibold">Plate Number:</label>
+                        <select class="form-select" name="vehicle_id">
+                           <option value="">None</option>
+                           <?php
+                           $sql = "SELECT vehicle_id, platenumber FROM vehicles";
+                           $result = $conn->query($sql);
+                           while ($row = $result->fetch_assoc()) {
+                              echo '<option value="' . $row['vehicle_id'] . '">' . $row['platenumber'] . '</option>';
+                           }
+                           ?>
+                        </select>
+                     </div>
 
-                  <!-- Cashier -->
-                  <div class="mb-3">
-                     <label class="fw-semibold">Cashier:</label>
-                     <select class="form-select" name="cashier_id">
-                        <option value="">None</option>
-                        <?php
-                        $sql = "SELECT cashier_id, cashier_name FROM cashiers";
-                        $result = $conn->query($sql);
-                        while ($row = $result->fetch_assoc()) {
-                           echo '<option value="' . $row['cashier_id'] . '">' . $row['cashier_name'] . '</option>';
-                        }
-                        ?>
-                     </select>
-                  </div>
+                     <!-- Cashier -->
+                     <div class="mb-3">
+                        <label class="fw-semibold">Cashier:</label>
+                        <select class="form-select" name="cashier_id">
+                           <option value="">None</option>
+                           <?php
+                           $sql = "SELECT cashier_id, cashier_name FROM cashiers";
+                           $result = $conn->query($sql);
+                           while ($row = $result->fetch_assoc()) {
+                              echo '<option value="' . $row['cashier_id'] . '">' . $row['cashier_name'] . '</option>';
+                           }
+                           ?>
+                        </select>
+                     </div>
 
-                  <div class="modal-footer">
-                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                     <button type="submit" class="btn btn-info">Create</button>
-                  </div>
-               </form>
+                     <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-info">Create</button>
+                     </div>
+                  </form>
+               </div>
             </div>
          </div>
       </div>
    </div>
-
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

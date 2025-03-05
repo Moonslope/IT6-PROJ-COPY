@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2025 at 09:55 AM
+-- Generation Time: Mar 05, 2025 at 11:38 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -186,14 +186,31 @@ CREATE TABLE `route_route_points` (
 --
 
 INSERT INTO `route_route_points` (`rrp_id`, `route_id`, `route_point_id`, `passenger_count`, `fare`, `travel_pass_id`) VALUES
-(40, 14, 28, 3, 38.00, 168),
-(41, 14, 33, 7, 50.00, 168),
-(42, 14, 30, 1, 40.00, 168),
-(43, 14, 27, 2, 35.00, 168),
-(44, 14, 32, 2, 45.00, 168),
-(45, 14, 31, 1, 45.00, 168),
-(46, 12, 23, 8, 35.00, 169),
-(47, 12, 25, 6, 40.00, 169);
+(60, 14, 29, 3, 40.00, 179),
+(61, 14, 33, 5, 50.00, 179),
+(62, 14, 28, 5, 38.00, 179),
+(63, 14, 31, 2, 45.00, 179),
+(64, 14, 32, 2, 45.00, 179),
+(65, 14, 27, 1, 35.00, 179),
+(66, 14, 30, 4, 40.00, 181),
+(67, 14, 32, 3, 45.00, 181),
+(68, 14, 33, 5, 50.00, 181),
+(69, 14, 27, 3, 35.00, 181),
+(70, 14, 28, 2, 38.00, 181),
+(71, 12, 23, 10, 35.00, 182),
+(72, 12, 25, 6, 40.00, 182),
+(73, 14, 33, 6, 50.00, 183),
+(74, 14, 28, 2, 38.00, 183),
+(75, 14, 30, 3, 40.00, 183),
+(76, 14, 31, 5, 45.00, 183),
+(77, 14, 33, 5, 50.00, 184),
+(78, 14, 27, 7, 35.00, 184),
+(79, 14, 29, 2, 40.00, 184),
+(80, 14, 30, 2, 40.00, 184),
+(81, 14, 32, 7, 45.00, 185),
+(82, 14, 29, 5, 40.00, 185),
+(83, 14, 33, 3, 50.00, 185),
+(84, 14, 30, 1, 40.00, 185);
 
 --
 -- Triggers `route_route_points`
@@ -221,6 +238,17 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `sales_summary`
+-- (See below for the actual view)
+--
+CREATE TABLE `sales_summary` (
+`total_sales_today` decimal(32,2)
+,`total_sales_month` decimal(32,2)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `travel_pass`
 --
 
@@ -242,8 +270,31 @@ CREATE TABLE `travel_pass` (
 --
 
 INSERT INTO `travel_pass` (`travel_pass_id`, `driver_id`, `vehicle_id`, `cashier_id`, `card_color_id`, `total_passengers`, `total_fare`, `travel_date`, `departure_time`, `route_id`) VALUES
-(168, 19, 12, 30, 1, 16, 709.00, '2025-03-04', '09:41:18', 14),
-(169, 13, 14, 28, 5, 14, 520.00, '2025-03-04', '09:42:07', 12);
+(179, 14, 10, 28, 3, 16, 699.00, '2025-03-05', '11:00:03', 14),
+(181, 15, 11, 27, 3, 17, 726.00, '2025-03-05', '11:00:38', 14),
+(182, 14, 3, 27, 6, 16, 590.00, '2025-03-05', '11:01:00', 12),
+(183, 13, 3, 32, 5, 16, 721.00, '2025-03-05', '11:01:41', 14),
+(184, 19, 3, 28, 3, 12, 515.00, '2025-03-05', '11:21:08', 14),
+(185, 17, 10, 27, 4, 16, 705.00, '2025-03-05', '11:35:13', 14);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `travel_pass_history`
+-- (See below for the actual view)
+--
+CREATE TABLE `travel_pass_history` (
+`travel_pass_id` int(11)
+,`card_color_name` varchar(50)
+,`route` varchar(100)
+,`driver` varchar(255)
+,`vehicle` varchar(100)
+,`cashier` varchar(255)
+,`total_passengers` int(11)
+,`total_fare` decimal(10,2)
+,`travel_date` date
+,`departure_time` time
+);
 
 -- --------------------------------------------------------
 
@@ -271,6 +322,24 @@ INSERT INTO `vehicles` (`vehicle_id`, `driver_id`, `platenumber`, `vehicle_model
 (11, 16, 'WBHD2', 's', 'White', '', 'John DDoe'),
 (12, 17, '123', 'QQQ', 'BLACK', '', 'Marie Doe'),
 (14, NULL, 'XXQW12', 'Mitsubishi ', 'White', '', 'Miochael Lar');
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `sales_summary`
+--
+DROP TABLE IF EXISTS `sales_summary`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `sales_summary`  AS SELECT (select sum(`travel_pass`.`total_fare`) from `travel_pass` where `travel_pass`.`travel_date` = curdate()) AS `total_sales_today`, (select sum(`travel_pass`.`total_fare`) from `travel_pass` where month(`travel_pass`.`travel_date`) = month(curdate()) and year(`travel_pass`.`travel_date`) = year(curdate())) AS `total_sales_month` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `travel_pass_history`
+--
+DROP TABLE IF EXISTS `travel_pass_history`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `travel_pass_history`  AS SELECT `tp`.`travel_pass_id` AS `travel_pass_id`, `cc`.`card_color_name` AS `card_color_name`, `r`.`route_name` AS `route`, `d`.`driver_name` AS `driver`, `v`.`platenumber` AS `vehicle`, `c`.`cashier_name` AS `cashier`, `tp`.`total_passengers` AS `total_passengers`, `tp`.`total_fare` AS `total_fare`, `tp`.`travel_date` AS `travel_date`, `tp`.`departure_time` AS `departure_time` FROM (((((`travel_pass` `tp` join `card_colors` `cc` on(`tp`.`card_color_id` = `cc`.`card_color_id`)) join `routes` `r` on(`tp`.`route_id` = `r`.`route_id`)) join `drivers` `d` on(`tp`.`driver_id` = `d`.`driver_id`)) join `vehicles` `v` on(`tp`.`vehicle_id` = `v`.`vehicle_id`)) join `cashiers` `c` on(`tp`.`cashier_id` = `c`.`cashier_id`)) ORDER BY `tp`.`travel_date` DESC, `tp`.`departure_time` DESC ;
 
 --
 -- Indexes for dumped tables
@@ -372,13 +441,13 @@ ALTER TABLE `route_points`
 -- AUTO_INCREMENT for table `route_route_points`
 --
 ALTER TABLE `route_route_points`
-  MODIFY `rrp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `rrp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `travel_pass`
 --
 ALTER TABLE `travel_pass`
-  MODIFY `travel_pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
+  MODIFY `travel_pass_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=186;
 
 --
 -- AUTO_INCREMENT for table `vehicles`
