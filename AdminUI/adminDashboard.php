@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
 <!-- Try -->
 <!-- comment -->
 <!-- php -->
-=======
 
->>>>>>> origin
 <?php
 include "../Database/db_connect.php";
 
@@ -61,6 +58,10 @@ require "../global/head.php";
 
                   <div class="mx-3 mb-3">
                      <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Card-color/view_card_color.php">Card Color</a>
+                  </div>
+
+                  <div class="mx-3 mb-3">
+                     <a class="btn btn-info w-100 fw-semibold  mb-2 border border-1 border-dark" href="../Destination/view_destination.php">Destination</a>
                   </div>
 
                   <div class="mx-3">

@@ -138,7 +138,10 @@ require  "../global/head.php";
                                              <?php
                                              $total_passengers = 0;
                                              $total_fare = 0;
-                                             $sql = "SELECT r.route, r.fare, COALESCE(t.total_passengers, 0) AS total_passengers, COALESCE(t.total_fare, 0) AS total_fare FROM route r LEFT JOIN temp_record t ON r.route_id = t.route_id";
+                                             $sql = "SELECT r.route, r.fare, COALESCE(tp.total_passengers, 0) AS total_passengers, COALESCE(tp.total_fare, 0) AS total_fare 
+                                                       FROM route r 
+                                                       LEFT JOIN travel_pass_routes tpr ON r.route_id = tpr.route_id 
+                                                       LEFT JOIN travel_pass tp ON tpr.travel_pass_id = tp.travel_pass_id";
                                              $result = $conn->query($sql);
                                              while ($row = $result->fetch_assoc()) {
                                                 $total_passengers += $row['total_passengers'];

@@ -20,8 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $stmt->close();
 
       if (!empty($route_id)) {
-         // Check if the destination already exists in the temp_record table
-         $checkSql = "SELECT total_passengers FROM temp_record WHERE route_id = ?";
+         // Check if the destination already exists in the travel_pass_routes table
+         $checkSql = "SELECT passenger FROM travel_pass_routes WHERE route_id = ?";
          $checkStmt = $conn->prepare($checkSql);
 
          if (!$checkStmt) {
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $new_total_passengers = $existing_passengers + 1;
             $new_total_fare = $new_total_passengers * $fare;
 
-            $updateSql = "UPDATE temp_record SET total_passengers = ?, total_fare = ? WHERE route_id = ?";
+            $updateSql = "UPDATE travel_pass_routes SET total_passengers = ?, total_fare = ? WHERE route_id = ?";
             $updateStmt = $conn->prepare($updateSql);
 
             if (!$updateStmt) {
@@ -50,16 +50,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $updateStmt->execute();
             $updateStmt->close();
          } else {
-            // Insert new temp_record entry
-            $insertSql = "INSERT INTO temp_record (route_id, total_passengers, total_fare) VALUES (?, 1, ?)";
+            // Insert new travel_pass_routes entry
+            $insertSql = "INSERT INTO travel_pass_routes (route_id, passenger, total_fare) VALUES (?, ?, ?)";
             $insertStmt = $conn->prepare($insertSql);
 
             if (!$insertStmt) {
                die("Error preparing insert statement: " . $conn->error);
             }
 
+            $total_passengers = 1;
             $total_fare = $fare;
-            $insertStmt->bind_param("id", $route_id, $total_fare);
+            $insertStmt->bind_param("iid", $route_id, $total_passengers, $total_fare);
             $insertStmt->execute();
             $insertStmt->close();
          }

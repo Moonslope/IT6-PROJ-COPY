@@ -2,6 +2,7 @@
 <html lang="en">
 
 <?php
+
 $title = "Add New Cashier";
 require "../global/head.php";
 ?>
@@ -83,6 +84,9 @@ require "../global/head.php";
                                        <input type="text" id="fare" name="fare" class="form-control border-dark" required>
                                     </div>
                                  </div>
+
+                                 <input type="hidden" name="destination_id" value="1"> <!-- Change value dynamically -->
+
 
                                  <div class="row mt-4">
                                     <div class="col">
