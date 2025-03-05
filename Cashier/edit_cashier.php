@@ -102,6 +102,18 @@ require "../global/head.php";
                                     </div>
                                  </div>
 
+                                 <div class="row mt-2">
+                                    <div class="col">
+                                       <label for="cashier_username" class="fw-semibold mb-3">Username</label>
+                                       <input type="text" id="cashier_username" name="cashier_username" value="<?php echo $row['username'] ?>" class="form-control border-dark" required>
+                                    </div>
+
+                                    <div class="col">
+                                       <label for="cashier_password" class="fw-semibold mb-3">Password</label>
+                                       <input type="text" id="cashier_password" name="cashier_password" value="<?php echo $row['password'] ?>" class="form-control border-dark" required>
+                                    </div>
+                                 </div>
+
                                  <div class="row mt-4">
                                     <div class="col">
                                        <a href="view_cashier.php" class="btn btn-outline-info w-100 text-dark fw-semibold">Cancel</a>

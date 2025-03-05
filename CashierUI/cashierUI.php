@@ -332,25 +332,10 @@ require  "../global/head.php";
                         </select>
                      </div>
 
-                     <!-- Driver -->
-                     <div class="mb-3">
-                        <label class="fw-semibold">Driver:</label>
-                        <select class="form-select" name="driver_id">
-                           <option value="">None</option>
-                           <?php
-                           $sql = "SELECT driver_id, driver_name FROM drivers";
-                           $result = $conn->query($sql);
-                           while ($row = $result->fetch_assoc()) {
-                              echo '<option value="' . $row['driver_id'] . '">' . $row['driver_name'] . '</option>';
-                           }
-                           ?>
-                        </select>
-                     </div>
-
                      <!-- Plate Number -->
                      <div class="mb-3">
                         <label class="fw-semibold">Plate Number:</label>
-                        <select class="form-select" name="vehicle_id">
+                        <select class="form-select" name="vehicle_id" id="platenumber">
                            <option value="">None</option>
                            <?php
                            $sql = "SELECT vehicle_id, platenumber FROM vehicles";
@@ -361,6 +346,14 @@ require  "../global/head.php";
                            ?>
                         </select>
                      </div>
+
+                     <!-- Driver -->
+                     <div class="mb-3">
+                        <label class="fw-semibold">Driver:</label>
+                        <input type="text" class="form-control form-control-sm" id="driver_name" readonly>
+                        <input type="hidden" id="driver_id" name="driver_id" value="<?php echo isset($driver_id) ? $driver_id : ''; ?>"> <!-- Added hidden input for driver_id -->
+                     </div>
+
 
                      <!-- Cashier -->
                      <div class="mb-3">
@@ -387,6 +380,26 @@ require  "../global/head.php";
          </div>
       </div>
    </div>
+
+   <script>
+      // Add event listener to the plate number dropdown
+      document.getElementById('platenumber').addEventListener('change', function() {
+         var vehicle_id = this.value;
+         if (vehicle_id) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'get_driver.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+               if (xhr.readyState == 4 && xhr.status == 200) {
+                  var response = JSON.parse(xhr.responseText);
+                  document.getElementById('driver_name').value = response.driver_name;
+                  document.getElementById('driver_id').value = response.driver_id; // Set driver_id value
+               }
+            };
+            xhr.send('vehicle_id=' + vehicle_id);
+         }
+      });
+   </script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
