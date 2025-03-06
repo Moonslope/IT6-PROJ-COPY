@@ -2,7 +2,14 @@
 <html lang="en">
 
 <?php
+
+session_start();
 include "../Database/db_connect.php";
+
+if (!isset($_SESSION['cashier_id']) || empty($_SESSION['cashier_id'])) {
+   header("location: ../Login-Register/login.php");
+   exit();
+}
 
 $sql = "SELECT total_sales_today, total_sales_month FROM sales_summary";
 $result = $conn->query($sql);
@@ -148,7 +155,7 @@ require "../global/head.php";
          <div class="col d-flex gap-5 align-items-center justify-content-end me-5">
             <button class="btn btn-c text-white" data-bs-toggle="modal" data-bs-target="#travelPassModal">New Travel Pass <i class="bi bi-plus-circle-fill ms-2"></i></button>
             <a class="btn btn-c text-white" href="travel_pass_history.php">Travel Pass History <i class="bi bi-clock-history ms-2"></i></a>
-            <a class="btn btn-c text-white w-25" href="../Login-Register/Login.php">Log out <i class="bi bi-box-arrow-right ms-2"></i></a>
+            <a class="btn btn-c text-white w-25" href="../Login-Register/Logout.php">Log out <i class="bi bi-box-arrow-right ms-2"></i></a>
          </div>
       </div>
       <!-- Row for logo and buttons -->

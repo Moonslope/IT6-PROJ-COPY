@@ -2,7 +2,15 @@
 <html lang="en">
 
 <?php
+
+session_start();
+
 include "../Database/db_connect.php";
+
+if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
+   header("location: ../Login-Register/login.php");
+   exit();
+}
 
 $sql = "SELECT COUNT(*) AS total_cashiers FROM cashiers";
 $result = $conn->query($sql);
@@ -62,7 +70,7 @@ require "../global/head.php";
                   </div>
 
                   <div class="mx-3">
-                     <a href="../Login-Register/Login.php" class="btn btn-info w-100 border border-1 border-dark fw-semibold"><i class="bi bi-box-arrow-left me-2"></i>Log Out</a>
+                     <a href="../Login-Register/Logout.php" class="btn btn-info w-100 border border-1 border-dark fw-semibold"><i class="bi bi-box-arrow-left me-2"></i>Log Out</a>
                   </div>
                </div>
             </div>

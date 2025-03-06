@@ -1,7 +1,5 @@
 <?php
 
-use function PHPSTORM_META\sql_injection_subst;
-
 session_start();
 include "../Database/db_connect.php";
 
@@ -18,26 +16,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </script>";
       exit();
    }
-}
-
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-   $user = $_POST['username'];
-   $pass = $_POST['password'];
 
    $sql = "SELECT cashier_id, password FROM cashiers WHERE username=?";
 
    $stmt = $conn->prepare($sql);
-   $stmt->bind_param("s", $user);
+   $stmt->bind_param("s", $username);
 
    $stmt->execute();
    $stmt->store_result();
-   $stmt->bind_result($user_id, $stored_password);
+   $stmt->bind_result($cashier_id, $stored_password);
    $stmt->fetch();
 
-   if ($pass === $stored_password) {
-      //$_SESSION["cashier_id"] == $user_id;
+   if ($password === $stored_password) {
+      $_SESSION["cashier_id"] = $cashier_id;
       echo "<script>
       alert('Login Successfully');
       window.location.href= '../CashierUI/travel_pass_history.php';
@@ -51,6 +42,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $stmt->close();
    $conn->close();
 }
+
+
+
 
 
    // // User login verification
