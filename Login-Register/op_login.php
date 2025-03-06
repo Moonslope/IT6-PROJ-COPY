@@ -37,14 +37,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $stmt->fetch();
 
    if ($pass === $stored_password) {
-      $_SESSION["cashier_id"] == $user_id;
+      //$_SESSION["cashier_id"] == $user_id;
       echo "<script>
       alert('Login Successfully');
       window.location.href= '../CashierUI/travel_pass_history.php';
       </script>";
    } else {
       echo "<script>alert('Invalid credentials');
-      window.location.href = '../Authentication/login.php';
+      window.location.href = '../Login-Register/login.php';
       </script>";
    }
 
