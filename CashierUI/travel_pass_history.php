@@ -87,21 +87,13 @@ require "../global/head.php";
                         <input type="hidden" id="driver_id" name="driver_id" value="<?php echo isset($driver_id) ? $driver_id : ''; ?>"> <!-- Added hidden input for driver_id -->
                      </div>
 
-
                      <!-- Cashier -->
                      <div class="mb-3">
                         <label class="fw-semibold">Cashier:</label>
-                        <select class="form-select" name="cashier_id">
-                           <option value="">None</option>
-                           <?php
-                           $sql = "SELECT cashier_id, cashier_name FROM cashiers";
-                           $result = $conn->query($sql);
-                           while ($row = $result->fetch_assoc()) {
-                              echo '<option value="' . $row['cashier_id'] . '">' . $row['cashier_name'] . '</option>';
-                           }
-                           ?>
-                        </select>
+                        <input type="text" class="form-control form-control-sm" value="<?php echo $_SESSION['cashier_name']; ?>" readonly>
+                        <input type="hidden" name="cashier_id" value="<?php echo $_SESSION['cashier_id']; ?>">
                      </div>
+
 
                      <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -207,7 +199,8 @@ require "../global/head.php";
             <?php
             try {
                // Fetch travel pass details from the travel_pass_history view
-               $sql = "SELECT * FROM travel_pass_history ORDER BY travel_date AND departure_time DESC";
+               $sql = "SELECT * FROM travel_pass_history ORDER BY travel_date DESC, departure_time DESC";
+
                $result = $conn->query($sql);
 
                if ($result->num_rows > 0) {
