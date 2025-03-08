@@ -12,7 +12,10 @@ try {
     $conn->close();
 
 
-    header("Location: ../Driver/view_driver.php?success=1");
+    echo "<script>
+            alert('Driver record deleted successfully!');
+            window.location.href = '../Driver/view_driver.php'; 
+         </script>";
     exit();
 } catch (\Exception $e) {
     $conn->close();

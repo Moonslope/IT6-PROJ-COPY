@@ -13,8 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    }
 
    // Get the current time
-   date_default_timezone_set('Asia/Manila'); // Change to your timezone
-   $departure_time = date("Y-m-d h:i:s A"); // 12-hour format with AM/PM
+   $departure_time = date("Y-m-d H:i:s");
 
    // Update the travel_pass table with the departure time
    $query = "UPDATE travel_pass SET departure_time = ? WHERE travel_pass_id = ?";

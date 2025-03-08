@@ -53,6 +53,7 @@ require  "../global/head.php";
          </div>
 
          <div class="col d-flex gap-5 align-items-center justify-content-end me-5">
+            <button class="btn btn-c text-white" data-bs-toggle="modal" data-bs-target="#travelPassModal">New Travel Pass <i class="bi bi-plus-circle-fill ms-2"></i></button>
             <a class="btn btn-c text-white" href="travel_pass_history.php">Travel Pass History <i class="bi bi-clock-history ms-2"></i></a>
             <a class="btn btn-c text-white w-25" href="../Login-Register/Login.php">Log out <i class="bi bi-box-arrow-right ms-2"></i></a>
          </div>
@@ -71,16 +72,14 @@ require  "../global/head.php";
                      </div>
                   </div>
 
-                  <div class="row ">
+                  <div class="row">
                      <!-- Route -->
                      <div class="col d-flex gap-3 mb-2">
                         <label class="fw-semibold">Route:</label>
                         <p><?php echo $travel_pass['route_name'] ?></p>
                      </div>
                      <!-- Route -->
-                  </div>
 
-                  <div class="row">
                      <!-- Card Color -->
                      <div class="col d-flex gap-3 ">
                         <label class="fw-semibold">Card Color:</label>
@@ -91,11 +90,13 @@ require  "../global/head.php";
 
                   <div class="row d-flex justify-content-center align-items-center border border-bottom-0 border-start-0 border-end-0 border-2">
                      <form method="POST" action="op_route_point.php?travel_pass_id=<?php echo $_GET['travel_pass_id']; ?>">
-                        <div class="col mt-3">
-                           <label class="fw-semibold mb-2" for="route_point">Route Point</label>
-                           <select class="form-select mb-3" id="route_point" name="route_point" required>
-                              <option value="">None</option>
-                           </select>
+                        <div class="col">
+                           <div class="mt-4">
+                              <label class="fw-semibold mb-2" for="route_point">Route Point</label>
+                              <select class="form-select mb-3" id="route_point" name="route_point">
+                                 <option value="">None</option>
+                              </select>
+                           </div>
 
                            <div>
                               <label for="passenger_count" class="fw-semibold">Passenger</label>
