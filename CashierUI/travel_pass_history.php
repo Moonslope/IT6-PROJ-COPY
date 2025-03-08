@@ -207,7 +207,7 @@ require "../global/head.php";
             <?php
             try {
                // Fetch travel pass details from the travel_pass_history view
-               $sql = "SELECT * FROM travel_pass_history ORDER BY travel_date DESC";
+               $sql = "SELECT * FROM travel_pass_history ORDER BY travel_date AND departure_time DESC";
                $result = $conn->query($sql);
 
                if ($result->num_rows > 0) {

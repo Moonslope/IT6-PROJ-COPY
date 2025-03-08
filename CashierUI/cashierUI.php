@@ -3,11 +3,6 @@
 <?php
 include "../Database/db_connect.php";
 
-if (!isset($_SESSION['cashier_id']) || empty($_SESSION['cashier_id'])) {
-   header("location: ../Login-Register/login.php");
-   exit();
-}
-
 // Get the latest travel pass ID from URL
 $travel_pass_id = isset($_GET['travel_pass_id']) ? $_GET['travel_pass_id'] : null;
 
