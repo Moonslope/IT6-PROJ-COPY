@@ -38,7 +38,7 @@ require "../global/head.php";
                      <!-- Card Color -->
                      <div class="mb-3">
                         <label class="fw-semibold">Card Color:</label>
-                        <select class="form-select" name="card_color_id">
+                        <select class="form-select" name="card_color_id" required>
                            <option value="">None</option>
                            <?php
                            $sql = "SELECT card_color_id, card_color_name FROM card_colors";
@@ -53,7 +53,7 @@ require "../global/head.php";
                      <!-- Route -->
                      <div class="mb-3">
                         <label class="fw-semibold">Route:</label>
-                        <select class="form-select" name="route_id">
+                        <select class="form-select" name="route_id" required>
                            <option value="">None</option>
                            <?php
                            $sql = "SELECT route_id, route_name FROM routes";
@@ -68,7 +68,7 @@ require "../global/head.php";
                      <!-- Plate Number -->
                      <div class="mb-3">
                         <label class="fw-semibold">Plate Number:</label>
-                        <select class="form-select" name="vehicle_id" id="platenumber">
+                        <select class="form-select" name="vehicle_id" id="platenumber" required>
                            <option value="">None</option>
                            <?php
                            $sql = "SELECT vehicle_id, platenumber FROM vehicles";
@@ -93,7 +93,6 @@ require "../global/head.php";
                         <input type="text" class="form-control form-control-sm" value="<?php echo $_SESSION['cashier_name']; ?>" readonly>
                         <input type="hidden" name="cashier_id" value="<?php echo $_SESSION['cashier_id']; ?>">
                      </div>
-
 
                      <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

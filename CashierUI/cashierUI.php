@@ -90,10 +90,11 @@ require  "../global/head.php";
 
                   <div class="row d-flex justify-content-center align-items-center border border-bottom-0 border-start-0 border-end-0 border-2">
                      <form method="POST" action="op_route_point.php?travel_pass_id=<?php echo $_GET['travel_pass_id']; ?>">
+                        <input type="hidden" name="travel_pass_id" value="<?php echo $_GET['travel_pass_id']; ?>">
                         <div class="col">
                            <div class="mt-4">
                               <label class="fw-semibold mb-2" for="route_point">Route Point</label>
-                              <select class="form-select mb-3" id="route_point" name="route_point">
+                              <select class="form-select mb-3" id="route_point" name="route_point" required>
                                  <option value="">None</option>
                               </select>
                            </div>
@@ -171,6 +172,7 @@ require  "../global/head.php";
                         <div class="card shadow-lg">
                            <div class="card-body">
                               <form method="POST" action="depart_operation.php">
+                                 <input type="hidden" name="travel_pass_id" value="<?php echo $_GET['travel_pass_id']; ?>">
                                  <div class="row mb-4">
 
                                     <!-- Plate Number -->

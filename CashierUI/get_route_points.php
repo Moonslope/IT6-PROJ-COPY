@@ -1,10 +1,6 @@
 <?php
 include "../Database/db_connect.php";
 
-if (!isset($_GET['travel_pass_id'])) {
-   die("Error: No travel_pass_id received.");
-}
-
 $travel_pass_id = $_GET['travel_pass_id'];
 
 // Get the route_id from travel_pass
@@ -26,7 +22,7 @@ $dest_query->bind_param("i", $route_id);
 $dest_query->execute();
 $dest_result = $dest_query->get_result();
 
-// Generate dropdown options
+//dropdown options
 $options = '<option value="">None</option>';
 while ($row = $dest_result->fetch_assoc()) {
    $options .= '<option value="' . $row['route_point_id'] . '">' . $row['route_point_name'] . '</option>';
