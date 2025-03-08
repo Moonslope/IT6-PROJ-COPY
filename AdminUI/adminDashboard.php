@@ -27,6 +27,7 @@ $rowww = $resulttt->fetch_assoc();
 $title = "Admin Dashboard";
 require "../global/head.php";
 ?>
+<!-- s -->
 
 <body>
    <div class="con-bg container-fluid vh-100">
