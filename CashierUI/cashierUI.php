@@ -352,7 +352,7 @@ require  "../global/head.php";
                      <!-- Driver -->
                      <div class="mb-3">
                         <label class="fw-semibold">Driver:</label>
-                        <input type="text" class="form-control form-control-sm" id="driver_name" readonly>
+                        <input type="text" class="form-control form-control-sm" id="driver_name">
                         <input type="hidden" id="driver_id" name="driver_id" value="<?php echo isset($driver_id) ? $driver_id : ''; ?>"> <!-- Added hidden input for driver_id -->
                      </div>
 

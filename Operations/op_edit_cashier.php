@@ -17,8 +17,5 @@ $stmt->execute();
 $stmt->close();
 $conn->close();
 
-echo "<script>
-            alert('Cashier record updated successfully!');
-            window.location.href = '../../Cashier/view_cashier.php';  // Correct path
-         </script>";
+header('Location: ../Cashier/view_cashier.php');
 exit();
