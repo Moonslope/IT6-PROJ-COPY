@@ -32,6 +32,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    if ($row = $result->fetch_assoc()) {
       // Update passenger count if route_point_id already exists
       $new_passenger_count = $row['passenger_count'] + $passenger_count;
+
+      if ($new_passenger_count > 16) {
+         die("Error: total number of passengers cannot exceed 16.");
+      }
+
       $update_query = "UPDATE route_route_points 
                          SET passenger_count = ? 
                          WHERE route_id = ? AND route_point_id = ? AND travel_pass_id = ?";
