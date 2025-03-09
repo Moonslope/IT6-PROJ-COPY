@@ -89,7 +89,7 @@ require  "../global/head.php";
                   </div>
 
                   <div class="row d-flex justify-content-center align-items-center border border-bottom-0 border-start-0 border-end-0 border-2">
-                     <form method="POST" action="op_route_point.php?travel_pass_id=<?php echo $_GET['travel_pass_id']; ?>">
+                     <form method="POST" action="op_route_point.php?travel_pass_id=<?php echo $_GET['travel_pass_id']; ?>" onsubmit="return validatePassengers();">
                         <input type="hidden" name="travel_pass_id" value="<?php echo $_GET['travel_pass_id']; ?>">
                         <div class="col">
                            <div class="mt-4">
@@ -383,7 +383,42 @@ require  "../global/head.php";
       </div>
    </div>
 
+
+
    <script>
+      // Function to validate the number of passengers before form submission
+      function validatePassengers() {
+         // Get the total number of passengers from the PHP variable
+         var totalPassengers = <?php echo $total_passengers; ?>;
+         var newPassengers = parseInt(document.getElementById('passenger_count').value);
+
+         // Check if the total number of passengers exceeds 16
+         if (totalPassengers + newPassengers > 16) {
+            alert("Error: Total number of passengers cannot exceed 16.");
+            return false; // Prevent form submission
+         }
+         return true; // Allow form submission
+      }
+
+      // Disable the "Okay" button if total passengers are 16 or more
+      window.onload = function() {
+         // Get the total number of passengers from the PHP variable
+         var totalPassengers = <?php echo $total_passengers; ?>;
+
+         // Check if the total number of passengers is 16 or more
+         if (totalPassengers >= 16) {
+            // Disable the "Okay" button if the total number of passengers is 16 or more
+            document.getElementById('okayButton').disabled = true;
+         }
+
+         // Check if the total number of passengers is less than 16
+         if (totalPassengers < 16) {
+            // Enable the "Depart" button if the total number of passengers is less than 16
+            document.getElementById('departButton').disabled = true;
+         }
+      };
+
+
       // Add event listener to the plate number dropdown
       document.getElementById('platenumber').addEventListener('change', function() {
          var vehicle_id = this.value;
