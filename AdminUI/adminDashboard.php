@@ -11,6 +11,12 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
    header("location: ../Login-Register/login.php");
    exit();
 }
+// Check if this is the first login session
+$showModal = false;
+if (!isset($_SESSION['logged_in'])) {
+   $_SESSION['logged_in'] = true; // Set session variable
+   $showModal = true; // Show modal on first login
+}
 
 $sql = "SELECT COUNT(*) AS total_cashiers FROM cashiers";
 $result = $conn->query($sql);
@@ -135,6 +141,33 @@ require "../global/head.php";
       </div>
    </div>
    </div>
+   <!-- Modal Structure -->
+   <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="welcomeModalLabel">Welcome!</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               <p>You have successfully logged in.</p>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-info" data-bs-dismiss="modal">OK</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Bootstrap Script to Show Modal Automatically -->
+   <script>
+      document.addEventListener("DOMContentLoaded", function() {
+         <?php if ($showModal): ?>
+            var welcomeModal = new bootstrap.Modal(document.getElementById("welcomeModal"));
+            welcomeModal.show();
+         <?php endif; ?>
+      });
+   </script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 

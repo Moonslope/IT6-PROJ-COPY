@@ -59,8 +59,6 @@ require "../global/head.php";
                                             <div class="row mt-4">
                                                 <div class="col col-11">
                                                     <button type="submit" class="btn-c btn text-white rounded-pill w-100 ">Login</button>
-
-                                                    <p class="text-center mt-3">Don't have an account? <a class="text-primary" href="Register.php">Register</a></p>
                                                 </div>
                                             </div>
                                         </form>
@@ -75,6 +73,36 @@ require "../global/head.php";
 
         </div>
     </div>
+
+    <!-- Log in Failed Modal -->
+    <div class="modal fade" id="failedModal" tabindex="-1" aria-labelledby="failedModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="failedModalLabel">Login failed</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Account doesn't exist or wrong credentials.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Trigger failed Modal if failed Parameter Exists -->
+    <?php if (isset($_GET['failed']) && $_GET['failed'] == 1): ?>
+        <script>
+            window.addEventListener('load', function() {
+                var failedModal = new bootstrap.Modal(document.getElementById('failedModal'));
+                failedModal.show();
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

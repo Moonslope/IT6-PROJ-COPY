@@ -9,10 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    // Admin login
    if ($username == "admin" && $password == "admin") {
       $_SESSION['username'] = $username;
-      echo "<script>
-               alert('Admin login successful!');
-               window.location.href = '../AdminUI/adminDashboard.php';
-            </script>";
+      header('Location: ../AdminUI/adminDashboard.php');
       exit();
    }
 
@@ -30,14 +27,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $_SESSION["cashier_id"] = $cashier_id;
       $_SESSION["cashier_name"] = $cashier_name;
 
-      echo "<script>
-      alert('Login Successfully');
-      window.location.href= '../CashierUI/travel_pass_history.php';
-      </script>";
+      header('Location: ../CashierUI/travel_pass_history.php');
    } else {
-      echo "<script>alert('Invalid credentials');
-      window.location.href = '../Login-Register/login.php';
-      </script>";
+      header('Location: Login.php?failed=1');
    }
 
    $stmt->close();

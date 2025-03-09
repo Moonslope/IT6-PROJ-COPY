@@ -11,6 +11,15 @@ if (!isset($_SESSION['cashier_id']) || empty($_SESSION['cashier_id'])) {
    exit();
 }
 
+$cashier_name = $_SESSION['cashier_name'];
+
+$showModal = false;
+if (!isset($_SESSION['logged_in'])) {
+   $_SESSION['logged_in'] = true; // Set session variable
+   $showModal = true; // Show modal on first login
+}
+
+
 $sql = "SELECT total_sales_today, total_sales_month FROM sales_summary";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
@@ -322,6 +331,34 @@ require "../global/head.php";
             };
             xhr.send('vehicle_id=' + vehicle_id);
          }
+      });
+   </script>
+
+   <!-- Modal Structure -->
+   <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="welcomeModalLabel">Welcome, <?php echo $cashier_name ?>!</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               <p>You have successfully logged in.</p>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-info" data-bs-dismiss="modal">OK</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Bootstrap Script to Show Modal Automatically -->
+   <script>
+      document.addEventListener("DOMContentLoaded", function() {
+         <?php if ($showModal): ?>
+            var welcomeModal = new bootstrap.Modal(document.getElementById("welcomeModal"));
+            welcomeModal.show();
+         <?php endif; ?>
       });
    </script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
