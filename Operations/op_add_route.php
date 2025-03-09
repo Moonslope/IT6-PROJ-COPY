@@ -9,7 +9,7 @@ if ($method == 'POST') {
       $origin = $_POST['origin'];
       $destination = $_POST['destination'];
 
-      $sql = "INSERT INTO routes(route_name, route_start, route_end) VALUES (?, ?, ?)";
+      $sql = "INSERT INTO routes(route_name, route_origin, route_destination) VALUES (?, ?, ?)";
 
       $stmt = $conn->prepare($sql);
       $stmt->bind_param("sss", $route_name, $origin, $destination);

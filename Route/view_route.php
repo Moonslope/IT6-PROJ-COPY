@@ -105,8 +105,8 @@ require "../global/head.php";
                                        </div>
                                        <div>
                                           <p class="mb-1"><span><strong>Route Name: </strong><?php echo $row['route_name']; ?></span><br></p>
-                                          <p class="mb-1"><span><strong>Origin : </strong><?php echo $row['route_start']; ?></span><br></p>
-                                          <p class="mb-1"><span><strong>Destination : </strong><?php echo $row['route_end']; ?></span><br></p>
+                                          <p class="mb-1"><span><strong>Origin : </strong><?php echo $row['route_origin']; ?></span><br></p>
+                                          <p class="mb-1"><span><strong>Destination : </strong><?php echo $row['route_destination']; ?></span><br></p>
                                        </div>
                                     </div>
                                     <div class="group-btn">
@@ -133,8 +133,8 @@ require "../global/head.php";
       </div>
    </div>
    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+   <!-- Modal -->
+   <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
          <div class="modal-content">
             <div class="modal-header bg-danger text-white">

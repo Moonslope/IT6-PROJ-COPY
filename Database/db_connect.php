@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "l300_copy1";
+$database = "cocop";
 
 try {
    $conn = new mysqli($servername, $username, $password, $database);

@@ -6,7 +6,7 @@ $route_name = $_POST['route_name'];
 $origin = $_POST['origin'];
 $destination = $_POST['destination'];
 
-$sql = "UPDATE routes SET route_name=?, route_start=?, route_end=? WHERE route_id=?";
+$sql = "UPDATE routes SET route_name=?, route_origin=?, route_destination=? WHERE route_id=?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ssss", $route_name, $origin, $destination, $id);
 

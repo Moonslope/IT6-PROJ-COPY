@@ -63,7 +63,7 @@ require  "../global/head.php";
       <div class="row">
          <!-- For the destination -->
          <div class="col col-3 ">
-            <div class="card shadow-lg">
+            <div class="card shadow-lg " style="height: 490px;">
                <div class="card-body">
                   <div class="row border border-start-0 border-end-0 border-top-0 border-2 mb-4">
                      <div class="col d-flex justify-content-center align-items-center gap-3 pb-3">
@@ -156,7 +156,7 @@ require  "../global/head.php";
                      <div class="col col-9">
                         <div>
                            <p class="fw-semibold fs-5 mb-0">Caltransco</p>
-                           <p class="fw-semibold fs-5 ">Travel Pass(Davao)</p>
+                           <p class="fw-semibold fs-5">Travel Pass(Davao)</p>
                         </div>
                      </div>
 
@@ -170,20 +170,20 @@ require  "../global/head.php";
                   <div class="row">
                      <div class="col pb-3">
                         <div class="card shadow-lg">
-                           <div class="card-body">
+                           <div class="card-body pb-0 mb-0">
                               <form method="POST" action="depart_operation.php">
                                  <input type="hidden" name="travel_pass_id" value="<?php echo $_GET['travel_pass_id']; ?>">
-                                 <div class="row mb-4">
+                                 <div class="row mb-2">
 
                                     <!-- Plate Number -->
-                                    <div class="col d-flex gap-3 ">
+                                    <div class="col d-flex gap-3">
                                        <label class="fw-semibold">Plate Number:</label>
                                        <p><?php echo $travel_pass['platenumber'] ?></p>
                                     </div>
                                     <!-- Plate Number -->
 
                                     <!-- Driver -->
-                                    <div class="col d-flex gap-3 ">
+                                    <div class="col d-flex gap-3">
                                        <label class="fw-semibold">Driver:</label>
                                        <p><?php echo $travel_pass['driver_name'] ?></p>
                                     </div>
@@ -198,7 +198,7 @@ require  "../global/head.php";
                                  </div>
 
                                  <div class="row mt-2">
-                                    <div class="col">
+                                    <div class="col" style="max-height: 205px; overflow-y: auto;">
                                        <table class="table table-bordered text-center">
                                           <thead class="table-secondary">
                                              <tr>
@@ -210,7 +210,6 @@ require  "../global/head.php";
                                           </thead>
                                           <tbody>
                                              <?php
-
                                              $total_passengers = 0;
                                              $total_fare = 0;
 
@@ -231,13 +230,13 @@ require  "../global/head.php";
                                              if ($travel_pass_id) {
                                                 // Query to get route point data for this travel pass
                                                 $sql = "SELECT 
-                                                            rp.route_point_name,  
-                                                            rrp.fare, 
-                                                            SUM(rrp.passenger_count) AS total_passengers
-                                                      FROM route_points rp
-                                                      JOIN route_route_points rrp ON rp.route_point_id = rrp.route_point_id
-                                                      WHERE rrp.travel_pass_id = ?
-                                                      GROUP BY rp.route_point_name, rrp.fare";
+                                                                rp.route_point_name,  
+                                                                rrp.fare, 
+                                                                SUM(rrp.passenger_count) AS total_passengers
+                                                            FROM route_points rp
+                                                            JOIN route_route_points rrp ON rp.route_point_id = rrp.route_point_id
+                                                            WHERE rrp.travel_pass_id = ?
+                                                            GROUP BY rp.route_point_name, rrp.fare";
 
                                                 $stmt = $conn->prepare($sql);
                                                 $stmt->bind_param("i", $travel_pass_id);
@@ -256,30 +255,31 @@ require  "../global/head.php";
                                                    $total_fare += $total_fare_per_route;
 
                                                    echo "<tr>
-                                                               <td>{$route_point_name}</td>
-                                                               <td>{$fare}</td>
-                                                               <td>{$passenger_count}</td>
-                                                               <td>{$total_fare_per_route}</td>
-                                                         </tr>";
+                                                                <td>{$route_point_name}</td>
+                                                                <td>{$fare}</td>
+                                                                <td>{$passenger_count}</td>
+                                                                <td>{$total_fare_per_route}</td>
+                                                            </tr>";
                                                 }
                                              }
 
                                              // Display the totals row
                                              echo "<tr>
-                                                      <td colspan='2'><strong>TOTAL:</strong></td>
-                                                      <td><strong>$total_passengers</strong></td>
-                                                      <td><strong>$total_fare</strong></td>
-                                                   </tr>";
+                                                        <td colspan='2'><strong>TOTAL:</strong></td>
+                                                        <td><strong>$total_passengers</strong></td>
+                                                        <td><strong>$total_fare</strong></td>
+                                                    </tr>";
                                              ?>
                                           </tbody>
                                        </table>
-
                                     </div>
                                  </div>
 
-                                 <div class="row mt-3">
+                                 <div class="row mt-4 mb-2">
                                     <div class="col d-flex gap-3 justify-content-end">
-                                       <button type="submit" class="btn btn-info w-25 fw-semibold" id="departButton">SAVE <i class="bi bi-box-arrow-down ms-2"></i></i></button>
+                                       <button type="submit" class="btn btn-info w-25 fw-semibold" id="departButton">
+                                          SAVE <i class="bi bi-box-arrow-down ms-2"></i>
+                                       </button>
                                     </div>
                                  </div>
                               </form>

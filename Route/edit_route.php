@@ -8,12 +8,13 @@ $id = $_GET['id'];
 $sql = "SELECT * FROM routes WHERE route_id=" . $id;
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
+
 $title = 'Route Lists | ' . $row['route_name'];
 require "../global/head.php";
 ?>
 
 <body>
-   
+
    <div class="con-bg container-fluid vh-100">
       <div class="row border border-start-0 border-end-0 border-top-0 border-2 border-dark pb-2">
          <div class="col d-flex gap-2 ms-2 mt-2">
@@ -90,7 +91,7 @@ require "../global/head.php";
                                     <div class="col">
                                        <label for="origin" class="fw-semibold mb-3">Origin</label>
                                        <input type="text" id="origin" name="origin" value="<?php echo $row['route_start'] ?>" class="form-control border-dark" required>
-                                    </div> 
+                                    </div>
 
                                     <div class="col">
                                        <label for="destination" class="fw-semibold mb-3">Destination</label>

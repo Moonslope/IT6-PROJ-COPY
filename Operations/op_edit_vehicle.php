@@ -3,47 +3,55 @@ include "../Database/db_connect.php";
 
 $id = $_POST['id'];
 $platenumber = $_POST['platenumber'];
-$driver = $_POST['driver'];
+$driver_id = $_POST['driver_id'];
 $vehicle_model = $_POST['vehicle_model'];
 $transmission_type = $_POST['transmission_type'];
 $vehicle_color = $_POST['vehicle_color'];
 
-// Ensure $id is an integer (if applicable)
-$id = intval($id);
-
-// Check if the driver is already assigned to another vehicle
-$sql_check = "SELECT * FROM vehicles WHERE driver_id = (SELECT driver_id FROM drivers WHERE driver_name = ?) AND vehicle_id != ?";
+//Check if the driver is already assigned to another vehicle
+$sql_check = "SELECT * FROM vehicles WHERE driver_id = ? AND vehicle_id != ?";
 $stmt_check = $conn->prepare($sql_check);
-$stmt_check->bind_param("si", $driver, $id);
+$stmt_check->bind_param("ii", $driver_id, $id);
 $stmt_check->execute();
 $result_check = $stmt_check->get_result();
+$stmt_check->close();
 
 if ($result_check->num_rows > 0) {
    echo "<script>
-            alert('This driver is already assigned to another vehicle.');
-            window.location.href = '../../Vehicle/edit_vehicle.php?id=$id';
-          </script>";
-} else {
-   $sql = "UPDATE vehicles SET platenumber = ?, driver = ?, vehicle_model = ?, transmission_type = ?, vehicle_color = ? WHERE vehicle_id = ?";
-   $stmt = $conn->prepare($sql);
+            window.location.href = '../Vehicle/edit_vehicle.php?id=$id&error=" . urlencode("This driver is already assigned to another vehicle. Please select another driver.") . "';
+         </script>";
+   exit();
+}
 
-   if ($stmt) {
-      // Bind parameters correctly (assuming vehicle_id is an integer)
-      $stmt->bind_param("sssssi", $platenumber, $driver, $vehicle_model, $transmission_type, $vehicle_color, $id);
+//Get driver name
+$sql_get_driver = "SELECT driver_name FROM drivers WHERE driver_id = ?";
+$stmt_driver = $conn->prepare($sql_get_driver);
+$stmt_driver->bind_param("i", $driver_id);
+$stmt_driver->execute();
+$result_driver = $stmt_driver->get_result();
+$row_driver = $result_driver->fetch_assoc();
+$stmt_driver->close();
+$driver_name = $row_driver['driver_name']; // Get driver name
 
-      if ($stmt->execute()) {
-         echo "<script>
-                    alert('Vehicle record updated successfully!');
-                    window.location.href = '../../Vehicle/view_vehicle.php';
-                  </script>";
-      } else {
-         echo "<script>alert('Error updating record: " . $stmt->error . "');</script>";
-      }
+//Update the vehicle record
+$sql_update = "UPDATE vehicles 
+               SET driver_id = ?, driver = ?, platenumber = ?, vehicle_model = ?, transmission_type = ?, vehicle_color = ? 
+               WHERE vehicle_id = ?";
+$stmt_update = $conn->prepare($sql_update);
 
-      $stmt->close();
-   } else {
-      echo "<script>alert('Error preparing statement');</script>";
+if ($stmt_update) {
+   $stmt_update->bind_param("isssssi", $driver_id, $driver_name, $platenumber, $vehicle_model, $transmission_type, $vehicle_color, $id);
+
+   if ($stmt_update->execute()) {
+      echo "<script>
+            window.location.href = '../Vehicle/edit_vehicle.php?id=$id&success=" . urlencode("Vehicle record updated successfully!") . "';
+         </script>";
+      exit();
    }
+
+   $stmt_update->close();
+} else {
+   echo "<script>alert('Error preparing statement');</script>";
 }
 
 $conn->close();

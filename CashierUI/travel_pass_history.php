@@ -20,12 +20,13 @@ if (!isset($_SESSION['logged_in'])) {
 }
 
 
-$sql = "SELECT total_sales_today, total_sales_month FROM sales_summary";
+$sql = "SELECT total_fares_today, total_fares_month, total_fares_year FROM total_fares_summary";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 
-$total_today = $row['total_sales_today'] ?? 0;
-$total_month = $row['total_sales_month'] ?? 0;
+$total_today = $row['total_fares_today'] ?? 0;
+$total_month = $row['total_fares_month'] ?? 0;
+$total_year = $row['total_fares_year'] ?? 0;
 
 $title = 'View | Travel Pass History';
 require "../global/head.php";
@@ -205,6 +206,7 @@ require "../global/head.php";
                <div class="modal-body">
                   <p class="fs-5 mb-3">Today: <strong>₱<?= number_format($total_today, 2) ?></strong></p>
                   <p class="fs-5">Month: <strong>₱<?= number_format($total_month, 2) ?></strong></p>
+                  <p class="fs-5">Month: <strong>₱<?= number_format($total_year, 2) ?></strong></p>
                </div>
             </div>
          </div>
@@ -212,7 +214,7 @@ require "../global/head.php";
 
       <!-- Table -->
       <div class="row">
-         <div class="col-12" style="max-height: 500px; overflow-y: auto;">
+         <div class="col-12" style="max-height: 450px; overflow-y: auto;">
             <?php
             try {
                // Fetch travel pass details from the travel_pass_history view

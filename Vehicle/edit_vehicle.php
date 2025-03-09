@@ -5,10 +5,21 @@
 include "../Database/db_connect.php";
 
 $id = $_GET['id'];
-$sql = "SELECT * FROM vehicles WHERE vehicle_id=" . $id;
-$result = $conn->query($sql);
-$row = $result->fetch_assoc();
-$title = 'Vehicle Lists | ' . $row['platenumber'];
+
+// Fetch the vehicle details, including the assigned driver ID
+$sql_vehicle = "SELECT * FROM vehicles WHERE vehicle_id = ?";
+$stmt_vehicle = $conn->prepare($sql_vehicle);
+$stmt_vehicle->bind_param("i", $id);
+$stmt_vehicle->execute();
+$result_vehicle = $stmt_vehicle->get_result();
+$row_vehicle = $result_vehicle->fetch_assoc();
+$stmt_vehicle->close();
+
+// Fetch the list of all drivers
+$sql_driver = "SELECT driver_id, driver_name FROM drivers";
+$result_driver = $conn->query($sql_driver);
+
+$title = 'Vehicle Lists | ' . $row_vehicle['platenumber'];
 require "../global/head.php";
 ?>
 
@@ -77,32 +88,27 @@ require "../global/head.php";
 
                                 <div class="card shadow-lg bg-light ">
                                     <div class="card-body">
-                                        <form action="../Operations//op_edit_vehicle.php" method="POST">
+                                        <form action="../Operations/op_edit_vehicle.php" method="POST">
                                             <input type="hidden" name="id" value="<?php echo $id; ?>">
                                             <div class="row">
 
                                                 <div class="col">
                                                     <label for="platenumber" class="fw-semibold mb-3">Plate Number</label>
-                                                    <input type="text" id="platenumber" name="platenumber" value="<?php echo $row['platenumber'] ?>" class="form-control w-100 border-dark" required>
+                                                    <input type="text" id="platenumber" name="platenumber" value="<?php echo $row_vehicle['platenumber'] ?>" class="form-control w-100 border-dark" required>
                                                 </div>
 
                                                 <div class="col">
-                                                    <label class="fw-semibold" for="driver">Assign Driver</label>
-                                                    <select class="form-select border border-dark mt-3" id="driver" name="driver">
+                                                    <label for="driver_id" class="fw-semibold mb-3">Driver</label>
+                                                    <select class="form-select border border-dark" name="driver_id" id="driver_id">
                                                         <option value="">None</option>
                                                         <?php
-                                                        try {
-                                                            $sqll = "SELECT * FROM drivers";
-                                                            $resultt = $conn->query($sqll);
-
-                                                            while ($roww = $resultt->fetch_assoc()) {
-                                                                echo '<option value="' . $roww['driver_name'] . '">' . $roww['driver_name'] . '</option>';
-                                                            }
-                                                            $conn->close();
-                                                        } catch (\Exception $e) {
-                                                            die($e);
-                                                        }
+                                                        while ($driver = $result_driver->fetch_assoc()) {
+                                                            $selected = ($row_vehicle['driver_id'] == $driver['driver_id']) ? "selected" : "";
                                                         ?>
+                                                            <option value="<?php echo $driver['driver_id']; ?>" <?php echo $selected; ?>>
+                                                                <?php echo $driver['driver_name']; ?>
+                                                            </option>
+                                                        <?php } ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -110,23 +116,20 @@ require "../global/head.php";
                                             <div class="row mt-4 mb-5">
                                                 <div class="col">
                                                     <label for="vehicle_model" class="fw-semibold mb-3">Vehicle Model</label>
-                                                    <input type="text" id="vehicle_model" name="vehicle_model" value="<?php echo $row['vehicle_model'] ?>" class="form-control border-dark" required>
+                                                    <input type="text" id="vehicle_model" name="vehicle_model" value="<?php echo $row_vehicle['vehicle_model'] ?>" class="form-control border-dark" required>
                                                 </div>
 
                                                 <div class="col">
                                                     <label for="transmission_type" class="fw-semibold mb-3">Transmission Type</label>
-                                                    <select class="form-select border border-dark" name="transmission_type" id="transmission_type">
-                                                        <option value="">None</option>
-                                                        <option value="Manual"> <?php echo (isset($_POST['transmission_type']) && $_POST['transmission_type'] == "Manual") ? "Selected" : ""; ?>Manual</option>
-
-                                                        <option value="Automatic"> <?php echo (isset($_POST['transmission_type']) && $_POST['transmission_type'] == "Automatic") ? "Selected" : ""; ?>Automatic</option>
+                                                    <select class="form-select border border-dark" name="transmission_type" id="transmission_type" required>
+                                                        <option value="Manual" <?php echo ($row_vehicle['transmission_type'] == "Manual") ? "selected" : ""; ?>>Manual</option>
+                                                        <option value="Automatic" <?php echo ($row_vehicle['transmission_type'] == "Automatic") ? "selected" : ""; ?>>Automatic</option>
                                                     </select>
-
-
                                                 </div>
+
                                                 <div class="col">
                                                     <label for="vehicle_color" class="fw-semibold mb-3">Vehicle Color</label>
-                                                    <input type="text" id="vehicle_color" name="vehicle_color" value="<?php echo $row['vehicle_color'] ?>" class="form-control border-dark" required>
+                                                    <input type="text" id="vehicle_color" name="vehicle_color" value="<?php echo $row_vehicle['vehicle_color'] ?>" class="form-control border-dark" required>
                                                 </div>
                                             </div>
 
@@ -135,7 +138,7 @@ require "../global/head.php";
                                                     <a href="view_vehicle.php" class="btn btn-outline-info w-100 text-dark fw-semibold">CANCEL</a>
                                                 </div>
                                                 <div class="col">
-                                                    <button type="submit" class="btn btn-h w-100 border-dark fw-semibold"><i class="bi bi-floppy-fill me-2"></i> Save Changes </button>
+                                                    <button type="submit" class="btn btn-info w-100 border-dark fw-semibold"><i class="bi bi-floppy-fill me-2"></i> Save Changes </button>
                                                 </div>
                                             </div>
                                         </form>
@@ -150,6 +153,68 @@ require "../global/head.php";
         </div>
     </div>
     </div>
+
+    <!-- Error Modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content ">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="errorModalLabel">Notification</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="errorMessage">
+                    <!-- Error message will be inserted here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title" id="successModalLabel">Updated</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="successMessage">
+                    <!-- Success message will be inserted here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="closeSuccessModal" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const errorMessage = "<?php echo isset($_GET['error']) ? $_GET['error'] : ''; ?>";
+            const successMessage = "<?php echo isset($_GET['success']) ? $_GET['success'] : ''; ?>";
+
+            if (errorMessage) {
+                document.getElementById("errorMessage").innerText = errorMessage;
+                var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                errorModal.show();
+            }
+
+            if (successMessage) {
+                document.getElementById("successMessage").innerText = successMessage;
+                var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                successModal.show();
+
+                // Redirect to view_vehicle.php after closing the modal
+                document.getElementById("closeSuccessModal").addEventListener("click", function() {
+                    window.location.href = "view_vehicle.php";
+                });
+            }
+        });
+    </script>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
