@@ -53,7 +53,6 @@ require  "../global/head.php";
          </div>
 
          <div class="col d-flex gap-5 align-items-center justify-content-end me-5">
-            <button class="btn btn-c text-white" data-bs-toggle="modal" data-bs-target="#travelPassModal">New Travel Pass <i class="bi bi-plus-circle-fill ms-2"></i></button>
             <a class="btn btn-c text-white" href="travel_pass_history.php">Travel Pass History <i class="bi bi-clock-history ms-2"></i></a>
             <a class="btn btn-c text-white w-25" href="../Login-Register/Login.php">Log out <i class="bi bi-box-arrow-right ms-2"></i></a>
          </div>
@@ -292,94 +291,6 @@ require  "../global/head.php";
          </div>
          <!-- For table -->
 
-      </div>
-
-      <!-- Modal for create travel pass-->
-      <div class="modal fade" id="travelPassModal" tabindex="-1" aria-labelledby="travelPassModalLabel" aria-hidden="true">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="travelPassModalLabel">Create Travel Pass</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-               </div>
-               <div class="modal-body">
-                  <form method="POST" action="./op_create_travel_pass.php">
-                     <!-- Card Color -->
-                     <div class="mb-3">
-                        <label class="fw-semibold">Card Color:</label>
-                        <select class="form-select" name="card_color_id">
-                           <option value="">None</option>
-                           <?php
-                           $sql = "SELECT card_color_id, card_color_name FROM card_colors";
-                           $result = $conn->query($sql);
-                           while ($row = $result->fetch_assoc()) {
-                              echo '<option value="' . $row['card_color_id'] . '">' . $row['card_color_name'] . '</option>';
-                           }
-                           ?>
-                        </select>
-                     </div>
-
-                     <!-- Route -->
-                     <div class="mb-3">
-                        <label class="fw-semibold">Route:</label>
-                        <select class="form-select" name="route_id">
-                           <option value="">None</option>
-                           <?php
-                           $sql = "SELECT route_id, route_name FROM routes";
-                           $result = $conn->query($sql);
-                           while ($row = $result->fetch_assoc()) {
-                              echo '<option value="' . $row['route_id'] . '">' . $row['route_name'] . '</option>';
-                           }
-                           ?>
-                        </select>
-                     </div>
-
-                     <!-- Plate Number -->
-                     <div class="mb-3">
-                        <label class="fw-semibold">Plate Number:</label>
-                        <select class="form-select" name="vehicle_id" id="platenumber">
-                           <option value="">None</option>
-                           <?php
-                           $sql = "SELECT vehicle_id, platenumber FROM vehicles";
-                           $result = $conn->query($sql);
-                           while ($row = $result->fetch_assoc()) {
-                              echo '<option value="' . $row['vehicle_id'] . '">' . $row['platenumber'] . '</option>';
-                           }
-                           ?>
-                        </select>
-                     </div>
-
-                     <!-- Driver -->
-                     <div class="mb-3">
-                        <label class="fw-semibold">Driver:</label>
-                        <input type="text" class="form-control form-control-sm" id="driver_name">
-                        <input type="hidden" id="driver_id" name="driver_id" value="<?php echo isset($driver_id) ? $driver_id : ''; ?>"> <!-- Added hidden input for driver_id -->
-                     </div>
-
-
-                     <!-- Cashier -->
-                     <div class="mb-3">
-                        <label class="fw-semibold">Cashier:</label>
-                        <select class="form-select" name="cashier_id">
-                           <option value="">None</option>
-                           <?php
-                           $sql = "SELECT cashier_id, cashier_name FROM cashiers";
-                           $result = $conn->query($sql);
-                           while ($row = $result->fetch_assoc()) {
-                              echo '<option value="' . $row['cashier_id'] . '">' . $row['cashier_name'] . '</option>';
-                           }
-                           ?>
-                        </select>
-                     </div>
-
-                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-info">Create</button>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
       </div>
    </div>
 
