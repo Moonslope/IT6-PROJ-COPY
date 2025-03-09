@@ -206,7 +206,7 @@ require "../global/head.php";
                <div class="modal-body">
                   <p class="fs-5 mb-3">Today: <strong>₱<?= number_format($total_today, 2) ?></strong></p>
                   <p class="fs-5">Month: <strong>₱<?= number_format($total_month, 2) ?></strong></p>
-                  <p class="fs-5">Month: <strong>₱<?= number_format($total_year, 2) ?></strong></p>
+                  <p class="fs-5">Year: <strong>₱<?= number_format($total_year, 2) ?></strong></p>
                </div>
             </div>
          </div>
