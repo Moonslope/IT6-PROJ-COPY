@@ -127,7 +127,7 @@ require "../global/head.php";
                New Route has been added successfully!
             </div>
             <div class="modal-footer">
-               <button type="button" class="btn btn-info" data-bs-dismiss="modal">OK</button>
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
             </div>
          </div>
       </div>

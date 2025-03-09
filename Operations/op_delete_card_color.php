@@ -11,10 +11,7 @@ try {
     $stmt->close();
     $conn->close();
 
-    echo "<script>
-            alert('Card record deleted successfully!');
-            window.location.href = '../Card-color/view_card_color.php'; 
-         </script>";
+    header("Location: ../Card-color/view_card_color.php?success=1");
     exit();
 } catch (\Exception $e) {
     $conn->close();

@@ -107,7 +107,7 @@ require "../global/head.php";
                                                     <a href="view_driver.php" class="btn btn-outline-info w-100 text-dark fw-semibold">CANCEL</a>
                                                 </div>
                                                 <div class="col">
-                                                    <button type="submit" class="btn btn-info w-100 border border-dark fw-semibold">UPDATE</button>
+                                                    <button type="submit" class="btn btn-info w-100 border border-dark fw-semibold">SAVE CHANGES</button>
                                                 </div>
                                             </div>
                                         </form>

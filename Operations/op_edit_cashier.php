@@ -17,5 +17,5 @@ $stmt->execute();
 $stmt->close();
 $conn->close();
 
-header('Location: ../Cashier/view_cashier.php');
+header('Location: ../../Cashier/view_cashier.php?update=1');
 exit();

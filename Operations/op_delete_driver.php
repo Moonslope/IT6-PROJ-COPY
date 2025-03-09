@@ -11,11 +11,7 @@ try {
     $stmt->close();
     $conn->close();
 
-
-    echo "<script>
-            alert('Driver record deleted successfully!');
-            window.location.href = '../Driver/view_driver.php'; 
-         </script>";
+    header("Location: ../Driver/view_driver.php?success=1");
     exit();
 } catch (\Exception $e) {
     $conn->close();

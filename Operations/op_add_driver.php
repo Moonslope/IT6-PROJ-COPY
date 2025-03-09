@@ -19,10 +19,8 @@ if ($method == 'POST') {
       $stmt->close();
       $conn->close();
 
-      echo "<script>
-      alert('Driver added successfully!');
-      window.location.href = '../Driver/view_driver.php';
-   </script>";
+      header("Location: ../Driver/add_driver.php?success=1");
+      exit();
    } catch (\Exception $e) {
 
       $conn->close();

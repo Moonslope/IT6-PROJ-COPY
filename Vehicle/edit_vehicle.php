@@ -138,7 +138,7 @@ require "../global/head.php";
                                                     <a href="view_vehicle.php" class="btn btn-outline-info w-100 text-dark fw-semibold">CANCEL</a>
                                                 </div>
                                                 <div class="col">
-                                                    <button type="submit" class="btn btn-info w-100 border-dark fw-semibold"><i class="bi bi-floppy-fill me-2"></i> Save Changes </button>
+                                                    <button type="submit" class="btn btn-info w-100 border-dark fw-semibold">Save Changes </button>
                                                 </div>
                                             </div>
                                         </form>

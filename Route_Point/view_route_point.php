@@ -137,7 +137,26 @@ require "../global/head.php";
       </div>
    </div>
    </div>
-   <!-- Modal -->
+
+   <!--Update Modal -->
+   <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+               <h5 class="modal-title" id="updateModalLabel">Updated</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               New Details has been saved successfully!
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!--Delete Modal -->
    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
          <div class="modal-content">
@@ -149,7 +168,7 @@ require "../global/head.php";
                Route Point has been deleted successfully!
             </div>
             <div class="modal-footer">
-               <button type="button" class="btn btn-info" data-bs-dismiss="modal">OK</button>
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
             </div>
          </div>
       </div>
@@ -167,6 +186,19 @@ require "../global/head.php";
             // Redirect after modal closes
             document.getElementById('successModal').addEventListener('hidden.bs.modal', function() {
                window.location.href = 'view_route_point.php';
+            });
+         });
+      </script>
+
+   <?php elseif (isset($_GET['update']) && $_GET['update'] == 1): ?>
+      <script>
+         window.addEventListener('load', function() {
+            var updateModal = new bootstrap.Modal(document.getElementById('updateModal'));
+            updateModal.show();
+
+            // Redirect after modal closes
+            document.getElementById('updateModal').addEventListener('hidden.bs.modal', function() {
+               window.location.href = '../Route_Point/view_route_point.php';
             });
          });
       </script>

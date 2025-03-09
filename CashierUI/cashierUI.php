@@ -383,21 +383,36 @@ require  "../global/head.php";
       </div>
    </div>
 
-
+   <!-- If malapas ug 16 modal -->
+   <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+            <div class="modal-header bg-danger text-light">
+               <h5 class="modal-title" id="errorModalLabel">Notification</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               <p id="modalErrorMessage"></p>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
 
    <script>
-      // Function to validate the number of passengers before form submission
       function validatePassengers() {
-         // Get the total number of passengers from the PHP variable
          var totalPassengers = <?php echo $total_passengers; ?>;
          var newPassengers = parseInt(document.getElementById('passenger_count').value);
 
-         // Check if the total number of passengers exceeds 16
          if (totalPassengers + newPassengers > 16) {
-            alert("Error: Total number of passengers cannot exceed 16.");
-            return false; // Prevent form submission
+            document.getElementById('modalErrorMessage').innerText = "Total number of passengers cannot exceed 16.";
+            var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+            errorModal.show();
+            return false;
          }
-         return true; // Allow form submission
+         return true;
       }
 
       // Disable the "Okay" button if total passengers are 16 or more

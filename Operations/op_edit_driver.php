@@ -15,8 +15,5 @@ $stmt->execute();
 $stmt->close();
 $conn->close();
 
-echo "<script>
-            alert('Driver record updated successfully!');
-            window.location.href = '../../Driver/view_driver.php';  // Correct path
-         </script>";
+header('Location: ../../Driver/view_driver.php?update=1');
 exit();

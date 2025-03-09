@@ -17,12 +17,11 @@ if ($method == 'POST') {
         $checkStmt->close();
 
         if ($count > 0) {
-            // Redirect with duplicate error
-            echo "<script>
-                window.location.href = '../Card-color/add_card_color.php?error=duplicate';
-            </script>";
-            exit;
+            // Redirect to the modal page with an error flag
+            header("Location: ../Card-color/add_card_color.php?error=duplicate");
+            exit; // Stop execution
         }
+
 
         // Insert new card color
         $sql = "INSERT INTO card_colors(card_color_name) VALUES (?)";
@@ -30,15 +29,7 @@ if ($method == 'POST') {
         $stmt->bind_param("s", $card_color);
 
         if ($stmt->execute()) {
-            echo "<script>
-                alert('Card color added successfully!');
-                window.location.href = '../Card-color/view_card_color.php';
-            </script>";
-        } else {
-            echo "<script>
-                alert('Error adding card color: " . $stmt->error . "');
-                window.location.href = '../Card-color/add_card_color.php';
-            </script>";
+            header('Location: ../Card-color/add_card_color.php?success=1');
         }
 
         $stmt->close();
