@@ -4,6 +4,16 @@
 <?php
 include "../Database/db_connect.php";
 
+if (isset($_GET['error']) && $_GET['error'] == 'duplicate') {
+    echo "<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('modalErrorMessage').innerText = 'Card color already exists!';
+            var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+            errorModal.show();
+        });
+    </script>";
+}
+
 $title = "Add New Cashier";
 require "../global/head.php";
 ?>
@@ -77,11 +87,7 @@ require "../global/head.php";
 
                                 <div class="card shadow-lg bg-light ">
                                     <div class="card-body p-4">
-                                        <?php if (isset($_GET['error']) && $_GET['error'] == 'duplicate'): ?>
-                                            <div class="alert alert-danger" role="alert">
-                                                Card color already exists!
-                                            </div>
-                                        <?php endif; ?>
+
                                         <form action="../Operations/op_add_card_color.php" method="POST">
                                             <div class="row">
                                                 <div class="col">
@@ -113,7 +119,59 @@ require "../global/head.php";
         </div>
     </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- duplicate modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-light">
+                    <h5 class="modal-title" id="errorModalLabel">Duplicate Error</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalErrorMessage"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--add Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title" id="successModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    New Card Color has been added successfully!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Trigger Success Modal if Success Parameter Exists -->
+    <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+        <script>
+            window.addEventListener('load', function() {
+                var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                successModal.show();
+
+                // Redirect after modal closes
+                document.getElementById('successModal').addEventListener('hidden.bs.modal', function() {
+                    window.location.href = '../Card-color/view_card_color.php';
+                });
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

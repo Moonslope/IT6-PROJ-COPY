@@ -11,11 +11,7 @@ try {
     $stmt->close();
     $conn->close();
 
-
-    echo "<script>
-            alert('Vehicle record deleted successfully!');
-            window.location.href = '../Vehicle/view_vehicle.php'; 
-         </script>";
+    header("Location: ../Vehicle/view_vehicle.php?success=1");
     exit();
 } catch (\Exception $e) {
     $conn->close();

@@ -19,10 +19,8 @@ if ($method == 'POST') {
         $stmt->close();
         $conn->close();
 
-        echo "<script>
-      alert('Vehicle added successfully!');
-      window.location.href = '../Vehicle/view_vehicle.php';
-   </script>";
+        header("Location: ../Vehicle/add_vehicle.php?success=1");
+        exit();
     } catch (\Exception $e) {
 
         $conn->close();

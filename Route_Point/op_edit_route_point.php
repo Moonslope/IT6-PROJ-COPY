@@ -14,5 +14,5 @@ $stmt->execute();
 $stmt->close();
 $conn->close();
 
-header("Location: view_route_point.php?");
+header("Location: view_route_point.php?update=1");
 exit();

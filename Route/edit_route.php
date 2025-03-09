@@ -90,12 +90,12 @@ require "../global/head.php";
                                  <div class="row">
                                     <div class="col">
                                        <label for="origin" class="fw-semibold mb-3">Origin</label>
-                                       <input type="text" id="origin" name="origin" value="<?php echo $row['route_start'] ?>" class="form-control border-dark" required>
+                                       <input type="text" id="origin" name="origin" value="<?php echo $row['route_origin'] ?>" class="form-control border-dark" required>
                                     </div>
 
                                     <div class="col">
                                        <label for="destination" class="fw-semibold mb-3">Destination</label>
-                                       <input type="text" id="destination" name="destination" value="<?php echo $row['route_end'] ?>" class="form-control border-dark" required>
+                                       <input type="text" id="destination" name="destination" value="<?php echo $row['route_destination'] ?>" class="form-control border-dark" required>
                                     </div>
                                  </div>
 
