@@ -89,7 +89,7 @@ require "../global/head.php";
                                 if (isset($_GET['query']) && !empty($_GET['query'])) {
                                     $search = $conn->real_escape_string($_GET['query']);
                                     $sql .= " WHERE 
-                                       card_color LIKE '%$search%' ";
+                                       card_color_name LIKE '%$search%' ";
                                 }
 
                                 $result = $conn->query($sql);

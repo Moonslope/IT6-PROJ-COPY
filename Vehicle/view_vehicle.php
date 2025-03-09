@@ -88,11 +88,11 @@ require "../global/head.php";
                                 if (isset($_GET['query']) && !empty($_GET['query'])) {
                                     $search = $conn->real_escape_string($_GET['query']);
                                     $sql .= " WHERE 
-                                       platenumber, LIKE '%$search%' OR
-                                       driver, LIKE '%$search%' OR
-                                       vehicle_model, LIKE '%$search%' OR
-                                       vehicle_color, LIKE '%$search%' OR
-                                       transmission_type, LIKE '%$search%' OR";
+                                       platenumber LIKE '%$search%' OR 
+                                       driver LIKE '%$search%' OR 
+                                       vehicle_model LIKE '%$search%' OR 
+                                       vehicle_color LIKE '%$search%' OR
+                                       transmission_type LIKE '%$search%'";
                                 }
 
                                 $result = $conn->query($sql);

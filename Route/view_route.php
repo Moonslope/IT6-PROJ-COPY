@@ -89,7 +89,7 @@ require "../global/head.php";
                         if (isset($_GET['query']) && !empty($_GET['query'])) {
                            $search = $conn->real_escape_string($_GET['query']);
                            $sql .= " WHERE 
-                                       route LIKE '%$search%'";
+                                       route_name LIKE '%$search%'";
                         }
 
                         $result = $conn->query($sql);
@@ -118,7 +118,7 @@ require "../global/head.php";
                      <?php
                            }
                         } else {
-                           echo '<div class="text-center mt-3"><p class="text-muted fs-5">No cashiers found.</p></div>';
+                           echo '<div class="text-center mt-3"><p class="text-muted fs-5">No route found.</p></div>';
                         }
 
                         $conn->close();

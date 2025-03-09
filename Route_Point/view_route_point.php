@@ -66,7 +66,7 @@ require "../global/head.php";
                      </div>
 
                      <div class="col col-6 d-flex gap-2  ps-5">
-                        <form method="GET" action="view_route.php" class="d-flex gap-2 ps-5">
+                        <form method="GET" action="view_route_point.php" class="d-flex gap-2 ps-5">
                            <input type="text" name="query" class="form-control" placeholder="Search here" value="<?php echo isset($_GET['query']) ? $_GET['query'] : ''; ?>">
                            <button type="submit" class="btn btn-outline-dark"><i class="bi bi-search"></i></button>
                         </form>
@@ -91,7 +91,9 @@ require "../global/head.php";
                         if (isset($_GET['query']) && !empty($_GET['query'])) {
                            $search = $conn->real_escape_string($_GET['query']);
                            $sql .= " WHERE 
-                                       route LIKE '%$search%'";
+                                       route_point_name LIKE '%$search%' OR
+                                       fare LIKE '%$search%' OR 
+                                       route_name LIKE '%$search%'";
                         }
 
                         $result = $conn->query($sql);
@@ -120,7 +122,7 @@ require "../global/head.php";
                      <?php
                            }
                         } else {
-                           echo '<div class="text-center mt-3"><p class="text-muted fs-5">No cashiers found.</p></div>';
+                           echo '<div class="text-center mt-3"><p class="text-muted fs-5">No route point found.</p></div>';
                         }
 
                         $conn->close();
