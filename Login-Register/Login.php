@@ -86,7 +86,7 @@ require "../global/head.php";
                     Account doesn't exist or wrong credentials.
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info" data-bs-dismiss="modal">OK</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
                 </div>
             </div>
         </div>

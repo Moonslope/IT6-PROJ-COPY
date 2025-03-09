@@ -141,19 +141,19 @@ require "../global/head.php";
       </div>
    </div>
    </div>
-   <!-- Modal Structure -->
+   <!-- Log in Modal -->
    <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
          <div class="modal-content">
-            <div class="modal-header">
-               <h5 class="modal-title" id="welcomeModalLabel">Welcome!</h5>
+            <div class="modal-header bg-info">
+               <h5 class="modal-title text-light" id="welcomeModalLabel">Welcome!</h5>
                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                <p>You have successfully logged in.</p>
             </div>
             <div class="modal-footer">
-               <button type="button" class="btn btn-info" data-bs-dismiss="modal">OK</button>
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
             </div>
          </div>
       </div>

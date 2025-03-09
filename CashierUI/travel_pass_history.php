@@ -116,17 +116,17 @@ require "../global/head.php";
 
       <!-- Success Modal -->
       <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-         <div class="modal-dialog ">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="successModalLabel">Success</h5>
+         <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content ">
+               <div class="modal-header bg-info">
+                  <h5 class="modal-title text-light" id="successModalLabel">Success</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                </div>
                <div class="modal-body">
                   The travel pass has been saved successfully!
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                </div>
             </div>
          </div>
@@ -160,42 +160,26 @@ require "../global/head.php";
       </div>
       <!-- Row for logo and buttons -->
 
-      <div class="row pt-2 bg-white border border-2">
-         <div class="col col-7">
-            <p class="fs-4 ms-3 fw-semibold">Travel Pass History</p>
+      <div class="bg-r row pt-2">
+         <div class="col col-10">
+            <p class="fs-4 ms-3 fw-semibold text-light">Travel Pass History</p>
          </div>
-         <div class="col d-flex align-items-center justify-content-end me-4">
-            <label class="fw-semibold me-3 fs-5">Total fares:</label>
-            <button class="btn btn-info me-3 fw-semibold" data-bs-toggle="modal" data-bs-target="#todayModal">Today</button>
-            <button class="btn btn-info fw-semibold" data-bs-toggle="modal" data-bs-target="#monthModal">Month</button>
+         <div class="col ">
+            <button class="btn btn-info me-3 fw-semibold" data-bs-toggle="modal" data-bs-target="#todayModal">Total fares <span class="ms-2">₱</span> </i></button>
          </div>
       </div>
 
-      <!-- Today Modal -->
+      <!-- Total fares Modal -->
       <div class="modal fade" id="todayModal" tabindex="-1" aria-labelledby="todayModalLabel" aria-hidden="true">
-         <div class="modal-dialog ">
+         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="todayModalLabel">Total Fares Today</h5>
+               <div class="modal-header bg-info">
+                  <h5 class="modal-title fw-semibold" id="todayModalLabel">Total Fares</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                </div>
                <div class="modal-body">
-                  <p><strong>₱<?= number_format($total_today, 2) ?></strong></p>
-               </div>
-            </div>
-         </div>
-      </div>
-
-      <!-- Month Modal -->
-      <div class="modal fade" id="monthModal" tabindex="-1" aria-labelledby="monthModalLabel" aria-hidden="true">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="monthModalLabel">Total Fares This Month</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-               </div>
-               <div class="modal-body">
-                  <p><strong>₱<?= number_format($total_month, 2) ?></strong></p>
+                  <p class="fs-5 mb-3">Today: <strong>₱<?= number_format($total_today, 2) ?></strong></p>
+                  <p class="fs-5">Month: <strong>₱<?= number_format($total_month, 2) ?></strong></p>
                </div>
             </div>
          </div>
@@ -334,11 +318,11 @@ require "../global/head.php";
       });
    </script>
 
-   <!-- Modal Structure -->
+   <!--Log in Modal -->
    <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
          <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-info">
                <h5 class="modal-title" id="welcomeModalLabel">Welcome, <?php echo $cashier_name ?>!</h5>
                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -346,7 +330,7 @@ require "../global/head.php";
                <p>You have successfully logged in.</p>
             </div>
             <div class="modal-footer">
-               <button type="button" class="btn btn-info" data-bs-dismiss="modal">OK</button>
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
          </div>
       </div>
